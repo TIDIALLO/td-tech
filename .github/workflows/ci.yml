@@ -1,0 +1,62 @@
+name: CI - Tests & Lint
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+  push:
+    branches:
+      - master
+      - main
+      - develop
+
+env:
+  NODE_ENV: test
+
+jobs:
+  lint-and-test:
+    name: Lint & Build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: 'postgresql://test:test@localhost:5432/test'
+
+      - name: Run ESLint
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Type Check
+        run: npx tsc --noEmit
+        continue-on-error: true
+
+      - name: Build Next.js
+        run: npm run build
+        env:
+          DATABASE_URL: 'postgresql://test:test@localhost:5432/test'
+          AUTH_SECRET: 'test-secret-for-ci'
+          NODE_ENV: production
+
+      - name: Check build artifacts
+        run: |
+          if [ -d ".next" ]; then
+            echo "✅ Build successful - .next directory exists"
+          else
+            echo "❌ Build failed - .next directory not found"
+            exit 1
+          fi

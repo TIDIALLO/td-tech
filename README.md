@@ -179,6 +179,30 @@ docker-compose logs -f app
 docker-compose down
 ```
 
+## 🔄 CI/CD avec GitHub Actions
+
+Le projet inclut une configuration CI/CD complète avec GitHub Actions :
+
+### Workflows Disponibles :
+
+- **CI - Build and Test** : Build et validation sur chaque push
+- **Deploy to Production** : Déploiement automatique sur VPS
+- **PR Checks** : Validation automatique des pull requests
+- **Tests** : Tests automatisés avec PostgreSQL
+
+### Configuration :
+
+1. **Secrets GitHub** : Configurer dans `Settings → Secrets and variables → Actions`
+   - `VPS_HOST`, `VPS_USERNAME`, `VPS_SSH_KEY`
+   - `DATABASE_URL`, `AUTH_SECRET`
+   - Voir `CI-CD-SETUP.md` pour la liste complète
+
+2. **Déploiement automatique** : Chaque push vers `master` déclenche le déploiement
+
+📖 **Guide complet** : Voir `CI-CD-SETUP.md`
+
+---
+
 ## 🚀 Déploiement sur VPS
 
 ### 1. Préparer le VPS
