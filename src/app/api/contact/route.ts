@@ -85,20 +85,42 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
     `.trim()
 
     // Envoyer l'email avec Resend
-    await resend.emails.send({
-      from: 'Tidiane Diallo <diallotidiane014@gmail.com>',
-      to: ['diallotidiane014@gmail.com'], // Destinataire principal
-      cc: ['tidiallo06@gmail.com'], // Copie
-      replyTo: validatedData.email, // Permettre de répondre directement
-      subject: subject,
-      html: htmlContent,
-      text: textContent,
-    })
+    try {
+      const emailResult = await resend.emails.send({
+        // Utiliser l'adresse par défaut de Resend pour les tests
+        // Remplace par ton domaine vérifié une fois configuré
+        from: 'onboarding@resend.dev', // Adresse par défaut Resend pour les tests
+        to: ['diallotidiane014@gmail.com'], // Destinataire principal
+        cc: ['tidiallo06@gmail.com'], // Copie
+        replyTo: validatedData.email, // Permettre de répondre directement
+        subject: subject,
+        html: htmlContent,
+        text: textContent,
+      })
 
-    return NextResponse.json(
-      { message: "Message envoyé avec succès" },
-      { status: 200 }
-    )
+      console.log("Email envoyé avec succès:", emailResult)
+
+      return NextResponse.json(
+        { 
+          message: "Message envoyé avec succès",
+          emailId: emailResult.data?.id 
+        },
+        { status: 200 }
+      )
+    } catch (emailError) {
+      console.error("Erreur Resend:", emailError)
+      
+      // Si l'email échoue, on sauvegarde quand même en DB mais on log l'erreur
+      // L'utilisateur voit un message de succès mais on sait qu'il y a eu un problème
+      return NextResponse.json(
+        { 
+          message: "Message enregistré. Nous vous répondrons bientôt.",
+          warning: "L'email n'a pas pu être envoyé automatiquement, mais votre message a été sauvegardé.",
+          error: emailError instanceof Error ? emailError.message : "Erreur inconnue"
+        },
+        { status: 200 }
+      )
+    }
   } catch (error) {
     console.error("Erreur lors de l'envoi:", error)
     
