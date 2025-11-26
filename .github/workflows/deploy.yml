@@ -3,7 +3,6 @@ name: Deploy to Production
 on:
   push:
     branches:
-      - master
       - main
   workflow_dispatch: # Permet de déclencher manuellement
 
@@ -49,7 +48,7 @@ jobs:
     name: Deploy to VPS
     needs: test
     runs-on: ubuntu-latest
-    if: ${{ secrets.VPS_HOST != '' }}
+    if: secrets.VPS_HOST != ''
     
     steps:
       - name: Checkout code
@@ -82,7 +81,7 @@ jobs:
             # Pull les dernières modifications
             echo "📥 Pulling latest changes from $BRANCH..."
             git fetch origin
-            git reset --hard origin/$BRANCH || git reset --hard origin/master || git reset --hard origin/main
+            git reset --hard origin/$BRANCH || git reset --hard origin/main
             
             # Installer les dépendances
             echo "📦 Installing dependencies..."
@@ -126,7 +125,7 @@ jobs:
     name: Deploy to Vercel
     needs: test
     runs-on: ubuntu-latest
-    if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VPS_HOST == '' }}
+    if: secrets.VERCEL_TOKEN != '' && secrets.VPS_HOST == ''
     
     steps:
       - name: Checkout code
