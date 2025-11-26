@@ -4,10 +4,10 @@ import { resend } from "@/lib/resend"
 import { z } from "zod"
 
 const contactSchema = z.object({
-  name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
-  email: z.string().email("Email invalide"),
-  subject: z.string().optional(),
-  message: z.string().min(10, "Le message doit contenir au moins 10 caractères"),
+  name: z.string().min(2, "Le nom doit contenir au moins 2 caractères").trim(),
+  email: z.string().email("Email invalide").trim().toLowerCase(),
+  subject: z.string().optional().transform(val => val?.trim() || undefined),
+  message: z.string().min(5, "Le message doit contenir au moins 5 caractères").trim(),
 })
 
 export async function POST(request: Request) {
@@ -103,8 +103,18 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
     console.error("Erreur lors de l'envoi:", error)
     
     if (error instanceof z.ZodError) {
+      // Formater les erreurs pour un affichage plus clair
+      const errorMessages = error.errors.map(err => {
+        const field = err.path.join('.')
+        return `${field}: ${err.message}`
+      })
+      
       return NextResponse.json(
-        { error: "Données invalides", details: error.errors },
+        { 
+          error: "Données invalides", 
+          message: errorMessages.join(', '),
+          details: error.errors 
+        },
         { status: 400 }
       )
     }
