@@ -51,6 +51,7 @@ jobs:
           DATABASE_URL: 'postgresql://test:test@localhost:5432/test'
           AUTH_SECRET: 'test-secret-for-ci'
           NODE_ENV: production
+          NEXT_PUBLIC_APP_URL: 'http://localhost:3000'
 
       - name: Check build artifacts
         run: |

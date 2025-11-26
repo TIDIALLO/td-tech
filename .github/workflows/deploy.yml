@@ -43,6 +43,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://user:pass@localhost:5432/test' }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET || 'test-secret' }}
           NODE_ENV: production
+          NEXT_PUBLIC_APP_URL: 'http://localhost:3000'
 
   deploy-vps:
     name: Deploy to VPS
@@ -95,9 +96,16 @@ jobs:
             echo "🏗️ Building Next.js application..."
             npm run build
             
-            # Appliquer les migrations
-            echo "🗄️ Running database migrations..."
-            npx prisma migrate deploy || echo "⚠️ Migration failed, continuing..."
+            # Appliquer les migrations ou push le schéma
+            echo "🗄️ Setting up database..."
+            if [ -d "prisma/migrations" ] && [ "$(ls -A prisma/migrations)" ]; then
+              echo "📦 Migrations found, applying..."
+              npx prisma migrate deploy || echo "⚠️ Migration failed, trying db push..."
+              npx prisma db push --accept-data-loss || echo "⚠️ DB push also failed, continuing..."
+            else
+              echo "⚠️ No migrations found, using db push..."
+              npx prisma db push --accept-data-loss || echo "⚠️ DB push failed, continuing..."
+            fi
             
             # Redémarrer avec Docker (si utilisé)
             if [ -f docker-compose.yml ]; then
