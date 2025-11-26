@@ -13,8 +13,9 @@ export default function Home() {
       <Navbar />
       <main>
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-16 md:py-24">
-          <div className="container">
+        <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-br from-background via-blue-50/30 to-background dark:from-background dark:via-blue-950/10 dark:to-background">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(37,99,235,0.08),transparent_50%)]" />
+          <div className="container relative z-10">
             <div className="grid gap-4 lg:grid-cols-2 lg:gap-6 items-center max-w-7xl mx-auto px-4">
               {/* Left Content */}
               <div className="space-y-6">
@@ -106,8 +107,9 @@ export default function Home() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20">
-          <div className="container">
+        <section className="py-20 bg-gradient-to-b from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
+          <div className="container relative z-10">
             <div className="grid gap-6 md:grid-cols-3">
               <Card className="relative">
                 <CardHeader className="text-center">
@@ -175,26 +177,36 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section className="border-t bg-muted/30 py-20">
-          <div className="container">
+        <section className="border-t bg-gradient-to-br from-muted/40 via-blue-50/20 to-muted/40 dark:from-muted/40 dark:via-blue-950/5 dark:to-muted/40 py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(37,99,235,0.06),transparent_50%)]" />
+          <div className="container relative z-10">
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-              <div className="relative">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-background to-primary/5 p-1">
-                  <div className="relative h-full w-full rounded-xl overflow-hidden bg-muted/50">
-                    <Image
-                      src="/images/diallo.png"
-                      alt="Tidiane Diallo au travail"
-                      fill
-                      className="object-cover opacity-80"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
-                  </div>
-                  <div className="absolute bottom-6 right-6 rounded-xl bg-background/95 backdrop-blur-sm px-6 py-3 shadow-xl border border-[#2563EB]/30">
-                    <p className="text-sm font-semibold flex items-center gap-2">
-                      <span className="text-2xl font-bold text-[#2563EB]">13+</span>
-                      Années d&apos;Expérience
-                    </p>
+              <div className="relative flex justify-center lg:justify-start">
+                <div className="relative w-full max-w-md">
+                  {/* Gradient Background Effect */}
+                  <div className="absolute -inset-3 bg-gradient-to-br from-[#2563EB]/20 via-[#3B82F6]/10 to-transparent rounded-2xl blur-2xl opacity-60" />
+                  
+                  {/* Image Container - Réduite */}
+                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#2563EB]/10 via-background to-[#3B82F6]/5 p-1.5 shadow-xl">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-muted/50">
+                      <Image
+                        src="/images/diallo.png"
+                        alt="Tidiane Diallo - Développeur Fullstack & Expert IA"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 400px"
+                        priority
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+                    </div>
+                    
+                    {/* Badge d'expérience - Réduit */}
+                    <div className="absolute -bottom-4 -right-4 rounded-xl bg-background/95 backdrop-blur-sm px-4 py-2 shadow-lg border border-[#2563EB]/30">
+                      <p className="text-xs font-semibold flex items-center gap-1.5">
+                        <span className="text-xl font-bold text-[#2563EB]">13+</span>
+                        <span className="text-[10px]">Années</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -236,8 +248,9 @@ export default function Home() {
         </section>
 
         {/* Community Section */}
-        <section className="py-20">
-          <div className="container">
+        <section className="py-20 bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(37,99,235,0.06),transparent_50%)]" />
+          <div className="container relative z-10">
             <div className="mb-12 text-center">
               <h2 className="mb-4 text-3xl font-bold md:text-4xl">
                 Rejoignez Notre Communauté Florissante
@@ -301,8 +314,9 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="border-t bg-muted/30 py-20">
-          <div className="container">
+        <section className="border-t bg-gradient-to-br from-muted/40 via-blue-50/30 to-muted/40 dark:from-muted/40 dark:via-blue-950/10 dark:to-muted/40 py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(37,99,235,0.08),transparent_50%)]" />
+          <div className="container relative z-10">
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="mb-4 text-3xl font-bold md:text-4xl">
                 Commencez Votre Parcours d&apos;Entrepreneuriat Digital Aujourd&apos;hui

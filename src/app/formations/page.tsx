@@ -160,8 +160,9 @@ export default async function FormationsPage() {
         </section>
 
         {/* Courses Grid */}
-        <section className="py-20 bg-gradient-to-b from-[#0F172A] to-[#1E293B]">
-          <div className="container">
+        <section className="py-20 bg-gradient-to-b from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.06),transparent_50%)]" />
+          <div className="container relative z-10">
             {courses.length === 0 ? (
               <div className="py-20 text-center">
                 <p className="text-white/70">
@@ -233,8 +234,9 @@ export default async function FormationsPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-gradient-to-b from-[#1E293B] to-[#0F172A] border-t border-[#334155]">
-          <div className="container">
+        <section className="py-16 bg-gradient-to-r from-muted/50 via-blue-50/30 to-muted/50 dark:from-muted/50 dark:via-blue-950/5 dark:to-muted/50 border-t relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
+          <div className="container relative z-10">
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
               <div className="text-center">
                 <div className="mb-2 text-3xl font-bold text-[#2563EB]">7+</div>
@@ -262,8 +264,9 @@ export default async function FormationsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-b from-[#0F172A] to-[#1E293B]">
-          <div className="container text-center">
+        <section className="py-20 bg-gradient-to-br from-muted/40 via-blue-50/30 to-muted/40 dark:from-muted/40 dark:via-blue-950/10 dark:to-muted/40 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(37,99,235,0.08),transparent_50%)]" />
+          <div className="container relative z-10 text-center">
             <h2 className="mb-4 text-3xl md:text-4xl font-bold text-white">
               Prêt à développer vos compétences ?
             </h2>

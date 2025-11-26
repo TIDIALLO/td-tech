@@ -203,8 +203,9 @@ export default function PortfolioPage() {
         </section>
 
         {/* Projects Grid */}
-        <section className="py-12 md:py-16 bg-background">
-          <div className="container">
+        <section className="py-12 md:py-16 bg-gradient-to-b from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.06),transparent_50%)]" />
+          <div className="container relative z-10">
             {filteredProjects.length === 0 ? (
               <div className="py-20 text-center">
                 <p className="text-muted-foreground">
@@ -322,8 +323,9 @@ export default function PortfolioPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 md:py-16 bg-muted/30 border-t">
-          <div className="container text-center">
+        <section className="py-12 md:py-16 bg-gradient-to-br from-muted/40 via-blue-50/30 to-muted/40 dark:from-muted/40 dark:via-blue-950/10 dark:to-muted/40 border-t relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(37,99,235,0.08),transparent_50%)]" />
+          <div className="container relative z-10 text-center">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
