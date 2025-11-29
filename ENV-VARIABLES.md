@@ -15,6 +15,25 @@ AUTH_URL="http://localhost:3000"
 # Resend - API Key pour l'envoi d'emails
 RESEND_API_KEY="re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG"
 
+# Resend - Adresse email d'expéditeur (optionnel)
+# Si non défini, utilise 'onboarding@resend.dev' (mode test, emails non livrés)
+# Pour recevoir les emails dans Gmail, vérifie un domaine sur Resend et utilise:
+# RESEND_FROM_EMAIL="contact@tidianediallo.com"
+# ou
+# RESEND_FROM_EMAIL="Tidiane Diallo <contact@tidianediallo.com>"
+# Voir RESEND-DOMAIN-SETUP.md pour les instructions complètes
+RESEND_FROM_EMAIL="onboarding@resend.dev"
+
+# Gmail SMTP - Solution sans domaine (optionnel)
+# Pour utiliser Gmail directement au lieu de Resend (pas besoin de domaine)
+# 1. Crée un App Password Gmail : https://myaccount.google.com/apppasswords
+# 2. Active la validation en 2 étapes si pas déjà fait
+# 3. Ajoute les variables ci-dessous
+# Voir GMAIL-SMTP-SETUP.md pour les instructions complètes
+USE_GMAIL_SMTP="false"
+GMAIL_USER="diallotidiane014@gmail.com"
+GMAIL_APP_PASSWORD=""  # App Password Gmail (16 caractères, pas le mot de passe normal)
+
 # Uploadthing (optionnel)
 UPLOADTHING_TOKEN="votre-token-uploadthing"
 

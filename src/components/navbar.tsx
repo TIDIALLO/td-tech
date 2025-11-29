@@ -24,9 +24,12 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            Tidiane Diallo
+        <Link href="/" className="flex items-center gap-3 ml-4 md:ml-8 hover:opacity-80 transition-opacity">
+          <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center shadow-lg">
+            <span className="text-white font-bold text-lg">TD</span>
+          </div>
+          <span className="text-xl font-bold bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
+            TDTech
           </span>
         </Link>
 

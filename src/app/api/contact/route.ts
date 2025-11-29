@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { resend } from "@/lib/resend"
+import { transporter } from "@/lib/nodemailer"
 import { z } from "zod"
 
 const contactSchema = z.object({
@@ -15,17 +16,7 @@ export async function POST(request: Request) {
     const body = await request.json()
     const validatedData = contactSchema.parse(body)
 
-    // Sauvegarder le message en base de données
-    await prisma.contactMessage.create({
-      data: {
-        name: validatedData.name,
-        email: validatedData.email,
-        subject: validatedData.subject || "Nouveau message",
-        message: validatedData.message,
-      },
-    })
-
-    // Envoyer un email avec Resend
+    // Préparer le contenu de l'email
     const subject = validatedData.subject || "Nouveau message de contact"
     
     // Email HTML formaté
@@ -84,43 +75,127 @@ ${validatedData.message}
 Ce message a été envoyé depuis le formulaire de contact de votre site web.
     `.trim()
 
-    // Envoyer l'email avec Resend
+    // PRIORITÉ 1 : Envoyer l'email (Gmail SMTP ou Resend)
+    let emailSent = false
+    let emailId = null
+    let emailError = null
+    const useGmailSmtp = process.env.USE_GMAIL_SMTP === 'true'
+
     try {
-      const emailResult = await resend.emails.send({
-        // Utiliser l'adresse par défaut de Resend pour les tests
-        // Remplace par ton domaine vérifié une fois configuré
-        from: 'onboarding@resend.dev', // Adresse par défaut Resend pour les tests
-        to: ['diallotidiane014@gmail.com'], // Destinataire principal
-        cc: ['tidiallo06@gmail.com'], // Copie
-        replyTo: validatedData.email, // Permettre de répondre directement
-        subject: subject,
-        html: htmlContent,
-        text: textContent,
+      if (useGmailSmtp && process.env.GMAIL_APP_PASSWORD) {
+        // Utiliser Gmail SMTP (solution sans domaine)
+        const mailOptions = {
+          from: `"Portfolio Contact" <${process.env.GMAIL_USER || 'diallotidiane014@gmail.com'}>`,
+          to: 'diallotidiane014@gmail.com',
+          cc: 'tidiallo06@gmail.com',
+          replyTo: validatedData.email,
+          subject: subject,
+          html: htmlContent,
+          text: textContent,
+        }
+
+        const info = await transporter.sendMail(mailOptions)
+        emailSent = true
+        emailId = info.messageId
+        console.log("✅ Email envoyé via Gmail SMTP:", info.messageId)
+      } else {
+        // Utiliser Resend (avec ou sans domaine vérifié)
+        const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+        
+        const emailResult = await resend.emails.send({
+          from: fromEmail,
+          to: ['diallotidiane014@gmail.com'],
+          // Ajouter cc uniquement si un domaine est vérifié (pas en mode test)
+          ...(fromEmail !== 'onboarding@resend.dev' && {
+            cc: ['tidiallo06@gmail.com']
+          }),
+          replyTo: validatedData.email,
+          subject: subject,
+          html: htmlContent,
+          text: textContent,
+        })
+
+        // Vérifier si l'email a vraiment été envoyé
+        if (emailResult.error) {
+          throw new Error(emailResult.error.message || "Erreur lors de l'envoi de l'email")
+        }
+
+        emailSent = true
+        emailId = emailResult.data?.id
+        console.log("✅ Email envoyé via Resend:", emailResult)
+      }
+    } catch (err) {
+      emailError = err
+      console.error("❌ Erreur envoi email:", err)
+      
+      // Log détaillé de l'erreur pour debugging
+      if (err && typeof err === 'object' && 'message' in err) {
+        console.error("Détails de l'erreur:", JSON.stringify(err, null, 2))
+      }
+    }
+
+    // PRIORITÉ 2 : Sauvegarder en base de données (optionnel, ne bloque pas si échec)
+    let dbSaved = false
+    try {
+      await prisma.contactMessage.create({
+        data: {
+          name: validatedData.name,
+          email: validatedData.email,
+          subject: validatedData.subject || "Nouveau message",
+          message: validatedData.message,
+        },
       })
+      dbSaved = true
+      console.log("✅ Message sauvegardé en base de données")
+    } catch (dbError) {
+      console.warn("⚠️ Impossible de sauvegarder en base de données (DB non disponible):", dbError)
+      // On continue même si la DB n'est pas disponible
+    }
 
-      console.log("Email envoyé avec succès:", emailResult)
-
+    // Retourner le résultat
+    if (emailSent) {
       return NextResponse.json(
         { 
           message: "Message envoyé avec succès",
-          emailId: emailResult.data?.id 
+          emailId: emailId,
+          dbSaved: dbSaved,
+          // Info pour l'utilisateur si DB non disponible
+          ...(dbSaved === false && { 
+            info: "Message envoyé par email. La sauvegarde en base de données n'est pas disponible actuellement."
+          })
         },
         { status: 200 }
       )
-    } catch (emailError) {
-      console.error("Erreur Resend:", emailError)
+    } else {
+      // Si l'email n'a pas pu être envoyé, analyser l'erreur
+      let errorMessage = "Erreur inconnue lors de l'envoi de l'email"
       
-      // Si l'email échoue, on sauvegarde quand même en DB mais on log l'erreur
-      // L'utilisateur voit un message de succès mais on sait qu'il y a eu un problème
+      if (emailError) {
+        // Gérer les erreurs Resend spécifiques
+        if (typeof emailError === 'object' && emailError !== null) {
+          if ('message' in emailError) {
+            errorMessage = emailError.message as string
+          } else if ('error' in emailError && typeof emailError.error === 'object' && emailError.error !== null) {
+            const resendError = emailError.error as { message?: string; name?: string }
+            errorMessage = resendError.message || resendError.name || errorMessage
+          }
+        } else if (emailError instanceof Error) {
+          errorMessage = emailError.message
+        }
+      }
+      
       return NextResponse.json(
         { 
-          message: "Message enregistré. Nous vous répondrons bientôt.",
-          warning: "L'email n'a pas pu être envoyé automatiquement, mais votre message a été sauvegardé.",
-          error: emailError instanceof Error ? emailError.message : "Erreur inconnue"
+          error: "L'email n'a pas pu être envoyé",
+          message: errorMessage,
+          dbSaved: dbSaved,
+          // Suggestion pour l'utilisateur
+          suggestion: "Vérifiez que votre domaine est vérifié sur Resend ou utilisez uniquement l'adresse de test autorisée."
         },
-        { status: 200 }
+        { status: 500 }
       )
     }
+
   } catch (error) {
     console.error("Erreur lors de l'envoi:", error)
     
@@ -141,14 +216,13 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
       )
     }
 
-    // En cas d'erreur Resend, on retourne quand même un succès si le message est sauvegardé en DB
-    // pour ne pas frustrer l'utilisateur
+    // Erreur inattendue
     return NextResponse.json(
       { 
-        message: "Message enregistré. Nous vous répondrons bientôt.",
-        warning: error instanceof Error ? error.message : "Erreur lors de l'envoi de l'email"
+        error: "Erreur lors du traitement de votre message",
+        message: error instanceof Error ? error.message : "Erreur inconnue"
       },
-      { status: 200 }
+      { status: 500 }
     )
   }
 }

@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
-import { CheckCircle2, Users, Star, Calendar, MessageSquare, BarChart3, MessageCircle, HeadphonesIcon } from "lucide-react"
+import { CheckCircle2, Users, Star, Calendar, MessageSquare, BarChart3, MessageCircle, HeadphonesIcon, Github, Linkedin, Mail } from "lucide-react"
 
 export default function Home() {
   return (
@@ -82,12 +82,139 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Professional Profile Section */}
+        <section className="py-20 bg-gradient-to-br from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
+          <div className="container relative z-10">
+            <div className="max-w-5xl mx-auto">
+              <Card className="border-2 border-[#2563EB]/20 shadow-xl bg-background/95 backdrop-blur-sm">
+                <CardContent className="p-8 md:p-12">
+                  <div className="grid gap-8 md:grid-cols-[auto_1fr] md:gap-12 items-start">
+                    {/* Left: Photo with Social Icons */}
+                    <div className="flex flex-col items-center md:items-start">
+                      {/* Profile Picture */}
+                      <div className="relative mb-6">
+                        <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden bg-gradient-to-br from-[#2563EB]/20 via-background to-[#3B82F6]/10 p-1.5 shadow-lg">
+                          <div className="relative w-full h-full rounded-xl overflow-hidden bg-muted/50">
+                            <Image
+                              src="/images/diallo.png"
+                              alt="Tidiane Diallo - Développeur Fullstack"
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 192px, 224px"
+                              priority
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Social Media Icons */}
+                      <div className="flex gap-4">
+                        <a
+                          href="https://linkedin.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-lg bg-muted hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-colors"
+                          aria-label="LinkedIn"
+                        >
+                          <Linkedin className="h-5 w-5" />
+                        </a>
+                        <a
+                          href="https://github.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-lg bg-muted hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-colors"
+                          aria-label="GitHub"
+                        >
+                          <Github className="h-5 w-5" />
+                        </a>
+                        <a
+                          href="mailto:contact@tidianediallo.com"
+                          className="p-2 rounded-lg bg-muted hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-colors"
+                          aria-label="Email"
+                        >
+                          <Mail className="h-5 w-5" />
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Right: Content */}
+                    <div className="space-y-6">
+                      {/* Name and Title */}
+                      <div>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-2">Tidiane Diallo</h2>
+                        <p className="text-lg md:text-xl text-[#2563EB] font-semibold">Développeur Fullstack</p>
+                      </div>
+
+                      {/* Professional Summary */}
+                      <div className="space-y-4 text-muted-foreground">
+                        <p>
+                          Avec <strong className="text-foreground">8 ans d&apos;expérience</strong> dans le développement logiciel, 
+                          je me spécialise dans la création d&apos;architectures robustes et scalables avec <strong className="text-foreground">.NET/C#</strong>, 
+                          <strong className="text-foreground"> Java</strong> et <strong className="text-foreground">Python</strong>.
+                        </p>
+                        <p>
+                          Mon expertise couvre les <strong className="text-foreground">architectures logicielles modernes</strong>, 
+                          le développement d&apos;<strong className="text-foreground">agents IA</strong> et l&apos;<strong className="text-foreground">automatisation intelligente</strong>. 
+                          J&apos;ai mené des projets complexes de la conception à la mise en production, en gérant des équipes 
+                          et en livrant des solutions SaaS performantes.
+                        </p>
+                        <p>
+                          Passionné par l&apos;innovation technologique, je combine expertise technique et vision stratégique 
+                          pour transformer les défis complexes en solutions élégantes et efficaces.
+                        </p>
+                      </div>
+
+                      {/* Experience Tags */}
+                      <div className="flex flex-wrap gap-3 pt-4">
+                        <div className="px-4 py-2 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30">
+                          <span className="text-sm font-semibold text-[#2563EB]">8 Ans</span>
+                          <span className="text-sm text-muted-foreground ml-1">d&apos;Expérience</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">.NET/C#</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">Java</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">Python</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">React</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">Blazor</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">Django</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">Angular</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">Architectures</span>
+                          <span className="text-sm text-muted-foreground ml-1">Logicielles</span>
+                        </div>
+                        <div className="px-4 py-2 rounded-full bg-background border border-border">
+                          <span className="text-sm font-semibold">Agents IA</span>
+                          <span className="text-sm text-muted-foreground ml-1">& Automatisation</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* Stats Section */}
         <section className="border-y bg-muted/30 py-12">
           <div className="container">
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
               <div className="text-center">
-                <div className="mb-2 text-2xl font-bold text-[#2563EB]">13+</div>
+                <div className="mb-2 text-2xl font-bold text-[#2563EB]">8+</div>
                 <div className="text-sm text-muted-foreground">Années d&apos;Expérience</div>
               </div>
               <div className="text-center">
@@ -111,138 +238,67 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
           <div className="container relative z-10">
             <div className="grid gap-6 md:grid-cols-3">
-              <Card className="relative">
+              <Card className="relative hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
                 <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-muted flex items-center justify-center">
-                    <Users className="h-8 w-8" />
+                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Users className="h-8 w-8 text-[#2563EB]" />
                   </div>
                   <div className="mb-2 flex justify-center gap-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                      <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
                     ))}
                   </div>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <p className="mb-4 text-sm text-muted-foreground">
+                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
                     Le style d&apos;enseignement de Tidiane est engageant et facile à suivre. 
                     Il explique des concepts complexes de manière concise et fournit de nombreux 
                     exemples et exercices pour vous aider à apprendre.
                   </p>
-                  <p className="font-semibold">Omar</p>
+                  <p className="font-semibold text-[#2563EB]">Pierre DIENG</p>
                 </CardContent>
               </Card>
 
-              <Card className="relative">
+              <Card className="relative hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
                 <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-muted flex items-center justify-center">
-                    <Users className="h-8 w-8" />
+                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Users className="h-8 w-8 text-[#2563EB]" />
                   </div>
                   <div className="mb-2 flex justify-center gap-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                      <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
                     ))}
                   </div>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <p className="mb-4 text-sm text-muted-foreground">
+                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
                     Tidiane est un entrepreneur incroyable, en plus d&apos;être un excellent enseignant. 
                     Il incarne quelqu&apos;un qui apporte une réelle valeur et propose une éducation 
                     de qualité avec des exemples clairs et concis.
                   </p>
-                  <p className="font-semibold">Bob Trussdale</p>
+                  <p className="font-semibold text-[#2563EB]">Pape DIOUF</p>
                 </CardContent>
               </Card>
 
-              <Card className="relative">
+              <Card className="relative hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
                 <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-muted flex items-center justify-center">
-                    <Users className="h-8 w-8" />
+                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Users className="h-8 w-8 text-[#2563EB]" />
                   </div>
                   <div className="mb-2 flex justify-center gap-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                      <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
                     ))}
                   </div>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <p className="mb-4 text-sm text-muted-foreground">
+                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
                     Je suis impressionné par vous. Vous êtes une source constante de générosité. 
                     Vous et vos efforts sont quelque chose de beau à voir. Merci.
                   </p>
-                  <p className="font-semibold">James Ruff</p>
+                  <p className="font-semibold text-[#2563EB]">James Ruff</p>
                 </CardContent>
               </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Experience Section */}
-        <section className="border-t bg-gradient-to-br from-muted/40 via-blue-50/20 to-muted/40 dark:from-muted/40 dark:via-blue-950/5 dark:to-muted/40 py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(37,99,235,0.06),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-              <div className="relative flex justify-center lg:justify-start">
-                <div className="relative w-full max-w-md">
-                  {/* Gradient Background Effect */}
-                  <div className="absolute -inset-3 bg-gradient-to-br from-[#2563EB]/20 via-[#3B82F6]/10 to-transparent rounded-2xl blur-2xl opacity-60" />
-                  
-                  {/* Image Container - Réduite */}
-                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#2563EB]/10 via-background to-[#3B82F6]/5 p-1.5 shadow-xl">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-muted/50">
-                      <Image
-                        src="/images/diallo.png"
-                        alt="Tidiane Diallo - Développeur Fullstack & Expert IA"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 400px"
-                        priority
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
-                    </div>
-                    
-                    {/* Badge d'expérience - Réduit */}
-                    <div className="absolute -bottom-4 -right-4 rounded-xl bg-background/95 backdrop-blur-sm px-4 py-2 shadow-lg border border-[#2563EB]/30">
-                      <p className="text-xs font-semibold flex items-center gap-1.5">
-                        <span className="text-xl font-bold text-[#2563EB]">13+</span>
-                        <span className="text-[10px]">Années</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold md:text-4xl">
-                  Apprenez d&apos;une Expérience du Monde Réel
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  Avec 13 ans dans la tech et plus de 9 ans à construire des entreprises en ligne 
-                  réussies, j&apos;ai développé un système éprouvé pour le succès entrepreneurial digital.
-                </p>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-[#2563EB] mt-0.5 flex-shrink-0" />
-                    <span>Expertise technique en développement et automatisation</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-[#2563EB] mt-0.5 flex-shrink-0" />
-                    <span>Plusieurs startups en ligne réussies</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-[#2563EB] mt-0.5 flex-shrink-0" />
-                    <span>Stratégies de monétisation éprouvées</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-[#2563EB] mt-0.5 flex-shrink-0" />
-                    <span>Approche de mentorat pratique</span>
-                  </li>
-                </ul>
-                <Link href="/about">
-                  <Button size="lg" className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                    En savoir plus sur mon parcours
-                  </Button>
-                </Link>
-              </div>
             </div>
           </div>
         </section>

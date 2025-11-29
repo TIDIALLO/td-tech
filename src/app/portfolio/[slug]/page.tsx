@@ -3,63 +3,243 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, ExternalLink, Github, Calendar, Code, Globe, Brain, Zap } from "lucide-react"
+import { ArrowLeft, ExternalLink, Github, Calendar, Code, Globe, Brain, Zap, CheckCircle2 } from "lucide-react"
 import Image from "next/image"
 
-// Projets statiques si la DB n'est pas disponible
+// Projets détaillés basés sur le CV
 const staticProjects: Record<string, any> = {
-  "plateforme-ecommerce-nextjs": {
+  "school-management-system": {
     id: "1",
-    title: "Plateforme E-commerce Next.js",
-    slug: "plateforme-ecommerce-nextjs",
-    description: "Site e-commerce moderne avec Next.js 15, paiement sécurisé et gestion de stock en temps réel.",
+    title: "School Management System",
+    slug: "school-management-system",
+    description: "Système de gestion scolaire Full Stack .NET avec Docker, CI/CD Azure, Blazor WebAssembly et SignalR pour les mises à jour en temps réel.",
     category: "WEB",
-    technologies: ["Next.js", "TypeScript", "Stripe", "Prisma", "TailwindCSS"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    technologies: [".NET 8", "Blazor WebAssembly", "SignalR", "PostgreSQL", "Docker", "RabbitMQ", "Hangfire", "Serilog", "Azure Pipelines", "JWT"],
+    githubUrl: "https://github.com/TIDIALLO",
+    liveUrl: null,
+    period: "Septembre 2023 – Décembre 2023",
+    location: "Dakar, Sénégal",
+    highlights: [
+      "Conteneurisation Docker avec orchestration (RabbitMQ, PostgreSQL, Hangfire, Serilog)",
+      "CI/CD automatisée avec Azure Pipeline (build, tests, déploiement multi-env)",
+      "Interface Blazor WebAssembly avec SignalR pour temps réel",
+      "Authentification JWT et gestion fine des rôles (admin, professeurs, étudiants)",
+      "Logs structurés et métriques métier avec tableaux de bord"
+    ],
     content: `
       <h2>Contexte du Projet</h2>
-      <p>Développement d'une plateforme e-commerce complète avec les dernières technologies web modernes.</p>
+      <p>Développement d'un système complet de gestion scolaire permettant de gérer les inscriptions, les cours, les notes, les absences et la communication entre les différents acteurs (administrateurs, professeurs, étudiants).</p>
+      
+      <h2>Architecture Technique</h2>
+      <p>Le projet utilise une architecture modulaire avec séparation claire des responsabilités :</p>
+      <ul>
+        <li><strong>Backend :</strong> API REST .NET 8 avec Clean Architecture</li>
+        <li><strong>Frontend :</strong> Blazor WebAssembly pour une expérience utilisateur fluide</li>
+        <li><strong>Base de données :</strong> PostgreSQL avec migrations EF Core</li>
+        <li><strong>Messaging :</strong> RabbitMQ pour la communication asynchrone entre services</li>
+        <li><strong>Background Jobs :</strong> Hangfire pour les tâches planifiées</li>
+        <li><strong>Observabilité :</strong> Serilog pour les logs structurés</li>
+      </ul>
       
       <h2>Fonctionnalités Principales</h2>
       <ul>
-        <li>Gestion de produits et catégories</li>
-        <li>Paiement sécurisé avec Stripe</li>
-        <li>Gestion de panier et commandes</li>
-        <li>Dashboard administrateur</li>
-        <li>Optimisation SEO</li>
+        <li><strong>Gestion des utilisateurs :</strong> Authentification JWT avec rôles (admin, professeurs, étudiants)</li>
+        <li><strong>Gestion académique :</strong> Inscriptions, cours, emplois du temps, notes</li>
+        <li><strong>Temps réel :</strong> SignalR pour les notifications et mises à jour en direct</li>
+        <li><strong>Dashboard :</strong> Tableaux de bord avec métriques métier (inscriptions, activité par profil)</li>
+        <li><strong>CI/CD :</strong> Pipeline Azure automatisé pour build, tests et déploiement</li>
       </ul>
       
-      <h2>Technologies Utilisées</h2>
-      <p>Next.js 15, TypeScript, Prisma, Stripe API, TailwindCSS, PostgreSQL</p>
-    `,
-    createdAt: new Date()
+      <h2>Déploiement & DevOps</h2>
+      <p>Le système est entièrement conteneurisé avec Docker Compose, incluant :</p>
+      <ul>
+        <li>Application principale (.NET 8)</li>
+        <li>Base de données PostgreSQL</li>
+        <li>Message broker RabbitMQ</li>
+        <li>Hangfire pour les tâches en arrière-plan</li>
+        <li>Configuration centralisée avec variables d'environnement</li>
+      </ul>
+      
+      <h2>Résultats</h2>
+      <p>Application scalable et maintenable avec une architecture moderne, permettant une évolution future vers une architecture microservices si nécessaire.</p>
+    `
   },
-  "app-ia-generation-contenu": {
+  "plateforme-supervision-alerting": {
     id: "2",
-    title: "Application IA de Génération de Contenu",
-    slug: "app-ia-generation-contenu",
-    description: "Application web avec intégration OpenAI pour générer du contenu automatiquement.",
-    category: "IA",
-    technologies: ["Next.js", "OpenAI", "TypeScript", "Prisma"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    title: "Plateforme de Supervision & Alerting",
+    slug: "plateforme-supervision-alerting",
+    description: "Architecture microservices .NET pour la supervision d'événements avec bus de messages RabbitMQ, politiques de résilience et observabilité avancée.",
+    category: "WEB",
+    technologies: [".NET 6/8", "Microservices", "RabbitMQ", "JWT", "Blazor", "Serilog", "Circuit Breaker", "Retry Policies"],
+    githubUrl: "https://github.com/TIDIALLO",
+    liveUrl: null,
+    period: "Projet avancé .NET (R&D)",
+    location: "Projet personnel / R&D",
+    highlights: [
+      "Architecture microservices pour supervision d'événements (logs, métriques, alertes)",
+      "Bus de messages RabbitMQ pour diffusion d'événements entre services",
+      "Politiques de résilience (retries, circuit breaker, fallback)",
+      "Logs structurés (Serilog) et corrélation de requêtes (traceId)",
+      "API REST sécurisée JWT et portail d'administration Blazor"
+    ],
     content: `
       <h2>Contexte du Projet</h2>
-      <p>Création d'une application web permettant de générer du contenu automatiquement grâce à l'intelligence artificielle.</p>
+      <p>Conception d'une plateforme avancée de supervision et d'alerting pour systèmes distribués, permettant de collecter, agréger et analyser des événements en temps réel.</p>
+      
+      <h2>Architecture Microservices</h2>
+      <p>L'architecture est composée de plusieurs microservices spécialisés :</p>
+      <ul>
+        <li><strong>Service de collecte :</strong> Récupération des logs et métriques depuis diverses sources</li>
+        <li><strong>Service d'agrégation :</strong> Traitement et agrégation des événements</li>
+        <li><strong>Service de notification :</strong> Envoi d'alertes selon les règles configurées</li>
+        <li><strong>Service d'API :</strong> Exposition REST sécurisée pour consultation et configuration</li>
+        <li><strong>Portail d'administration :</strong> Interface Blazor pour gestion des règles d'alertes</li>
+      </ul>
+      
+      <h2>Patterns & Bonnes Pratiques</h2>
+      <ul>
+        <li><strong>Event-Driven Architecture :</strong> Communication asynchrone via RabbitMQ</li>
+        <li><strong>Resilience Patterns :</strong> Retry policies, circuit breaker, fallback mechanisms</li>
+        <li><strong>Observability :</strong> Logs structurés avec Serilog et corrélation de requêtes (traceId)</li>
+        <li><strong>Security :</strong> Authentification JWT et autorisation fine</li>
+        <li><strong>Scalability :</strong> Architecture horizontale pour gérer de gros volumes d'événements</li>
+      </ul>
+      
+      <h2>Fonctionnalités Clés</h2>
+      <ul>
+        <li>Collecte de logs et métriques depuis multiples sources</li>
+        <li>Agrégation et traitement en temps réel</li>
+        <li>Configuration de règles d'alertes personnalisables</li>
+        <li>Tableaux de bord pour visualisation des métriques</li>
+        <li>Tracing de bout en bout avec corrélation de requêtes</li>
+      </ul>
+      
+      <h2>Technologies Avancées</h2>
+      <p>Utilisation de patterns avancés .NET pour la résilience et l'observabilité, avec intégration de bibliothèques comme Polly pour les politiques de retry et circuit breaker.</p>
+    `
+  },
+  "ecommerce-multivendeurs": {
+    id: "3",
+    title: "E-commerce Multivendeurs",
+    slug: "ecommerce-multivendeurs",
+    description: "Boutique en ligne multivendeurs avec architecture microservices Java/Spring Boot, interface React responsive et intégration APIs de paiement.",
+    category: "WEB",
+    technologies: ["Java", "Spring Boot", "React", "Microservices", "JWT", "PostgreSQL", "Docker"],
+    githubUrl: "https://github.com/TIDIALLO",
+    liveUrl: null,
+    period: "Mars 2018 – Août 2023",
+    location: "Projet long terme",
+    highlights: [
+      "Architecture microservices pour séparer les domaines (commandes, paiements, inventaire)",
+      "Interface React responsive avec gestion de panier et recherche avancée",
+      "Intégration APIs de paiement et authentification JWT",
+      "Dashboard administrateur pour ventes, stocks et statistiques",
+      "Gestion complète des vendeurs, produits et commandes"
+    ],
+    content: `
+      <h2>Contexte du Projet</h2>
+      <p>Développement d'une plateforme e-commerce complète permettant à plusieurs vendeurs de vendre leurs produits sur une même plateforme, avec gestion centralisée des commandes, paiements et inventaire.</p>
+      
+      <h2>Architecture Microservices</h2>
+      <p>L'application est découpée en plusieurs microservices indépendants :</p>
+      <ul>
+        <li><strong>Service Commandes :</strong> Gestion des commandes et paniers</li>
+        <li><strong>Service Paiements :</strong> Intégration avec APIs de paiement</li>
+        <li><strong>Service Inventaire :</strong> Gestion des stocks et produits</li>
+        <li><strong>Service Vendeurs :</strong> Gestion des comptes vendeurs</li>
+        <li><strong>Service Authentification :</strong> JWT et gestion des utilisateurs</li>
+      </ul>
       
       <h2>Fonctionnalités Principales</h2>
       <ul>
-        <li>Génération de texte avec OpenAI GPT</li>
-        <li>Interface utilisateur intuitive</li>
-        <li>Historique des générations</li>
-        <li>Export en différents formats</li>
+        <li><strong>Multi-vendeurs :</strong> Chaque vendeur peut gérer son catalogue et ses ventes</li>
+        <li><strong>Gestion de produits :</strong> CRUD complet avec images, variantes, catégories</li>
+        <li><strong>Panier & Commandes :</strong> Gestion de panier multi-vendeurs et suivi de commandes</li>
+        <li><strong>Recherche avancée :</strong> Filtres, tri, recherche par mots-clés</li>
+        <li><strong>Paiements :</strong> Intégration sécurisée avec APIs de paiement</li>
+        <li><strong>Dashboard :</strong> Statistiques de ventes, stocks, revenus par vendeur</li>
       </ul>
       
-      <h2>Technologies Utilisées</h2>
-      <p>Next.js, OpenAI API, TypeScript, Prisma, TailwindCSS</p>
-    `,
-    createdAt: new Date()
+      <h2>Interface Utilisateur</h2>
+      <p>Interface React moderne et responsive avec :</p>
+      <ul>
+        <li>Design responsive pour mobile, tablette et desktop</li>
+        <li>Gestion d'état avec Redux ou Context API</li>
+        <li>Optimisation des performances (lazy loading, code splitting)</li>
+        <li>Expérience utilisateur fluide avec animations et transitions</li>
+      </ul>
+      
+      <h2>Résultats</h2>
+      <p>Plateforme scalable capable de gérer de nombreux vendeurs et transactions, avec une architecture modulaire facilitant la maintenance et l'évolution.</p>
+    `
+  },
+  "chiffrement-signature-numerique": {
+    id: "4",
+    title: "Application de Chiffrement & Signature Numérique",
+    slug: "chiffrement-signature-numerique",
+    description: "Application pédagogique illustrant la cryptographie moderne avec algorithmes symétriques (AES) et asymétriques (RSA, DSA) et système de signature numérique.",
+    category: "WEB",
+    technologies: ["Java 11", "JavaFX", "JUnit", "Maven", "RSA", "AES", "SHA-256", "PKI", "X.509"],
+    githubUrl: "https://github.com/TIDIALLO",
+    liveUrl: null,
+    period: "Septembre 2017 – Décembre 2017",
+    location: "Projet pédagogique",
+    highlights: [
+      "Algorithmes de chiffrement symétrique (AES) et asymétrique (RSA, DSA)",
+      "Système de signature numérique (génération et vérification)",
+      "Interface pour chiffrer/déchiffrer fichiers et messages",
+      "Gestion sécurisée des clés et certificats X.509",
+      "Concepts avancés : PKI, hachage cryptographique, certificats"
+    ],
+    content: `
+      <h2>Contexte du Projet</h2>
+      <p>Application pédagogique développée dans le cadre d'un projet universitaire pour illustrer les principes de cryptographie moderne et de sécurité de l'information.</p>
+      
+      <h2>Algorithmes Implémentés</h2>
+      <h3>Chiffrement Symétrique</h3>
+      <ul>
+        <li><strong>AES (Advanced Encryption Standard) :</strong> Chiffrement par blocs avec différentes tailles de clés (128, 192, 256 bits)</li>
+        <li>Modes d'opération : ECB, CBC, GCM</li>
+        <li>Gestion sécurisée des clés et vecteurs d'initialisation (IV)</li>
+      </ul>
+      
+      <h3>Chiffrement Asymétrique</h3>
+      <ul>
+        <li><strong>RSA :</strong> Génération de paires de clés, chiffrement/déchiffrement</li>
+        <li><strong>DSA :</strong> Algorithmes de signature numérique</li>
+        <li>Gestion des certificats X.509</li>
+      </ul>
+      
+      <h2>Fonctionnalités</h2>
+      <ul>
+        <li><strong>Chiffrement/Déchiffrement :</strong> Fichiers et messages texte avec différents algorithmes</li>
+        <li><strong>Signature numérique :</strong> Génération et vérification de signatures</li>
+        <li><strong>Gestion de clés :</strong> Génération, import/export de clés publiques et privées</li>
+        <li><strong>Hachage cryptographique :</strong> SHA-256 pour intégrité des données</li>
+        <li><strong>Certificats :</strong> Gestion de certificats X.509 et infrastructure PKI</li>
+      </ul>
+      
+      <h2>Interface Utilisateur</h2>
+      <p>Interface JavaFX intuitive permettant :</p>
+      <ul>
+        <li>Sélection de l'algorithme de chiffrement</li>
+        <li>Chiffrement/déchiffrement de fichiers et messages</li>
+        <li>Génération et gestion de clés</li>
+        <li>Signature et vérification de documents</li>
+        <li>Visualisation des certificats</li>
+      </ul>
+      
+      <h2>Concepts Cryptographiques</h2>
+      <ul>
+        <li><strong>PKI (Public Key Infrastructure) :</strong> Infrastructure à clés publiques</li>
+        <li><strong>Hachage cryptographique :</strong> SHA-256 pour l'intégrité</li>
+        <li><strong>Certificats X.509 :</strong> Format standard pour certificats numériques</li>
+        <li><strong>Sécurité des clés :</strong> Stockage et protection des clés privées</li>
+      </ul>
+      
+      <h2>Tests & Qualité</h2>
+      <p>Tests unitaires avec JUnit pour valider les algorithmes cryptographiques et garantir la sécurité des opérations.</p>
+    `
   }
 }
 
@@ -136,6 +316,21 @@ export default async function ProjectPage({
               {project.description}
             </p>
             
+            {/* Project Meta */}
+            <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-muted-foreground">
+              {project.period && (
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  {project.period}
+                </div>
+              )}
+              {project.location && (
+                <div className="flex items-center gap-2">
+                  <span>{project.location}</span>
+                </div>
+              )}
+            </div>
+            
             <div className="flex flex-wrap gap-3">
               {project.githubUrl && (
                 <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
@@ -160,6 +355,24 @@ export default async function ProjectPage({
         {/* Content Section */}
         <section className="py-12 md:py-16 bg-background">
           <div className="container max-w-4xl">
+            {/* Highlights */}
+            {project.highlights && project.highlights.length > 0 && (
+              <div className="mb-8 p-6 bg-gradient-to-br from-[#2563EB]/5 to-[#3B82F6]/5 rounded-lg border border-[#2563EB]/10">
+                <h2 className="mb-4 text-xl font-bold flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-[#2563EB]" />
+                  Points Clés
+                </h2>
+                <ul className="space-y-2">
+                  {project.highlights.map((highlight: string, idx: number) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#2563EB] flex-shrink-0" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Technologies */}
             <div className="mb-8 p-6 bg-muted/50 rounded-lg border">
               <h2 className="mb-4 text-xl font-bold flex items-center gap-2">
@@ -170,7 +383,7 @@ export default async function ProjectPage({
                 {project.technologies.map((tech: string) => (
                   <span
                     key={tech}
-                    className="rounded-md bg-background border px-3 py-1.5 text-sm font-medium"
+                    className="rounded-md bg-background border border-[#2563EB]/20 px-3 py-1.5 text-sm font-medium text-[#2563EB]"
                   >
                     {tech}
                   </span>
@@ -179,7 +392,7 @@ export default async function ProjectPage({
             </div>
 
             {/* Project Content */}
-            <div className="prose prose-zinc dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-[#2563EB] prose-ul:text-muted-foreground">
+            <div className="prose prose-zinc dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-[#2563EB] prose-ul:text-muted-foreground prose-li:text-muted-foreground">
               <div dangerouslySetInnerHTML={{ __html: project.content || "<p>Description détaillée du projet...</p>" }} />
             </div>
           </div>
