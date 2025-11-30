@@ -1,0 +1,50 @@
+# ============================================
+# Variables d'Environnement Vercel - PRÊTES À COPIER
+# ============================================
+# 
+# Copie ces valeurs dans Vercel → Settings → Environment Variables
+# Pour chaque variable : Key = nom, Value = valeur ci-dessous
+# Coche ✅ Production pour toutes
+#
+# ============================================
+
+# Variable 1 : DATABASE_URL
+postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+
+# Variable 2 : AUTH_SECRET (GÉNÉRÉE ✅)
+yLsy9d/nkotK+ds/Jzaq+McZlB/lTU/c3jOsASZjDec=
+
+# Variable 3 : AUTH_URL (à mettre à jour après déploiement avec l'URL réelle)
+https://td-tech.vercel.app
+
+# Variable 4 : RESEND_API_KEY
+re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG
+
+# Variable 5 : RESEND_FROM_EMAIL
+onboarding@resend.dev
+
+# Variable 6 : ADMIN_EMAIL
+admin@tidianediallo.com
+
+# Variable 7 : ADMIN_PASSWORD
+Admin123!
+
+# ============================================
+# INSTRUCTIONS RAPIDES
+# ============================================
+# 
+# 1. Va sur : https://vercel.com/dashboard
+# 2. Sélectionne ton projet (ou crée-le)
+# 3. Settings → Environment Variables
+# 4. Pour chaque variable ci-dessus :
+#    - Clique "Add New"
+#    - Key = nom (ex: DATABASE_URL)
+#    - Value = valeur correspondante
+#    - Coche Production
+#    - Save
+# 5. Déploie (ou redéploie)
+# 6. Vérifie le statut dans Deployments
+# 7. Copie l'URL de production
+#
+# ============================================
+

@@ -9,26 +9,34 @@ import { formatDate } from "@/lib/utils"
 import ReactMarkdown from "react-markdown"
 
 export async function generateStaticParams() {
-  const posts = await prisma.blogPost.findMany({
-    where: { published: true },
-    select: { slug: true },
-  })
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { published: true },
+      select: { slug: true },
+    })
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
+    return posts.map((post) => ({
+      slug: post.slug,
+    }))
+  } catch {
+    return []
+  }
 }
 
 async function getPost(slug: string) {
-  const post = await prisma.blogPost.findUnique({
-    where: { slug, published: true },
-  })
+  try {
+    const post = await prisma.blogPost.findUnique({
+      where: { slug, published: true },
+    })
 
-  if (!post) {
+    if (!post) {
+      notFound()
+    }
+
+    return post
+  } catch {
     notFound()
   }
-
-  return post
 }
 
 export default async function BlogPostPage({

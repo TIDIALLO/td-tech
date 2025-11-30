@@ -7,7 +7,22 @@ import { ArrowLeft, ExternalLink, Github, Calendar, Code, Globe, Brain, Zap, Che
 import Image from "next/image"
 
 // Projets détaillés basés sur le CV
-const staticProjects: Record<string, any> = {
+interface ProjectData {
+  id: string
+  title: string
+  slug: string
+  description: string
+  category: string
+  technologies: string[]
+  githubUrl: string | null
+  liveUrl: string | null
+  period?: string
+  location?: string
+  highlights?: string[]
+  content: string
+}
+
+const staticProjects: Record<string, ProjectData> = {
   "school-management-system": {
     id: "1",
     title: "School Management System",
@@ -318,15 +333,15 @@ export default async function ProjectPage({
             
             {/* Project Meta */}
             <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-muted-foreground">
-              {project.period && (
+              {"period" in project && project.period && (
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  {project.period}
+                  {(project as { period?: string }).period}
                 </div>
               )}
-              {project.location && (
+              {"location" in project && project.location && (
                 <div className="flex items-center gap-2">
-                  <span>{project.location}</span>
+                  <span>{(project as { location?: string }).location}</span>
                 </div>
               )}
             </div>
@@ -356,14 +371,14 @@ export default async function ProjectPage({
         <section className="py-12 md:py-16 bg-background">
           <div className="container max-w-4xl">
             {/* Highlights */}
-            {project.highlights && project.highlights.length > 0 && (
+            {"highlights" in project && project.highlights && (project as { highlights?: string[] }).highlights && (project as { highlights: string[] }).highlights.length > 0 && (
               <div className="mb-8 p-6 bg-gradient-to-br from-[#2563EB]/5 to-[#3B82F6]/5 rounded-lg border border-[#2563EB]/10">
                 <h2 className="mb-4 text-xl font-bold flex items-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-[#2563EB]" />
                   Points Clés
                 </h2>
                 <ul className="space-y-2">
-                  {project.highlights.map((highlight: string, idx: number) => (
+                  {(project as { highlights: string[] }).highlights.map((highlight: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#2563EB] flex-shrink-0" />
                       <span>{highlight}</span>

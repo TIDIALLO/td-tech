@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs"
 import { z } from "zod"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  // @ts-expect-error - PrismaAdapter type mismatch between @auth/prisma-adapter and next-auth versions
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   pages: {

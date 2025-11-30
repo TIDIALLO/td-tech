@@ -7,26 +7,34 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 
 export async function generateStaticParams() {
-  const services = await prisma.service.findMany({
-    where: { published: true },
-    select: { slug: true },
-  })
+  try {
+    const services = await prisma.service.findMany({
+      where: { published: true },
+      select: { slug: true },
+    })
 
-  return services.map((service) => ({
-    slug: service.slug,
-  }))
+    return services.map((service) => ({
+      slug: service.slug,
+    }))
+  } catch {
+    return []
+  }
 }
 
 async function getService(slug: string) {
-  const service = await prisma.service.findUnique({
-    where: { slug, published: true },
-  })
+  try {
+    const service = await prisma.service.findUnique({
+      where: { slug, published: true },
+    })
 
-  if (!service) {
+    if (!service) {
+      notFound()
+    }
+
+    return service
+  } catch {
     notFound()
   }
-
-  return service
 }
 
 export default async function ServicePage({

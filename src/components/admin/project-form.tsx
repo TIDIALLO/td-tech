@@ -9,8 +9,22 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { slugify } from "@/lib/utils"
 
+interface Project {
+  id: string
+  title: string
+  slug: string
+  description: string
+  content: string
+  category: string
+  technologies: string[]
+  githubUrl?: string | null
+  liveUrl?: string | null
+  published: boolean
+  featured: boolean
+}
+
 interface ProjectFormProps {
-  project?: any
+  project?: Project
 }
 
 export function ProjectForm({ project }: ProjectFormProps) {
@@ -61,7 +75,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
       router.push("/admin/projects")
       router.refresh()
-    } catch (err) {
+    } catch {
       setError("Une erreur est survenue")
     } finally {
       setLoading(false)

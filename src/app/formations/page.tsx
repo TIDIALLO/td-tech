@@ -28,8 +28,23 @@ async function getCourses() {
   }
 }
 
+// Type pour les courses
+type CourseType = {
+  id: string
+  title: string
+  slug: string
+  description: string
+  category: string
+  level: string
+  duration: string
+  price: string
+  modules: Array<{ id: string; title: string }>
+  videos: unknown[]
+  files: unknown[]
+}
+
 // Formations statiques si la base de données n'est pas disponible
-const staticCourses = [
+const staticCourses: CourseType[] = [
   {
     id: "1",
     title: "Formation Next.js Complète",
@@ -128,7 +143,7 @@ export default async function FormationsPage() {
   
   // Utiliser les formations statiques si la base de données est vide
   if (courses.length === 0) {
-    courses = staticCourses as any
+    courses = staticCourses as typeof courses
   }
 
   return (
@@ -171,7 +186,7 @@ export default async function FormationsPage() {
               </div>
             ) : (
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {courses.map((course: any) => (
+                {courses.map((course) => (
                   <Card 
                     key={course.id} 
                     className="group bg-[#1E293B] border-[#334155] text-white hover:border-[#2563EB]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#2563EB]/20 hover:-translate-y-2 flex flex-col"

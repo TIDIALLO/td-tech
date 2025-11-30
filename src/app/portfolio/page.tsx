@@ -21,7 +21,7 @@ const staticProjects = [
     technologies: [".NET 8", "Blazor WebAssembly", "SignalR", "PostgreSQL", "Docker", "RabbitMQ", "Hangfire", "Serilog", "Azure Pipelines", "JWT"],
     githubUrl: "https://github.com/TIDIALLO",
     liveUrl: null,
-    imageUrl: "/placeholder-project.jpg",
+    image: "/placeholder-project.jpg",
     period: "Septembre 2023 – Décembre 2023",
     highlights: [
       "Conteneurisation Docker avec orchestration (RabbitMQ, PostgreSQL, Hangfire, Serilog)",
@@ -40,7 +40,7 @@ const staticProjects = [
     technologies: [".NET 6/8", "Microservices", "RabbitMQ", "JWT", "Blazor", "Serilog", "Circuit Breaker", "Retry Policies"],
     githubUrl: "https://github.com/TIDIALLO",
     liveUrl: null,
-    imageUrl: "/placeholder-project.jpg",
+    image: "/placeholder-project.jpg",
     period: "Projet avancé .NET (R&D)",
     highlights: [
       "Architecture microservices pour supervision d'événements (logs, métriques, alertes)",
@@ -59,7 +59,7 @@ const staticProjects = [
     technologies: ["Java", "Spring Boot", "React", "Microservices", "JWT", "PostgreSQL", "Docker"],
     githubUrl: "https://github.com/TIDIALLO",
     liveUrl: null,
-    imageUrl: "/placeholder-project.jpg",
+    image: "/placeholder-project.jpg",
     period: "Mars 2018 – Août 2023",
     highlights: [
       "Architecture microservices pour séparer les domaines (commandes, paiements, inventaire)",
@@ -78,7 +78,7 @@ const staticProjects = [
     technologies: ["Java 11", "JavaFX", "JUnit", "Maven", "RSA", "AES", "SHA-256", "PKI", "X.509"],
     githubUrl: "https://github.com/TIDIALLO",
     liveUrl: null,
-    imageUrl: "/placeholder-project.jpg",
+    image: "/placeholder-project.jpg",
     period: "Septembre 2017 – Décembre 2017",
     highlights: [
       "Algorithmes de chiffrement symétrique (AES) et asymétrique (RSA, DSA)",
@@ -320,9 +320,9 @@ export default function PortfolioPage() {
                               <div className="absolute inset-0 flex items-center justify-center">
                                 <CategoryIcon className="h-16 w-16 text-[#2563EB]/20" />
                               </div>
-                              {project.imageUrl && (
+                              {project.image && (
                                 <Image
-                                  src={project.imageUrl}
+                                  src={project.image}
                                   alt={project.title}
                                   fill
                                   className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -335,10 +335,10 @@ export default function PortfolioPage() {
                                 <div className="inline-block rounded-full bg-[#2563EB]/10 px-3 py-1 text-xs font-medium text-[#2563EB] border border-[#2563EB]/20">
                                   {project.category}
                                 </div>
-                                {project.period && (
+                                {("period" in project && project.period) && (
                                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                                     <Calendar className="h-3 w-3" />
-                                    {project.period}
+                                    {(project as { period?: string }).period}
                                   </div>
                                 )}
                               </div>
@@ -350,17 +350,17 @@ export default function PortfolioPage() {
 
                             <CardContent className="pt-0">
                               {/* Highlights */}
-                              {project.highlights && project.highlights.length > 0 && (
+                              {("highlights" in project && project.highlights && (project as { highlights?: string[] }).highlights && (project as { highlights: string[] }).highlights.length > 0) && (
                                 <div className="mb-4 space-y-1.5">
-                                  {project.highlights.slice(0, 2).map((highlight, idx) => (
+                                  {(project as { highlights: string[] }).highlights.slice(0, 2).map((highlight, idx) => (
                                     <div key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
                                       <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#2563EB]/40 flex-shrink-0" />
                                       <span className="line-clamp-1">{highlight}</span>
                                     </div>
                                   ))}
-                                  {project.highlights.length > 2 && (
+                                  {(project as { highlights: string[] }).highlights.length > 2 && (
                                     <div className="text-xs text-[#2563EB] font-medium">
-                                      +{project.highlights.length - 2} autres points clés
+                                      +{(project as { highlights: string[] }).highlights.length - 2} autres points clés
                                     </div>
                                   )}
                                 </div>

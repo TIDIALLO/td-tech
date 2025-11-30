@@ -25,7 +25,7 @@ export function DeleteProjectButton({ projectId }: { projectId: string }) {
       } else {
         alert("Erreur lors de la suppression")
       }
-    } catch (error) {
+    } catch {
       alert("Erreur lors de la suppression")
     } finally {
       setLoading(false)

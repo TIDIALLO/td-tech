@@ -13,8 +13,7 @@ import {
   Zap, 
   CheckCircle2,
   ArrowRight,
-  Sparkles,
-  TrendingUp
+  Sparkles
 } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -58,7 +57,7 @@ export default function ServicesPage() {
     {
       id: 4,
       title: "Intégration IA",
-      description: "Intégration de l'intelligence artificielle dans vos applications existantes.",
+      description: "Intégration de l&apos;intelligence artificielle dans vos applications existantes.",
       icon: Brain,
       features: [
         "Agents intelligents",
@@ -70,13 +69,13 @@ export default function ServicesPage() {
     {
       id: 5,
       title: "Automatisation IA",
-      description: "Automatisez vos processus métier avec l'IA. Workflows intelligents et optimisation.",
+      description: "Automatisez vos processus métier avec l&apos;IA. Workflows intelligents et optimisation.",
       icon: Zap,
       features: [
         "Workflows N8N",
         "Automatisation de tâches",
         "Traitement de données",
-        "Intégration d'APIs"
+        "Intégration d&apos;APIs"
       ]
     }
   ]
@@ -160,7 +159,7 @@ export default function ServicesPage() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <ul className="space-y-1.5 mb-4">
-                      {services[0].features.slice(0, 4).map((feature, idx) => (
+                      {services[0]?.features?.slice(0, 4).map((feature, idx) => (
                         <li key={idx} className="flex items-center gap-2 text-xs text-muted-foreground">
                           <CheckCircle2 className="h-3 w-3 text-[#2563EB] flex-shrink-0" />
                           <span className="line-clamp-1">{feature}</span>
@@ -259,7 +258,7 @@ export default function ServicesPage() {
                     </div>
                     <CardTitle className="text-lg mb-2">Intégration IA</CardTitle>
                     <CardDescription className="text-xs leading-relaxed">
-                      Intégration de l'intelligence artificielle dans vos applications.
+                      Intégration de l&apos;intelligence artificielle dans vos applications.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="pt-0">
@@ -326,7 +325,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
                     <ul className="space-y-1 mb-4">
-                      {services[4].features.slice(0, 3).map((feature, idx) => (
+                      {services[4]?.features?.slice(0, 3).map((feature, idx) => (
                         <li key={idx} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                           <CheckCircle2 className="h-3 w-3 text-[#2563EB] flex-shrink-0" />
                           <span className="line-clamp-1">{feature}</span>

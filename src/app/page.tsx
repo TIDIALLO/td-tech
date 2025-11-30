@@ -244,7 +244,7 @@ export default function Home() {
                     <Users className="h-8 w-8 text-[#2563EB]" />
                   </div>
                   <div className="mb-2 flex justify-center gap-1">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(5)].map((_unused, i) => (
                       <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
                     ))}
                   </div>
@@ -265,7 +265,7 @@ export default function Home() {
                     <Users className="h-8 w-8 text-[#2563EB]" />
                   </div>
                   <div className="mb-2 flex justify-center gap-1">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(5)].map((_unused, i) => (
                       <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
                     ))}
                   </div>
@@ -286,7 +286,7 @@ export default function Home() {
                     <Users className="h-8 w-8 text-[#2563EB]" />
                   </div>
                   <div className="mb-2 flex justify-center gap-1">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(5)].map((_unused, i) => (
                       <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
                     ))}
                   </div>

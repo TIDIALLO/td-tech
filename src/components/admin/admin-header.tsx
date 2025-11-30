@@ -5,7 +5,12 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { LogOut } from "lucide-react"
 import { signOut } from "next-auth/react"
 
-export function AdminHeader({ user }: { user: any }) {
+interface User {
+  name?: string | null
+  email?: string | null
+}
+
+export function AdminHeader({ user }: { user: User }) {
   return (
     <header className="border-b bg-background">
       <div className="flex h-16 items-center justify-between px-6">

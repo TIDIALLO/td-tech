@@ -15,7 +15,7 @@ export async function GET() {
         technologies: true,
         githubUrl: true,
         liveUrl: true,
-        imageUrl: true,
+        image: true,
         createdAt: true,
       },
     })
