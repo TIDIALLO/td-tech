@@ -50,7 +50,7 @@ jobs:
     name: Deploy to VPS
     needs: test
     runs-on: ubuntu-latest
-    if: ${{ secrets.VPS_HOST != '' }}
+    if: ${{ secrets.VPS_HOST }}
     
     steps:
       - name: Checkout code
@@ -127,7 +127,7 @@ jobs:
     name: Deploy to Vercel
     needs: test
     runs-on: ubuntu-latest
-    if: ${{ secrets.VERCEL_TOKEN != '' && (secrets.VPS_HOST == '' || secrets.VPS_HOST == null) }}
+    if: ${{ secrets.VERCEL_TOKEN && !secrets.VPS_HOST }}
     continue-on-error: true
     
     steps:
