@@ -451,7 +451,7 @@ export default function PortfolioPage() {
                 animate="visible"
                 className="space-y-8"
               >
-                {experiences.map((exp, idx) => (
+                {experiences.map((exp) => (
                   <motion.div key={exp.id} variants={itemVariants}>
                     <Card className="bg-card border hover:border-[#2563EB]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#2563EB]/10">
                       <CardHeader>

@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
-import { Users, Star, MessageSquare, BarChart3, HeadphonesIcon, Github, Linkedin, Mail, Brain, Zap, Lightbulb, Code, Rocket, Globe, GraduationCap, ChevronLeft, ChevronRight, MapPin, CheckCircle } from "lucide-react"
+import { Users, Star, MessageSquare, BarChart3, HeadphonesIcon, Github, Linkedin, Mail, Brain, Zap, Lightbulb, Code, Rocket, Globe, GraduationCap } from "lucide-react"
 import { BookingCalendar } from "@/components/booking-calendar"
 
 export default function Home() {

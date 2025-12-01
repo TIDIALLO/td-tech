@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
-import { BookOpen, Clock, ArrowRight, CheckCircle2, PlayCircle, Download, Users, Star } from "lucide-react"
+import { BookOpen, Clock, ArrowRight, PlayCircle, Download, Users, Star } from "lucide-react"
 
 export const metadata = {
   title: "Formations - Tidiane Diallo",

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ExternalLink, Github, Calendar, Code, Globe, Brain, Zap, CheckCircle2 } from "lucide-react"
-import Image from "next/image"
 
 // Projets détaillés basés sur le CV
 interface ProjectData {
