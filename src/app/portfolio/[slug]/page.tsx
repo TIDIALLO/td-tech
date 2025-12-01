@@ -269,9 +269,9 @@ async function getProject(slug: string) {
     if (project) {
       return project
     }
-  } catch (error) {
+  } catch (err) {
     // Si erreur, utiliser les projets statiques
-    console.log("Using static project")
+    console.log("Using static project", err)
   }
   
   // Utiliser les projets statiques

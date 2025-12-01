@@ -21,8 +21,9 @@ export async function GET() {
     })
     
     return NextResponse.json(projects)
-  } catch (error) {
+  } catch (err) {
     // Retourner un tableau vide en cas d'erreur
+    console.error("Erreur lors de la récupération des projets:", err)
     return NextResponse.json([])
   }
 }

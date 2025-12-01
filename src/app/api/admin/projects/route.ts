@@ -31,14 +31,15 @@ export async function POST(request: Request) {
     })
 
     return NextResponse.json(project, { status: 201 })
-  } catch (error) {
-    if (error instanceof z.ZodError) {
+  } catch (err) {
+    if (err instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Données invalides", details: error.errors },
+        { error: "Données invalides", details: err.errors },
         { status: 400 }
       )
     }
 
+    console.error("Erreur lors de la création du projet:", err)
     return NextResponse.json(
       { error: "Erreur lors de la création" },
       { status: 500 }

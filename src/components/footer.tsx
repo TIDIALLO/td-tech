@@ -45,8 +45,9 @@ export function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-muted-foreground text-center md:text-right">
             <p>© {new Date().getFullYear()} <span className="font-semibold text-foreground">TDTech</span>. Tous droits réservés.</p>
+            <p className="mt-1 text-xs opacity-70">Sous-titrage : Sette Inc. 2021</p>
           </div>
         </div>
       </div>

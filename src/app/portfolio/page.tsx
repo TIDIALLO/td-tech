@@ -164,9 +164,9 @@ export default function PortfolioPage() {
             setProjects(data)
           }
         }
-      } catch (error) {
+      } catch (err) {
         // Utiliser les projets statiques en cas d'erreur
-        console.log("Using static projects")
+        console.log("Using static projects", err)
       }
     }
     loadProjects()

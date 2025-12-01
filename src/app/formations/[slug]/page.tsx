@@ -9,37 +9,45 @@ import { ArrowLeft, BookOpen, Clock, Download, Video } from "lucide-react"
 import { auth } from "@/auth"
 
 export async function generateStaticParams() {
-  const courses = await prisma.course.findMany({
-    where: { published: true },
-    select: { slug: true },
-  })
+  try {
+    const courses = await prisma.course.findMany({
+      where: { published: true },
+      select: { slug: true },
+    })
 
-  return courses.map((course) => ({
-    slug: course.slug,
-  }))
+    return courses.map((course) => ({
+      slug: course.slug,
+    }))
+  } catch {
+    return []
+  }
 }
 
 async function getCourse(slug: string) {
-  const course = await prisma.course.findUnique({
-    where: { slug, published: true },
-    include: {
-      modules: {
-        where: { published: true },
-        orderBy: { order: "asc" },
+  try {
+    const course = await prisma.course.findUnique({
+      where: { slug, published: true },
+      include: {
+        modules: {
+          where: { published: true },
+          orderBy: { order: "asc" },
+        },
+        files: true,
+        videos: {
+          where: { published: true },
+          orderBy: { order: "asc" },
+        },
       },
-      files: true,
-      videos: {
-        where: { published: true },
-        orderBy: { order: "asc" },
-      },
-    },
-  })
+    })
 
-  if (!course) {
+    if (!course) {
+      notFound()
+    }
+
+    return course
+  } catch {
     notFound()
   }
-
-  return course
 }
 
 export default async function CourseDetailPage({

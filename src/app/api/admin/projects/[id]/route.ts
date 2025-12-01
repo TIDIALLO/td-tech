@@ -19,7 +19,8 @@ export async function DELETE(
     })
 
     return NextResponse.json({ message: "Projet supprimé" }, { status: 200 })
-  } catch (error) {
+  } catch (err) {
+    console.error("Erreur lors de la suppression du projet:", err)
     return NextResponse.json(
       { error: "Erreur lors de la suppression" },
       { status: 500 }

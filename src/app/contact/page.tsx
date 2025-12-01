@@ -83,6 +83,7 @@ export default function ContactPage() {
       
       ;(e.target as HTMLFormElement).reset()
     } catch (err) {
+      console.error("Erreur lors de l'envoi du formulaire:", err)
       setError("Une erreur est survenue. Veuillez réessayer.")
     } finally {
       setLoading(false)

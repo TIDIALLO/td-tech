@@ -196,31 +196,32 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
       )
     }
 
-  } catch (error) {
-    console.error("Erreur lors de l'envoi:", error)
+  } catch (err) {
+    console.error("Erreur lors de l'envoi:", err)
     
-    if (error instanceof z.ZodError) {
+    if (err instanceof z.ZodError) {
       // Formater les erreurs pour un affichage plus clair
-      const errorMessages = error.errors.map(err => {
-        const field = err.path.join('.')
-        return `${field}: ${err.message}`
+      const errorMessages = err.errors.map(errorItem => {
+        const field = errorItem.path.join('.')
+        return `${field}: ${errorItem.message}`
       })
       
       return NextResponse.json(
         { 
           error: "Données invalides", 
           message: errorMessages.join(', '),
-          details: error.errors 
+          details: err.errors 
         },
         { status: 400 }
       )
     }
 
     // Erreur inattendue
+    console.error("Erreur inattendue lors de l'envoi:", err)
     return NextResponse.json(
       { 
         error: "Erreur lors du traitement de votre message",
-        message: error instanceof Error ? error.message : "Erreur inconnue"
+        message: err instanceof Error ? err.message : "Erreur inconnue"
       },
       { status: 500 }
     )

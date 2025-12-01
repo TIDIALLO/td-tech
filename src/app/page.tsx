@@ -5,7 +5,8 @@ import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
-import { CheckCircle2, Users, Star, Calendar, MessageSquare, BarChart3, MessageCircle, HeadphonesIcon, Github, Linkedin, Mail } from "lucide-react"
+import { Users, Star, MessageSquare, BarChart3, HeadphonesIcon, Github, Linkedin, Mail, Brain, Zap, Lightbulb, Code, Rocket, Globe, GraduationCap, ChevronLeft, ChevronRight, MapPin, CheckCircle } from "lucide-react"
+import { BookingCalendar } from "@/components/booking-calendar"
 
 export default function Home() {
   return (
@@ -19,13 +20,19 @@ export default function Home() {
             <div className="grid gap-4 lg:grid-cols-2 lg:gap-6 items-center max-w-7xl mx-auto px-4">
               {/* Left Content */}
               <div className="space-y-6">
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <h1 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
                     Des solutions modernes pour vos{" "}
                     <span className="text-[#2563EB] bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">ambitions digitales</span>.
                   </h1>
-                  <p className="text-sm text-muted-foreground">
-                    Propulsons votre projet au niveau supérieur.
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                    Propulsons votre projet au niveau supérieur avec l&apos;<strong className="text-foreground">intelligence artificielle</strong>, 
+                    des <strong className="text-foreground">agents IA</strong> intelligents et des solutions d&apos;<strong className="text-foreground">automatisation</strong> sur mesure. 
+                    Transformez vos processus métier et optimisez vos opérations avec des technologies de pointe. 
+                    De l&apos;intégration d&apos;agents conversationnels à l&apos;automatisation de workflows complexes avec N8N, 
+                    nous créons des solutions qui s&apos;adaptent à vos besoins spécifiques. 
+                    Créez des <strong className="text-foreground">applications web modernes</strong> et des <strong className="text-foreground">sites web performants</strong> 
+                    avec les dernières technologies pour propulser votre présence digitale.
                   </p>
                 </div>
 
@@ -203,6 +210,206 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section className="py-20 bg-gradient-to-br from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
+          <div className="container relative z-10">
+            <div className="mb-12 text-center">
+              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+                Nos Services
+              </h2>
+              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+                Des solutions complètes pour transformer vos idées en réalité digitale
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader>
+                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Globe className="h-6 w-6 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-xl">Création de Sites Web Modernes</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Développement de sites web modernes et performants avec Next.js, React et les dernières technologies. 
+                    Sites vitrine, e-commerce et applications web sur mesure avec optimisation SEO et design responsive.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader>
+                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Code className="h-6 w-6 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-xl">Développement d&apos;Applications</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Création d&apos;applications web et mobiles modernes avec des architectures robustes et scalables. 
+                    Solutions sur mesure développées avec .NET/C#, Java, Python, React et les frameworks les plus récents.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader>
+                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Brain className="h-6 w-6 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-xl">Intégration IA & Agents</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Intégration d&apos;intelligence artificielle dans vos applications existantes. 
+                    Développement d&apos;agents IA intelligents, chatbots conversationnels et assistants virtuels pour automatiser vos processus.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader>
+                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Zap className="h-6 w-6 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-xl">Automatisation IA</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Automatisation de vos processus métier avec l&apos;IA. Workflows intelligents avec N8N, 
+                    traitement de données automatisé et intégration d&apos;APIs pour optimiser vos opérations.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader>
+                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <GraduationCap className="h-6 w-6 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-xl">Formations & Cours</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Formations complètes en développement web, automatisation IA et programmation. 
+                    Cours approfondis en Next.js, React, TypeScript, .NET/C#, Java et Python pour tous les niveaux.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader>
+                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Rocket className="h-6 w-6 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-xl">Architectures Logicielles</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Conception d&apos;architectures logicielles modernes, robustes et scalables. 
+                    Solutions SaaS performantes, microservices et systèmes distribués pour vos projets complexes.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="mt-12 text-center">
+              <Link href="/services">
+                <Button size="lg" className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                  Voir tous nos services
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Process Section */}
+        <section className="py-20 bg-gradient-to-br from-background via-blue-50/30 to-background dark:from-background dark:via-blue-950/10 dark:to-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(37,99,235,0.08),transparent_50%)]" />
+          <div className="container relative z-10">
+            <div className="mb-16 text-center">
+              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+                Notre Processus Éprouvé
+              </h2>
+              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+                Une approche structurée pour transformer vos idées en solutions performantes
+              </p>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-3">
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader className="text-center">
+                  <div className="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Lightbulb className="h-10 w-10 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-2xl mb-4">1. Planifiez votre roadmap</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Nous prenons le temps de comprendre vos besoins, en établissant une roadmap stratégique 
+                    pour votre solution sur mesure.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader className="text-center">
+                  <div className="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Code className="h-10 w-10 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-2xl mb-4">2. Construisez votre MVP</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Nos développeurs commencent alors à construire votre solution IA personnalisée - 
+                    intuitive, belle et fonctionnelle.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
+                <CardHeader className="text-center">
+                  <div className="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
+                    <Rocket className="h-10 w-10 text-[#2563EB]" />
+                  </div>
+                  <CardTitle className="text-2xl mb-4">3. Itérez et lancez</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Nous travaillons en sprints agiles bi-hebdomadaires. Où nous travaillerons pour pousser 
+                    la roadmap et itérer en temps réel.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Booking Section */}
+        <section className="py-20 bg-gradient-to-br from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
+          <div className="container relative z-10">
+            <div className="max-w-6xl mx-auto">
+              <div className="mb-12 text-center">
+                <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+                  Réservez une Consultation
+                </h2>
+                <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+                  Discutons de votre projet et découvrons comment nous pouvons vous aider
+                </p>
+              </div>
+
+              <Card className="border-2 border-[#2563EB]/20 shadow-xl bg-background/95 backdrop-blur-sm">
+                <CardContent className="p-8 md:p-12">
+                  <BookingCalendar />
                 </CardContent>
               </Card>
             </div>

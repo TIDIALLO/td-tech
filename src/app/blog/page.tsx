@@ -13,11 +13,15 @@ export const metadata = {
 }
 
 async function getPosts() {
-  const posts = await prisma.blogPost.findMany({
-    where: { published: true },
-    orderBy: { publishedAt: "desc" },
-  })
-  return posts
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { published: true },
+      orderBy: { publishedAt: "desc" },
+    })
+    return posts
+  } catch {
+    return []
+  }
 }
 
 export default async function BlogPage() {

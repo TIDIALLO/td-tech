@@ -16,8 +16,8 @@ export async function verifyConnection() {
     await transporter.verify()
     console.log('✅ Connexion Gmail SMTP réussie')
     return true
-  } catch (error) {
-    console.error('❌ Erreur de connexion Gmail SMTP:', error)
+  } catch (err) {
+    console.error('❌ Erreur de connexion Gmail SMTP:', err)
     return false
   }
 }

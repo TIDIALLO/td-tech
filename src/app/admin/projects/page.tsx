@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
-import { Plus, Edit, Trash2 } from "lucide-react"
+import { Plus, Edit } from "lucide-react"
 import { DeleteProjectButton } from "@/components/admin/delete-project-button"
 
 async function getProjects() {

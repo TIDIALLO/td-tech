@@ -23,7 +23,8 @@ async function getCourses() {
       },
     })
     return courses
-  } catch (error) {
+  } catch (err) {
+    console.error("Erreur lors de la récupération des formations:", err)
     return []
   }
 }
