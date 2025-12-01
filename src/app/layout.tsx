@@ -6,9 +6,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tidiane Diallo - Portfolio & Formations",
-  description: "Développeur Fullstack, Expert en Automatisation IA et N8N. Découvrez mes projets, services et formations.",
-  keywords: ["développeur fullstack", "automatisation IA", "N8N", "formations", "web development"],
+  title: "Td-Tech | Tidiane Diallo - Solutions Digitales & Automatisation IA",
+  description: "Développeur Fullstack, Expert en Automatisation IA et N8N. Solutions digitales sur mesure pour propulser votre entreprise.",
+  keywords: ["développeur fullstack", "automatisation IA", "N8N", "formations", "web development", "Td-Tech", "Tidiane Diallo"],
 };
 
 export default function RootLayout({

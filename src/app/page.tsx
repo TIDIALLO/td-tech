@@ -26,13 +26,11 @@ export default function Home() {
                     <span className="text-[#2563EB] bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">ambitions digitales</span>.
                   </h1>
                   <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                    Propulsons votre projet au niveau supérieur avec l&apos;<strong className="text-foreground">intelligence artificielle</strong>, 
-                    des <strong className="text-foreground">agents IA</strong> intelligents et des solutions d&apos;<strong className="text-foreground">automatisation</strong> sur mesure. 
-                    Transformez vos processus métier et optimisez vos opérations avec des technologies de pointe. 
-                    De l&apos;intégration d&apos;agents conversationnels à l&apos;automatisation de workflows complexes avec N8N, 
-                    nous créons des solutions qui s&apos;adaptent à vos besoins spécifiques. 
-                    Créez des <strong className="text-foreground">applications web modernes</strong> et des <strong className="text-foreground">sites web performants</strong> 
-                    avec les dernières technologies pour propulser votre présence digitale.
+                    Solutions digitales sur mesure alliant <strong className="text-foreground">intelligence artificielle</strong>, 
+                    <strong className="text-foreground"> agents IA</strong> et <strong className="text-foreground">automatisation</strong> pour transformer vos processus métier. 
+                    De l&apos;intégration d&apos;agents conversationnels à l&apos;automatisation de workflows avec N8N, 
+                    nous développons des <strong className="text-foreground">applications web modernes</strong> et des 
+                    <strong className="text-foreground"> sites performants</strong> qui s&apos;adaptent à vos besoins.
                   </p>
                 </div>
 
