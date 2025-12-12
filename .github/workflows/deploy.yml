@@ -50,13 +50,13 @@ jobs:
     name: Deploy to VPS
     needs: test
     runs-on: ubuntu-latest
-    if: ${{ secrets.VPS_HOST }}
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Deploy to VPS via SSH
+        if: ${{ secrets.VPS_HOST != '' }}
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -127,7 +127,6 @@ jobs:
     name: Deploy to Vercel
     needs: test
     runs-on: ubuntu-latest
-    if: ${{ secrets.VERCEL_TOKEN && !secrets.VPS_HOST }}
     continue-on-error: true
     
     steps:
@@ -145,6 +144,7 @@ jobs:
 
       - name: Pull Vercel Environment Information
         id: vercel-env
+        if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' && secrets.VPS_HOST == '' }}
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -154,6 +154,7 @@ jobs:
           scope: ${{ secrets.VERCEL_ORG_ID }}
 
       - name: Deploy to Vercel Production
+        if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' && secrets.VPS_HOST == '' }}
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
