@@ -79,6 +79,26 @@ export default function Home() {
     },
   ] as const
 
+  const techStack = [
+    { name: "n8n", logo: "https://cdn.simpleicons.org/n8n/ff6b6b" },
+    { name: "Python", logo: "https://cdn.simpleicons.org/python/3776ab" },
+    { name: ".NET", logo: "https://cdn.simpleicons.org/dotnet/512bd4" },
+    { name: "C#", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-line.svg" },
+    { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+    { name: "React", logo: "https://cdn.simpleicons.org/react/61dafb" },
+    { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/ffffff", darkBg: true },
+    { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript/3178c6" },
+    { name: "JavaScript", logo: "https://cdn.simpleicons.org/javascript/f7df1e" },
+    { name: "Node.js", logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
+    { name: "PostgreSQL", logo: "https://cdn.simpleicons.org/postgresql/4169e1" },
+    { name: "Tailwind CSS", logo: "https://cdn.simpleicons.org/tailwindcss/38bdf8" },
+    { name: "Azure", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+    { name: "Supabase", logo: "https://cdn.simpleicons.org/supabase/3ecf8e" },
+    { name: "MySQL", logo: "https://cdn.simpleicons.org/mysql/4479a1" },
+    { name: "SQL Server", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" },
+    { name: "Blazor", logo: "https://cdn.simpleicons.org/blazor/512bd4" },
+  ]
+
   return (
     <>
       <Navbar />
@@ -333,6 +353,68 @@ export default function Home() {
               </Button>
             </div>
           </div>
+        </section>
+
+        {/* TECH STACK (logos en défilement) */}
+        <section className="relative overflow-hidden py-20 bg-gradient-to-b from-background via-muted/40 to-background">
+          <div className="absolute inset-0 pointer-events-none opacity-40 [background-image:radial-gradient(circle,rgba(37,99,235,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
+          <div className="container relative px-4 space-y-10">
+            <div className="mx-auto max-w-3xl text-center space-y-3">
+              <p className="inline-flex items-center gap-2 rounded-full border bg-background/80 px-3 py-1 text-xs font-semibold text-primary shadow-sm backdrop-blur">
+                Stack moderne & interopérable
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold">Technos maîtrisées</h2>
+              <p className="text-muted-foreground">
+                Un socle éprouvé pour livrer vite et propre : front, back, data, automation et IA.
+              </p>
+            </div>
+
+            <div className="relative space-y-6">
+              {[0, 1].map((row) => (
+                <div key={row} className="overflow-hidden">
+                  <div
+                    className="flex items-center gap-4 tech-marquee"
+                    data-direction={row === 1 ? "reverse" : "normal"}
+                  >
+                    {[...techStack, ...techStack].map((tech, idx) => (
+                      <div
+                        key={`${tech.name}-${idx}-${row}`}
+                        className="flex items-center gap-3 rounded-xl border bg-background/80 px-4 py-3 shadow-sm backdrop-blur hover:-translate-y-1 hover:shadow-md transition-transform duration-300"
+                      >
+                        <div
+                          className={`h-10 w-10 rounded-lg flex items-center justify-center border ${tech.darkBg ? "bg-slate-900" : "bg-white"}`}
+                        >
+                          <img
+                            src={tech.logo}
+                            alt={tech.name}
+                            className={`h-6 w-6 object-contain ${tech.darkBg ? "invert" : ""}`}
+                            loading="lazy"
+                            crossOrigin="anonymous"
+                          />
+                        </div>
+                        <span className="text-sm font-semibold text-foreground">{tech.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <style jsx>{`
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .tech-marquee {
+              width: max-content;
+              animation: marquee 26s linear infinite;
+            }
+            .tech-marquee[data-direction="reverse"] {
+              animation-direction: reverse;
+              animation-duration: 30s;
+            }
+          `}</style>
         </section>
 
         {/* Section Booking */}
