@@ -10,8 +10,9 @@ export function Footer() {
             <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300 group-hover:scale-105">
             <span className="text-white font-bold text-lg">S6</span>
             </div>
-            <span className="text-lg font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-            Synap6ia
+            <span className="text-lg font-bold flex items-center gap-0.5">
+              <span className="text-white">Synap</span>
+              <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">6ia</span>
             </span>
           </div>
 

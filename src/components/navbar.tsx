@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils"
 
 const navigation = [
   { name: "Accueil", href: "/" },
+  { name: "Notre approche", href: "/#approche" },
   { name: "Services", href: "/services" },
   { name: "Formations", href: "/formations" },
-  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ]
 
@@ -27,8 +27,9 @@ export function Navbar() {
           <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-lg">S6</span>
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-            Synap6ia
+          <span className="text-xl font-bold flex items-center gap-0.5">
+            <span className="text-white">Synap</span>
+            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">6ia</span>
           </span>
         </Link>
 

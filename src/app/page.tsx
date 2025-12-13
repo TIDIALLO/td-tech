@@ -102,7 +102,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">
+      <main className="min-h-screen font-semibold text-foreground">
         {/* HERO (Aceternity vibe, sobre + crédible) */}
         <section className="relative min-h-[90vh] overflow-hidden">
           <AuroraBackground showRadialGradient className="absolute inset-0">
@@ -415,6 +415,67 @@ export default function Home() {
               animation-duration: 30s;
             }
           `}</style>
+        </section>
+
+        {/* OUR APPROACH (FR) */}
+        <section id="approche" className="relative overflow-hidden py-20 bg-muted/30">
+          <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:radial-gradient(circle,rgba(37,99,235,0.18)_1px,transparent_1px)] [background-size:26px_26px]" />
+          <div className="container relative px-4">
+            <div className="mx-auto max-w-4xl text-center space-y-4 mb-12">
+              <p className="inline-flex items-center gap-2 rounded-full border bg-background/80 px-3 py-1 text-xs font-semibold text-primary shadow-sm backdrop-blur">
+                Notre approche
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Une méthodologie éprouvée, <span className="text-primary">du concept au déploiement</span>
+              </h2>
+              <p className="text-muted-foreground text-base">
+                Une démarche claire, du cadrage métier à l’intégration fluide dans vos outils, pour garantir un déploiement IA sans frictions.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  step: "01",
+                  title: "Discovery",
+                  desc: "Exploration de vos enjeux, objectifs et infrastructure actuelle pour identifier les opportunités IA.",
+                },
+                {
+                  step: "02",
+                  title: "Strategy",
+                  desc: "Roadmap IA avec jalons, délais et KPI de succès pour piloter la valeur livrée.",
+                },
+                {
+                  step: "03",
+                  title: "Development",
+                  desc: "Build & training d’agents IA sur-mesure avec les meilleures pratiques et une stack adaptée.",
+                },
+                {
+                  step: "04",
+                  title: "Integration",
+                  desc: "Déploiement fluide dans vos workflows et systèmes existants, avec accompagnement.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.step}
+                  className="group relative overflow-hidden rounded-xl border bg-background/80 backdrop-blur shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                >
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary/12 via-sky-400/10 to-emerald-300/12" />
+                  <div className="pointer-events-none absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-primary/0 via-primary/25 to-primary/0 opacity-0 blur-xl transition duration-500 group-hover:opacity-100" />
+
+                  <div className="relative flex flex-col items-center gap-4 p-6 text-center">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-emerald-400 to-primary text-slate-900 font-bold shadow-lg group-hover:scale-105 transition-transform duration-300">
+                      {item.step}
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-bold">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Section Booking */}
