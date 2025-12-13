@@ -4,8 +4,8 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { CheckCircle, Clock, Video, MapPin, ChevronLeft, ChevronRight, Loader2, Send } from "lucide-react"
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, getDay, startOfWeek, endOfWeek } from "date-fns"
+import { CheckCircle, Clock, Video, ChevronLeft, ChevronRight, Loader2, Send } from "lucide-react"
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, getDay, startOfWeek, endOfWeek, addMinutes } from "date-fns"
 import { fr } from "date-fns/locale/fr"
 
 interface BookingCalendarProps {
@@ -26,7 +26,7 @@ export function BookingCalendar({
   description = "Parlons de la façon dont nous pouvons aider votre entreprise.",
   duration = "30min",
   meetingType = "Google Meet",
-  timezone = "Europe/Paris",
+  timezone = "Africa/Dakar",
   availableSlots = ["12:00", "12:30", "13:00", "13:30"]
 }: BookingCalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date())
@@ -36,6 +36,22 @@ export function BookingCalendar({
   const [formData, setFormData] = useState({ name: "", email: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [durationMinutes, setDurationMinutes] = useState<number>(Number(duration.replace(/\D/g, "")) || 30)
+  const [selectedTimezone, setSelectedTimezone] = useState<string>(timezone)
+  const timezoneOptions = [
+    { value: "Africa/Dakar", label: "Sénégal / Dakar (UTC+0)" },
+    { value: "Europe/Paris", label: "France / Paris (UTC+1/+2)" },
+    { value: "UTC", label: "UTC" },
+  ]
+
+  const durationOptions = [15, 30, 45, 60]
+
+  const addMinutesToTime = (time: string, minutes: number) => {
+    const [hours, mins] = time.split(":").map(Number)
+    const date = new Date()
+    date.setHours(hours, mins, 0, 0)
+    return format(addMinutes(date, minutes), "HH:mm")
+  }
 
   // Générer les jours du mois
   const monthStart = startOfMonth(currentMonth)
@@ -94,7 +110,9 @@ export function BookingCalendar({
           email: formData.email,
           date: format(selectedDate, "yyyy-MM-dd"),
           time: selectedTime,
-          timezone: timezone,
+          timezone: selectedTimezone,
+          durationMinutes,
+          endTime: addMinutesToTime(selectedTime, durationMinutes),
         }),
       })
 
@@ -130,7 +148,7 @@ export function BookingCalendar({
       <div className="space-y-6">
         <div className="flex flex-col items-center lg:items-start">
           <div className="relative mb-6">
-            <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-[#2563EB]/20 via-background to-[#3B82F6]/10 p-1.5 shadow-lg">
+            <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-[#10B981]/20 via-background to-[#059669]/10 p-1.5 shadow-lg">
               <div className="relative w-full h-full rounded-full overflow-hidden bg-muted/50">
                 <Image
                   src={profileImage}
@@ -143,7 +161,7 @@ export function BookingCalendar({
             </div>
           </div>
           <h3 className="text-2xl font-bold mb-2 text-foreground">{name}</h3>
-          <h4 className="text-xl font-semibold text-[#2563EB] mb-4">{consultationType}</h4>
+          <h4 className="text-xl font-semibold text-[#10B981] mb-4">{consultationType}</h4>
           <p className="text-muted-foreground text-center lg:text-left mb-6">
             {description}
           </p>
@@ -151,20 +169,16 @@ export function BookingCalendar({
 
         <div className="space-y-3">
           <div className="flex items-center gap-3 text-sm">
-            <CheckCircle className="h-5 w-5 text-[#2563EB] flex-shrink-0" />
+            <CheckCircle className="h-5 w-5 text-[#10B981] flex-shrink-0" />
             <span className="text-muted-foreground">Nécessite une confirmation</span>
           </div>
           <div className="flex items-center gap-3 text-sm">
-            <Clock className="h-5 w-5 text-[#2563EB] flex-shrink-0" />
-            <span className="text-muted-foreground">{duration}</span>
+            <Clock className="h-5 w-5 text-[#10B981] flex-shrink-0" />
+            <span className="text-muted-foreground">{durationMinutes} minutes</span>
           </div>
           <div className="flex items-center gap-3 text-sm">
-            <Video className="h-5 w-5 text-[#2563EB] flex-shrink-0" />
+            <Video className="h-5 w-5 text-[#10B981] flex-shrink-0" />
             <span className="text-muted-foreground">{meetingType}</span>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <MapPin className="h-5 w-5 text-[#2563EB] flex-shrink-0" />
-            <span className="text-muted-foreground">{timezone}</span>
           </div>
         </div>
       </div>
@@ -179,7 +193,7 @@ export function BookingCalendar({
               variant="ghost" 
               size="icon"
               onClick={handlePrevMonth}
-              className="hover:bg-[#2563EB]/10"
+              className="hover:bg-[#10B981]/10"
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -190,7 +204,7 @@ export function BookingCalendar({
               variant="ghost" 
               size="icon"
               onClick={handleNextMonth}
-              className="hover:bg-[#2563EB]/10"
+              className="hover:bg-[#10B981]/10"
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
@@ -223,9 +237,9 @@ export function BookingCalendar({
                   className={`
                     aspect-square rounded-md text-sm transition-all font-medium
                     ${isSelected
-                      ? "bg-[#2563EB] text-white font-semibold shadow-md scale-105"
+                      ? "bg-[#10B981] text-white font-semibold shadow-md scale-105"
                       : isAvailable
-                        ? "bg-muted hover:bg-[#2563EB]/10 hover:text-[#2563EB] cursor-pointer text-foreground hover:scale-105"
+                        ? "bg-muted hover:bg-[#10B981]/10 hover:text-[#10B981] cursor-pointer text-foreground hover:scale-105"
                         : "text-muted-foreground/30 cursor-not-allowed bg-transparent"
                     }
                     ${!isCurrentMonth ? "opacity-40" : ""}
@@ -241,24 +255,73 @@ export function BookingCalendar({
         {/* Selected Date and Time Slots */}
         {selectedDate && !showForm && (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground lowercase">
-              {format(selectedDate, "EEE. dd", { locale: fr })}
-            </h3>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h3 className="text-lg font-semibold text-foreground lowercase">
+                  {format(selectedDate, "EEE. dd", { locale: fr })}
+                </h3>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Durée</span>
+                  <div className="flex rounded-md border bg-muted/60 p-1">
+                    {durationOptions.map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => setDurationMinutes(opt)}
+                        className={`px-3 py-1 text-xs font-semibold rounded ${durationMinutes === opt ? "bg-[#10B981] text-white shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+                      >
+                        {opt} min
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Fuseau</span>
+                  <select
+                    className="h-9 rounded-md border bg-background px-2 text-sm"
+                    value={selectedTimezone}
+                    onChange={(e) => setSelectedTimezone(e.target.value)}
+                  >
+                    {timezoneOptions.map((tz) => (
+                      <option key={tz.value} value={tz.value}>{tz.label}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Heure</span>
+                  <Input
+                    type="time"
+                    step={900}
+                    value={selectedTime || ""}
+                    onChange={(e) => setSelectedTime(e.target.value || null)}
+                    className="h-9 w-32"
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="space-y-2">
-              {availableSlots.map((time) => (
-                <Button
-                  key={time}
-                  variant="outline"
-                  className="w-full justify-start hover:bg-[#2563EB]/10 hover:border-[#2563EB] hover:text-[#2563EB] bg-muted/50 transition-all"
-                  onClick={() => handleTimeSlotSelect(time)}
-                >
-                  {time}
-                </Button>
-              ))}
+              {availableSlots.map((time) => {
+                const endTime = addMinutesToTime(time, durationMinutes)
+                return (
+                  <Button
+                    key={time}
+                    variant="outline"
+                    className="w-full justify-between hover:bg-[#10B981]/10 hover:border-[#10B981] hover:text-[#10B981] bg-muted/50 transition-all"
+                    onClick={() => handleTimeSlotSelect(time)}
+                  >
+                    <span className="font-medium">{time} → {endTime}</span>
+                    <span className="text-xs text-muted-foreground">{durationMinutes} min</span>
+                  </Button>
+                )
+              })}
             </div>
             <div className="p-4 rounded-lg bg-muted/50 border">
               <p className="text-xs text-muted-foreground">
-                Les créneaux horaires sont affichés dans votre fuseau horaire ({timezone})
+                Les créneaux sont affichés en {selectedTimezone}. Ajustez la durée et l&apos;heure pour le début/fin.
               </p>
             </div>
           </div>
@@ -267,7 +330,7 @@ export function BookingCalendar({
         {/* Booking Form */}
         {showForm && selectedDate && selectedTime && (
           <div className="space-y-4">
-            <div className="p-4 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 border-2 border-[#2563EB]/20">
+            <div className="p-4 rounded-lg bg-gradient-to-br from-[#10B981]/10 to-[#059669]/5 border-2 border-[#10B981]/20">
               <h3 className="text-lg font-semibold text-foreground mb-2">
                 Réserver votre créneau
               </h3>
@@ -315,7 +378,7 @@ export function BookingCalendar({
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white"
+                      className="flex-1 bg-[#10B981] hover:bg-[#059669] text-white"
                     >
                       {isSubmitting ? (
                         <>
@@ -351,7 +414,7 @@ export function BookingCalendar({
         {!selectedDate && (
           <div className="p-4 rounded-lg bg-muted/50 border text-center">
             <p className="text-sm text-muted-foreground">
-              Sélectionnez une date pour voir les créneaux disponibles
+              Sélectionnez une date et ajustez la durée (début / fin) pour voir les créneaux disponibles
             </p>
           </div>
         )}

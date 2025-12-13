@@ -87,6 +87,44 @@ const staticProjects = [
       "Gestion sécurisée des clés et certificats X.509",
       "Concepts avancés : PKI, hachage cryptographique, certificats"
     ]
+  },
+  {
+    id: "5",
+    title: "Thercal Energies — site vitrine & demandes de devis",
+    slug: "thercal-energies",
+    description: "Site vitrine industriel pour un expert en calorifugeage, avec mise en avant des services, garanties et capture de leads rapide.",
+    category: "WEB",
+    technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "SEO", "Formulaire devis", "Performance"],
+    githubUrl: null,
+    liveUrl: "https://thercalenergies.com/",
+    image: "/placeholder-project.jpg",
+    period: "2025",
+    highlights: [
+      "Parcours de devis mis en avant dès le hero pour capter les leads en < 24h",
+      "Sections services claires (calorifugeage, isolation, audit) avec CTA contextualisés",
+      "Mises en avant des garanties (décennale, matériaux certifiés, équipes qualifiées)",
+      "Charte sobre orientée industrie avec pictogrammes et preuves sociales partenaires",
+      "Formulaire de contact complet (pièces jointes, coordonnées, horaires d'intervention)"
+    ]
+  },
+  {
+    id: "6",
+    title: "KHEOPS Consulting — landing B2B de contrôle de projets",
+    slug: "kheops-consulting",
+    description: "Landing page B2B pour un cabinet de conseil en contrôle de projets complexes, centrée sur la méthodologie et la génération de rendez-vous.",
+    category: "WEB",
+    technologies: ["Next.js", "Tailwind CSS", "Motion", "SEO B2B", "Formulaire lead", "Design system"],
+    githubUrl: null,
+    liveUrl: "https://www.kheops-consulting.com/",
+    image: "/placeholder-project.jpg",
+    period: "2025",
+    highlights: [
+      "Présentation claire de la méthodologie en 3 phases avec CTA « Discuter de votre projet »",
+      "Sections secteur/méthodes/outils (Primavera, MS Project, Power BI, Tableau) pour rassurer",
+      "Hero impactant avec promesse business et mise en avant de la disponibilité des équipes",
+      "Formulaire de contact optimisé pour leads B2B (coords, message, documents)",
+      "Preuves sociales (références clients, chiffres clés : satisfaction, projets, experts)"
+    ]
   }
 ]
 

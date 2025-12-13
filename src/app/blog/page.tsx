@@ -43,10 +43,23 @@ export default async function BlogPage() {
         <section className="py-12">
           <div className="container">
             {posts.length === 0 ? (
-              <div className="py-20 text-center">
-                <p className="text-muted-foreground">
-                  Aucun article disponible pour le moment.
-                </p>
+              <div className="py-16">
+                <Card className="max-w-2xl mx-auto text-center border-dashed">
+                  <CardHeader>
+                    <CardTitle>Les articles arrivent bientôt</CardTitle>
+                    <CardDescription>
+                      Je prépare des contenus concrets (guides pratiques, retours d&apos;expérience, bonnes pratiques). Inscrivez-vous pour être prévenu dès la sortie.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+                    <Link href="/contact">
+                      <Button>Être notifié</Button>
+                    </Link>
+                    <Link href="/portfolio">
+                      <Button variant="outline">Voir les projets</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
               </div>
             ) : (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

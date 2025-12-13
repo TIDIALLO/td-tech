@@ -4,6 +4,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { AuroraBackground } from "@/components/ui/aurora-background"
 import Link from "next/link"
 import { 
   Globe, 
@@ -103,29 +104,36 @@ export default function ServicesPage() {
     }
   }
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0 },
+  }
+
   return (
     <>
       <Navbar />
       <main className="min-h-screen">
         {/* Header Section */}
-        <section className="relative overflow-hidden border-b bg-gradient-to-b from-background via-muted/30 to-background py-12 md:py-16">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.08),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.05),transparent_50%)]" />
-          <div className="container relative z-10">
+        <section className="relative min-h-[60vh] overflow-hidden">
+          <AuroraBackground showRadialGradient className="absolute inset-0">
+            <div className="container relative z-10 px-4 py-24 md:py-28">
+              <div className="mx-auto max-w-4xl text-center">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6"
+                  variants={fadeUp}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ duration: 0.55, ease: "easeOut" }}
+                  className="space-y-6"
             >
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                Nos service<span className="text-[#2563EB]">s</span>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                    Nos <span className="text-primary">Services</span>
               </h1>
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-base md:text-lg text-muted-foreground max-w-3xl leading-relaxed"
+                    variants={fadeUp}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
+                    className="text-lg md:text-xl text-foreground/85 max-w-3xl mx-auto"
               >
                 Des solutions sur mesure pour transformer vos idées en réalité digitale. 
                 De la création de sites web à l&apos;intégration d&apos;intelligence artificielle, 
@@ -133,12 +141,16 @@ export default function ServicesPage() {
               </motion.p>
             </motion.div>
           </div>
+            </div>
+          </AuroraBackground>
         </section>
 
         {/* Services Grid */}
-        <section className="py-12 md:py-16 bg-gradient-to-b from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.06),transparent_50%)]" />
-          <div className="container relative z-10">
+        <section className="relative overflow-hidden py-24">
+          <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:26px_26px] animate-dots-drift" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+          <div className="container relative px-4">
             <motion.div
               variants={containerVariants}
               initial="hidden"

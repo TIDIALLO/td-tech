@@ -79,7 +79,7 @@ export function CalendlyEmbed({ url, className }: CalendlyEmbedProps) {
       {isLoading && (
         <div className="flex items-center justify-center h-[700px]">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2563EB] mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#10B981] mx-auto mb-4"></div>
             <p className="text-muted-foreground">Chargement du calendrier...</p>
           </div>
         </div>

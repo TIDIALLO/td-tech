@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils"
 
 const navigation = [
   { name: "Accueil", href: "/" },
-  { name: "Portfolio", href: "/portfolio" },
   { name: "Services", href: "/services" },
   { name: "Formations", href: "/formations" },
   { name: "Blog", href: "/blog" },
@@ -25,11 +24,11 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-3 ml-4 md:ml-8 hover:opacity-80 transition-opacity">
-          <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center shadow-lg">
-            <span className="text-white font-bold text-lg">TD</span>
+          <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
+            <span className="text-white font-bold text-lg">S6</span>
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
-            TDTech
+          <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Synap6ia
           </span>
         </Link>
 

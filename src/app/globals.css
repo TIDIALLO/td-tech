@@ -10,21 +10,21 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 217 91% 60%; /* Blue-600: #2563EB */
+    --primary: 142 71% 45%; /* Green-500: #10B981 - Moderne et professionnel */
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
+    --ring: 142 71% 45%;
+    --radius: 0.75rem;
+    --chart-1: 142 71% 45%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
@@ -38,20 +38,20 @@
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
+    --accent: 142 71% 45%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
+    --ring: 142 71% 45%;
+    --chart-1: 142 71% 45%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
@@ -66,27 +66,13 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background: linear-gradient(
-      135deg,
-      hsl(var(--background)) 0%,
-      hsl(217 91% 97%) 25%,
-      hsl(240 5% 98%) 50%,
-      hsl(217 91% 97%) 75%,
-      hsl(var(--background)) 100%
-    );
+    background: hsl(var(--background));
     background-attachment: fixed;
     min-height: 100vh;
   }
   
   .dark body {
-    background: linear-gradient(
-      135deg,
-      hsl(240 10% 3.9%) 0%,
-      hsl(217 33% 8%) 25%,
-      hsl(240 10% 5%) 50%,
-      hsl(217 33% 8%) 75%,
-      hsl(240 10% 3.9%) 100%
-    );
+    background: hsl(240 10% 3.9%);
     background-attachment: fixed;
   }
 }
@@ -301,8 +287,103 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Aurora Background Animation */
+@keyframes aurora {
+  from {
+    background-position:
+      50% 50%,
+      50% 50%;
+  }
+  to {
+    background-position:
+      350% 50%,
+      350% 50%;
+  }
+}
+
+.animate-aurora {
+  animation: aurora 60s linear infinite;
+}
+
+/* Dotted (dot grid) animation - léger drift pour un rendu vivant */
+@keyframes dots-drift {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 64px 64px;
+  }
+}
+
+.animate-dots-drift {
+  animation: dots-drift 18s linear infinite;
+}
+
 /* Image optimization */
 img {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+}
+
+/* Typographie améliorée */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+p {
+  line-height: 1.7;
+}
+
+/* Smooth transitions pour tous les éléments interactifs */
+button, a, input, textarea, select {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Amélioration des cartes */
+.card-modern {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .card-modern {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Effet de glow vert pour les éléments importants */
+.glow-green {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3),
+              0 0 40px rgba(16, 185, 129, 0.2),
+              0 0 60px rgba(16, 185, 129, 0.1);
+}
+
+/* Animation de particules */
+@keyframes float-particles {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.6;
+  }
+}
+
+.particle {
+  animation: float-particles 6s ease-in-out infinite;
 }

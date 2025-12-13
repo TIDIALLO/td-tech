@@ -1,602 +1,371 @@
+"use client"
+
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import Link from "next/link"
-import { Input } from "@/components/ui/input"
-import Image from "next/image"
-import { Users, Star, MessageSquare, BarChart3, HeadphonesIcon, Github, Linkedin, Mail, Brain, Zap, Lightbulb, Code, Rocket, Globe, GraduationCap } from "lucide-react"
+import {
+  ArrowRight,
+  Bot,
+  Code,
+  GraduationCap,
+  LineChart,
+  ShieldCheck,
+  Workflow,
+} from "lucide-react"
 import { BookingCalendar } from "@/components/booking-calendar"
+import { AuroraBackground } from "@/components/ui/aurora-background"
+import { motion } from "framer-motion"
 
 export default function Home() {
+  const fadeUp = {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0 },
+  }
+
+  const services = [
+    {
+      icon: Code,
+      title: "Création d'applications web",
+      desc: "Sites et applications Next.js modernes, rapides, SEO-ready et maintenables.",
+      bullets: ["Design & UX pro", "Performance & SEO", "Qualité production"],
+      href: "/services",
+    },
+    {
+      icon: Workflow,
+      title: "Automatisation n8n",
+      desc: "Workflows fiables (CRM, e-mails, reporting, data) pour gagner du temps chaque semaine.",
+      bullets: ["Intégrations API", "Logs & monitoring", "Sécurité & droits"],
+      href: "/services",
+    },
+    {
+      icon: Bot,
+      title: "Agents IA",
+      desc: "Assistants IA utiles (support, sales, ops) intégrés à vos outils, avec garde-fous.",
+      bullets: ["RAG & bases métiers", "Déploiement sécurisé", "Mesure d'impact"],
+      href: "/services",
+    },
+    {
+      icon: GraduationCap,
+      title: "Formations",
+      desc: "Formation IA + dev (Next.js/Python) pour rendre vos équipes autonomes rapidement.",
+      bullets: ["Cas concrets", "Supports & exercices", "Suivi post-formation"],
+      href: "/formations",
+    },
+  ] as const
+
+  const caseStudies = [
+    {
+      title: "Automatisation back-office",
+      industry: "Services",
+      metric: "-40% temps de traitement",
+      desc: "Centralisation des demandes, tri automatique, notifications et reporting hebdo.",
+      tags: ["n8n", "Gmail", "Sheets", "Slack"],
+    },
+    {
+      title: "App web de pilotage",
+      industry: "Ops / Data",
+      metric: "+28% visibilité KPI",
+      desc: "Dashboard temps réel, rôles, exports, historique et alertes personnalisées.",
+      tags: ["Next.js", "PostgreSQL", "Prisma", "Tailwind"],
+    },
+    {
+      title: "Agent IA support interne",
+      industry: "Entreprise",
+      metric: "-30% tickets récurrents",
+      desc: "Recherche dans la base documentaire, réponses guidées, escalade intelligente.",
+      tags: ["RAG", "Docs", "Guardrails", "Observability"],
+    },
+  ] as const
+
   return (
     <>
       <Navbar />
-      <main>
-        {/* Hero Section */}
-        <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-br from-background via-blue-50/30 to-background dark:from-background dark:via-blue-950/10 dark:to-background">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(37,99,235,0.08),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="grid gap-4 lg:grid-cols-2 lg:gap-6 items-center max-w-7xl mx-auto px-4">
-              {/* Left Content */}
-              <div className="space-y-6">
-                <div className="space-y-4">
-                  <h1 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
-                    Des solutions modernes pour vos{" "}
-                    <span className="text-[#2563EB] bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">ambitions digitales</span>.
-                  </h1>
-                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                    Solutions digitales sur mesure alliant <strong className="text-foreground">intelligence artificielle</strong>, 
-                    <strong className="text-foreground"> agents IA</strong> et <strong className="text-foreground">automatisation</strong> pour transformer vos processus métier. 
-                    De l&apos;intégration d&apos;agents conversationnels à l&apos;automatisation de workflows avec N8N, 
-                    nous développons des <strong className="text-foreground">applications web modernes</strong> et des 
-                    <strong className="text-foreground"> sites performants</strong> qui s&apos;adaptent à vos besoins.
-                  </p>
-                </div>
+      <main className="min-h-screen">
+        {/* HERO (Aceternity vibe, sobre + crédible) */}
+        <section className="relative min-h-[90vh] overflow-hidden">
+          <AuroraBackground showRadialGradient className="absolute inset-0">
+            <div className="container relative z-10 px-4 py-24 md:py-28">
+              <div className="mx-auto max-w-5xl text-center">
+                <motion.div
+                  variants={fadeUp}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ duration: 0.55, ease: "easeOut" }}
+                  className="space-y-6"
+                >
+                  <div className="mx-auto inline-flex items-center gap-2 rounded-full border bg-background/70 px-4 py-2 text-sm text-muted-foreground shadow-sm backdrop-blur">
+                    <ShieldCheck className="h-4 w-4 text-primary" />
+                    Livraison pro • Design sobre • Résultats mesurables
+                  </div>
 
-                {/* Email Form */}
-                <div className="flex flex-col sm:flex-row gap-3 max-w-md">
-                  <Input 
-                    type="email" 
-                    placeholder="Votre meilleure adresse email" 
-                    className="flex-1"
-                  />
-                  <Button size="default" className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-6 shadow-lg hover:shadow-xl transition-all duration-300">
-                    Rejoindre
+                  <motion.h1
+                    className="text-balance text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                  >
+                    Nous modernisons et créons des{" "}
+                    <motion.span
+                      className="inline-block bg-gradient-to-r from-primary via-sky-400 to-emerald-400 bg-clip-text text-transparent"
+                      animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                      transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+                      style={{ backgroundSize: "200% 200%" }}
+                    >
+                      solutions digitales
+                    </motion.span>
+                  </motion.h1>
+
+                  <motion.p
+                    className="mx-auto max-w-3xl text-pretty text-lg text-foreground/85 md:text-xl"
+                    animate={{ opacity: [0.8, 1, 0.9, 1] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    Applications web, automatisations n8n, agents IA et formations — pensés pour des équipes
+                    qui veulent aller vite, sans dette technique.
+                  </motion.p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
+                  className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+                >
+                  <Button asChild size="lg" className="px-7">
+                    <Link href="#booking">
+                      Évaluation gratuite <ArrowRight className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="px-7">
+                    <Link href="/contact">
+                      Demander une démo <ArrowRight className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="ghost"
+                    className="px-7 text-muted-foreground hover:text-foreground"
+                  >
+                    <Link href="#services">Voir les services</Link>
+                  </Button>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.25 }}
+                  className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3"
+                >
+                  {[
+                    { k: "Réponse", v: "< 24h" },
+                    { k: "Cadence", v: "1–2 semaines" },
+                    { k: "Qualité", v: "prod-ready" },
+                  ].map((item) => (
+                    <div
+                      key={item.k}
+                      className="rounded-xl border bg-background/60 px-4 py-3 text-left shadow-sm backdrop-blur"
+                    >
+                      <div className="text-xs text-muted-foreground">{item.k}</div>
+                      <div className="text-base font-semibold">{item.v}</div>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </AuroraBackground>
+        </section>
+
+        {/* SERVICES (4 piliers) */}
+        <section id="services" className="relative overflow-hidden py-24">
+          <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(circle,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:26px_26px] animate-dots-drift" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+
+          <div className="container relative px-4">
+            <div className="mx-auto mb-14 max-w-3xl text-center">
+              <motion.h2
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.45 }}
+                className="text-4xl font-bold md:text-5xl"
+              >
+                Services structurés, livrables clairs
+              </motion.h2>
+              <motion.p
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.45, delay: 0.05 }}
+                className="mt-4 text-lg text-muted-foreground"
+              >
+                Un cadre simple : on mesure, on livre, on améliore. Pas de “bling”, juste du résultat.
+              </motion.p>
+                    </div>
+
+            <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
+              {services.map((s, idx) => {
+                const Icon = s.icon
+                return (
+                  <motion.div
+                    key={s.title}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.35 }}
+                    transition={{ duration: 0.45, delay: idx * 0.06 }}
+                  >
+                    <Card className="card-shine glow-on-hover border-border/60 bg-background/80 shadow-lg backdrop-blur">
+                      <CardHeader className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-xl border bg-primary/10 text-primary">
+                            <Icon className="h-6 w-6" />
+                      </div>
+                          <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
+                            <Link href={s.href}>
+                              Détails <ArrowRight className="h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </div>
+                        <CardTitle className="text-2xl">{s.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <p className="text-foreground/85">{s.desc}</p>
+                        <ul className="grid gap-2 text-sm text-muted-foreground">
+                          {s.bullets.map((b) => (
+                            <li key={b} className="flex items-center gap-2">
+                              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                              {b}
+                            </li>
+                          ))}
+                        </ul>
+                </CardContent>
+              </Card>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* CAS CLIENTS (métriques visibles) */}
+        <section id="case-studies" className="relative overflow-hidden py-24 bg-muted/30">
+          <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:radial-gradient(circle,rgba(16,185,129,0.18)_1px,transparent_1px)] [background-size:28px_28px] animate-dots-drift" />
+          <div className="container relative px-4">
+            <div className="mx-auto mb-14 max-w-3xl text-center">
+              <motion.h2
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.45 }}
+                className="text-4xl font-bold md:text-5xl"
+              >
+                Cas clients & résultats
+              </motion.h2>
+              <motion.p
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.45, delay: 0.05 }}
+                className="mt-4 text-lg text-muted-foreground"
+              >
+                Exemple de livrables typiques : on vise un impact mesurable (temps, coût, conversion, qualité).
+              </motion.p>
+            </div>
+
+            <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
+              {caseStudies.map((c, idx) => (
+                <motion.div
+                  key={c.title}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 0.45, delay: idx * 0.06 }}
+                >
+                  <Card className="card-shine border-border/60 bg-background/85 shadow-lg backdrop-blur">
+                    <CardHeader className="space-y-2">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="text-xs text-muted-foreground">{c.industry}</div>
+                          <CardTitle className="text-xl">{c.title}</CardTitle>
+          </div>
+                        <div className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                          {c.metric}
+                  </div>
+                  </div>
+                </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-sm text-foreground/85">{c.desc}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {c.tags.map((t) => (
+                          <span
+                            key={t}
+                            className="rounded-full border bg-background/70 px-3 py-1 text-xs text-muted-foreground"
+                          >
+                            {t}
+                          </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+                </motion.div>
+                    ))}
+                  </div>
+
+            <div className="mx-auto mt-10 flex max-w-6xl flex-col items-center justify-between gap-4 rounded-2xl border bg-background/70 p-6 backdrop-blur md:flex-row">
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <LineChart className="h-5 w-5 text-primary" />
+                <span className="text-sm">
+                  Tu veux afficher tes vrais résultats ? On connecte ça à tes projets (DB / CMS) dès que tu veux.
+                </span>
+              </div>
+              <Button asChild>
+                <Link href="/portfolio">
+                  Voir le portfolio <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Section Booking */}
+        <section id="booking" className="py-24 relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:radial-gradient(circle,rgba(16,185,129,0.14)_1px,transparent_1px)] [background-size:30px_30px] animate-dots-drift" />
+          <div className="container px-4">
+            <div className="max-w-6xl mx-auto">
+            <div className="mb-12 text-center">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                  Évaluation gratuite (15 min)
+              </h2>
+                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                  On clarifie votre besoin, on propose une piste concrète, puis on définit les prochaines étapes.
+                </p>
+                <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                  <Button asChild size="lg">
+                    <Link href="/contact">
+                      Démarrer un projet <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <Link href="/contact">
+                      Demander une démo <ArrowRight className="h-4 w-4" />
+                    </Link>
                   </Button>
                 </div>
-              </div>
-
-              {/* Right Image - Réduite */}
-              <div className="relative flex justify-center lg:justify-start">
-                <div className="relative w-full max-w-xl mx-auto lg:mx-0 animate-fade-in-right">
-                  {/* Gradient Background Effect - Bleu */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-[#2563EB]/30 via-[#3B82F6]/20 to-transparent rounded-3xl blur-3xl opacity-60 animate-pulse" />
-                  
-                  {/* Image Container with Border Gradient - Bleu */}
-                  <div className="relative rounded-3xl bg-gradient-to-br from-[#2563EB]/20 via-background to-[#3B82F6]/10 p-2 transform hover:scale-[1.02] transition-transform duration-500">
-                    <div className="relative rounded-3xl overflow-hidden bg-background shadow-2xl">
-                      <Image
-                        src="/images/diallo.png"
-                        alt="Tidiane Diallo - Développeur Fullstack & Expert IA"
-                        width={600}
-                        height={750}
-                        className="object-cover w-full h-auto animate-float"
-                        priority
-                        quality={95}
-                      />
-                      {/* Subtle Overlay Gradient - Bleu */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent pointer-events-none" />
-                    </div>
-                  </div>
-
-                  {/* Floating Badge - Bleu */}
-                  <div className="absolute -bottom-4 -left-4 bg-background border-2 border-[#2563EB]/30 rounded-xl px-4 py-2 shadow-xl backdrop-blur-sm animate-fade-in-up">
-                    <div className="flex items-center gap-2">
-                      <div className="h-2.5 w-2.5 bg-[#2563EB] rounded-full animate-pulse" />
-                      <span className="text-xs font-semibold text-[#2563EB]">Disponible pour projets</span>
-                    </div>
-                  </div>
-
-                  {/* Decorative Elements - Bleu */}
-                  <div className="absolute -top-6 -right-6 h-32 w-32 bg-[#2563EB]/20 rounded-full blur-3xl animate-pulse" />
-                  <div className="absolute -bottom-12 -right-12 h-40 w-40 bg-[#3B82F6]/10 rounded-full blur-3xl animate-pulse delay-300" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Professional Profile Section */}
-        <section className="py-20 bg-gradient-to-br from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="max-w-5xl mx-auto">
-              <Card className="border-2 border-[#2563EB]/20 shadow-xl bg-background/95 backdrop-blur-sm">
-                <CardContent className="p-8 md:p-12">
-                  <div className="grid gap-8 md:grid-cols-[auto_1fr] md:gap-12 items-start">
-                    {/* Left: Photo with Social Icons */}
-                    <div className="flex flex-col items-center md:items-start">
-                      {/* Profile Picture */}
-                      <div className="relative mb-6">
-                        <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden bg-gradient-to-br from-[#2563EB]/20 via-background to-[#3B82F6]/10 p-1.5 shadow-lg">
-                          <div className="relative w-full h-full rounded-xl overflow-hidden bg-muted/50">
-                            <Image
-                              src="/images/diallo.png"
-                              alt="Tidiane Diallo - Développeur Fullstack"
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 768px) 192px, 224px"
-                              priority
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Social Media Icons */}
-                      <div className="flex gap-4">
-                        <a
-                          href="https://linkedin.com"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-lg bg-muted hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-colors"
-                          aria-label="LinkedIn"
-                        >
-                          <Linkedin className="h-5 w-5" />
-                        </a>
-                        <a
-                          href="https://github.com"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-lg bg-muted hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-colors"
-                          aria-label="GitHub"
-                        >
-                          <Github className="h-5 w-5" />
-                        </a>
-                        <a
-                          href="mailto:contact@tidianediallo.com"
-                          className="p-2 rounded-lg bg-muted hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-colors"
-                          aria-label="Email"
-                        >
-                          <Mail className="h-5 w-5" />
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* Right: Content */}
-                    <div className="space-y-6">
-                      {/* Name and Title */}
-                      <div>
-                        <h2 className="text-3xl md:text-4xl font-bold mb-2">Tidiane Diallo</h2>
-                        <p className="text-lg md:text-xl text-[#2563EB] font-semibold">Développeur Fullstack</p>
-                      </div>
-
-                      {/* Professional Summary */}
-                      <div className="space-y-4 text-muted-foreground">
-                        <p>
-                          Avec <strong className="text-foreground">8 ans d&apos;expérience</strong> dans le développement logiciel, 
-                          je me spécialise dans la création d&apos;architectures robustes et scalables avec <strong className="text-foreground">.NET/C#</strong>, 
-                          <strong className="text-foreground"> Java</strong> et <strong className="text-foreground">Python</strong>.
-                        </p>
-                        <p>
-                          Mon expertise couvre les <strong className="text-foreground">architectures logicielles modernes</strong>, 
-                          le développement d&apos;<strong className="text-foreground">agents IA</strong> et l&apos;<strong className="text-foreground">automatisation intelligente</strong>. 
-                          J&apos;ai mené des projets complexes de la conception à la mise en production, en gérant des équipes 
-                          et en livrant des solutions SaaS performantes.
-                        </p>
-                        <p>
-                          Passionné par l&apos;innovation technologique, je combine expertise technique et vision stratégique 
-                          pour transformer les défis complexes en solutions élégantes et efficaces.
-                        </p>
-                      </div>
-
-                      {/* Experience Tags */}
-                      <div className="flex flex-wrap gap-3 pt-4">
-                        <div className="px-4 py-2 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30">
-                          <span className="text-sm font-semibold text-[#2563EB]">8 Ans</span>
-                          <span className="text-sm text-muted-foreground ml-1">d&apos;Expérience</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">.NET/C#</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">Java</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">Python</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">React</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">Blazor</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">Django</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">Angular</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">Architectures</span>
-                          <span className="text-sm text-muted-foreground ml-1">Logicielles</span>
-                        </div>
-                        <div className="px-4 py-2 rounded-full bg-background border border-border">
-                          <span className="text-sm font-semibold">Agents IA</span>
-                          <span className="text-sm text-muted-foreground ml-1">& Automatisation</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Services Section */}
-        <section className="py-20 bg-gradient-to-br from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                Nos Services
-              </h2>
-              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                Des solutions complètes pour transformer vos idées en réalité digitale
-              </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader>
-                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Globe className="h-6 w-6 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-xl">Création de Sites Web Modernes</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Développement de sites web modernes et performants avec Next.js, React et les dernières technologies. 
-                    Sites vitrine, e-commerce et applications web sur mesure avec optimisation SEO et design responsive.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader>
-                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Code className="h-6 w-6 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-xl">Développement d&apos;Applications</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Création d&apos;applications web et mobiles modernes avec des architectures robustes et scalables. 
-                    Solutions sur mesure développées avec .NET/C#, Java, Python, React et les frameworks les plus récents.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader>
-                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Brain className="h-6 w-6 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-xl">Intégration IA & Agents</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Intégration d&apos;intelligence artificielle dans vos applications existantes. 
-                    Développement d&apos;agents IA intelligents, chatbots conversationnels et assistants virtuels pour automatiser vos processus.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader>
-                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Zap className="h-6 w-6 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-xl">Automatisation IA</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Automatisation de vos processus métier avec l&apos;IA. Workflows intelligents avec N8N, 
-                    traitement de données automatisé et intégration d&apos;APIs pour optimiser vos opérations.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader>
-                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <GraduationCap className="h-6 w-6 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-xl">Formations & Cours</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Formations complètes en développement web, automatisation IA et programmation. 
-                    Cours approfondis en Next.js, React, TypeScript, .NET/C#, Java et Python pour tous les niveaux.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader>
-                  <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Rocket className="h-6 w-6 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-xl">Architectures Logicielles</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Conception d&apos;architectures logicielles modernes, robustes et scalables. 
-                    Solutions SaaS performantes, microservices et systèmes distribués pour vos projets complexes.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="mt-12 text-center">
-              <Link href="/services">
-                <Button size="lg" className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                  Voir tous nos services
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Process Section */}
-        <section className="py-20 bg-gradient-to-br from-background via-blue-50/30 to-background dark:from-background dark:via-blue-950/10 dark:to-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(37,99,235,0.08),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="mb-16 text-center">
-              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                Notre Processus Éprouvé
-              </h2>
-              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                Une approche structurée pour transformer vos idées en solutions performantes
-              </p>
-            </div>
-
-            <div className="grid gap-8 md:grid-cols-3">
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader className="text-center">
-                  <div className="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Lightbulb className="h-10 w-10 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-2xl mb-4">1. Planifiez votre roadmap</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Nous prenons le temps de comprendre vos besoins, en établissant une roadmap stratégique 
-                    pour votre solution sur mesure.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader className="text-center">
-                  <div className="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Code className="h-10 w-10 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-2xl mb-4">2. Construisez votre MVP</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Nos développeurs commencent alors à construire votre solution IA personnalisée - 
-                    intuitive, belle et fonctionnelle.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader className="text-center">
-                  <div className="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Rocket className="h-10 w-10 text-[#2563EB]" />
-                  </div>
-                  <CardTitle className="text-2xl mb-4">3. Itérez et lancez</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Nous travaillons en sprints agiles bi-hebdomadaires. Où nous travaillerons pour pousser 
-                    la roadmap et itérer en temps réel.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Booking Section */}
-        <section className="py-20 bg-gradient-to-br from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="max-w-6xl mx-auto">
-              <div className="mb-12 text-center">
-                <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                  Réservez une Consultation
-                </h2>
-                <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                  Discutons de votre projet et découvrons comment nous pouvons vous aider
-                </p>
-              </div>
-
-              <Card className="border-2 border-[#2563EB]/20 shadow-xl bg-background/95 backdrop-blur-sm">
+              <Card className="bg-background/85 backdrop-blur-sm border-border/60 shadow-2xl">
                 <CardContent className="p-8 md:p-12">
                   <BookingCalendar />
                 </CardContent>
               </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section */}
-        <section className="border-y bg-muted/30 py-12">
-          <div className="container">
-            <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-              <div className="text-center">
-                <div className="mb-2 text-2xl font-bold text-[#2563EB]">8+</div>
-                <div className="text-sm text-muted-foreground">Années d&apos;Expérience</div>
-              </div>
-              <div className="text-center">
-                <div className="mb-2 text-2xl font-bold text-[#2563EB]">9+</div>
-                <div className="text-sm text-muted-foreground">Années en Ligne</div>
-              </div>
-              <div className="text-center">
-                <div className="mb-2 text-2xl font-bold text-[#2563EB]">2310+</div>
-                <div className="text-sm text-muted-foreground">Membres Actifs</div>
-              </div>
-              <div className="text-center">
-                <div className="mb-2 text-2xl font-bold text-[#2563EB]">5125+</div>
-                <div className="text-sm text-muted-foreground">Avis 5 Étoiles</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="py-20 bg-gradient-to-b from-background via-blue-50/20 to-background dark:from-background dark:via-blue-950/5 dark:to-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.05),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="grid gap-6 md:grid-cols-3">
-              <Card className="relative hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Users className="h-8 w-8 text-[#2563EB]" />
-                  </div>
-                  <div className="mb-2 flex justify-center gap-1">
-                    {[...Array(5)].map((_unused, i) => (
-                      <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
-                    ))}
-                  </div>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
-                    Le style d&apos;enseignement de Tidiane est engageant et facile à suivre. 
-                    Il explique des concepts complexes de manière concise et fournit de nombreux 
-                    exemples et exercices pour vous aider à apprendre.
-                  </p>
-                  <p className="font-semibold text-[#2563EB]">Pierre DIENG</p>
-                </CardContent>
-              </Card>
-
-              <Card className="relative hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Users className="h-8 w-8 text-[#2563EB]" />
-                  </div>
-                  <div className="mb-2 flex justify-center gap-1">
-                    {[...Array(5)].map((_unused, i) => (
-                      <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
-                    ))}
-                  </div>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
-                    Tidiane est un entrepreneur incroyable, en plus d&apos;être un excellent enseignant. 
-                    Il incarne quelqu&apos;un qui apporte une réelle valeur et propose une éducation 
-                    de qualité avec des exemples clairs et concis.
-                  </p>
-                  <p className="font-semibold text-[#2563EB]">Pape DIOUF</p>
-                </CardContent>
-              </Card>
-
-              <Card className="relative hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-[#2563EB]/20">
-                <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/5 flex items-center justify-center border-2 border-[#2563EB]/20">
-                    <Users className="h-8 w-8 text-[#2563EB]" />
-                  </div>
-                  <div className="mb-2 flex justify-center gap-1">
-                    {[...Array(5)].map((_unused, i) => (
-                      <Star key={i} className="h-4 w-4 fill-[#2563EB] text-[#2563EB]" />
-                    ))}
-                  </div>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
-                    Je suis impressionné par vous. Vous êtes une source constante de générosité. 
-                    Vous et vos efforts sont quelque chose de beau à voir. Merci.
-                  </p>
-                  <p className="font-semibold text-[#2563EB]">James Ruff</p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Community Section */}
-        <section className="py-20 bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(37,99,235,0.06),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                Rejoignez Notre Communauté Florissante
-              </h2>
-              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                Connectez-vous avec plus de 1150 entrepreneurs digitaux, partagez vos expériences, 
-                et obtenez un soutien direct sur votre chemin vers le succès.
-              </p>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <Card className="text-center hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <Users className="mx-auto mb-3 h-10 w-10 text-[#2563EB]" />
-                  <CardTitle className="text-lg">Fil Communautaire</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Partagez vos mises à jour et connectez-vous avec d&apos;autres entrepreneurs
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <MessageSquare className="mx-auto mb-3 h-10 w-10 text-[#2563EB]" />
-                  <CardTitle className="text-lg">Forums de Discussion</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Engagez des discussions sur les affaires et la croissance
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <BarChart3 className="mx-auto mb-3 h-10 w-10 text-[#2563EB]" />
-                  <CardTitle className="text-lg">Partagez vos Résultats</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Partagez vos progrès et obtenez des retours de la communauté
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <HeadphonesIcon className="mx-auto mb-3 h-10 w-10 text-[#2563EB]" />
-                  <CardTitle className="text-lg">Support Direct</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Obtenez des conseils personnalisés via messagerie privée
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="border-t bg-gradient-to-br from-muted/40 via-blue-50/30 to-muted/40 dark:from-muted/40 dark:via-blue-950/10 dark:to-muted/40 py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(37,99,235,0.08),transparent_50%)]" />
-          <div className="container relative z-10">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                Commencez Votre Parcours d&apos;Entrepreneuriat Digital Aujourd&apos;hui
-              </h2>
-              <p className="mb-8 text-lg text-muted-foreground">
-                Choisissez votre chemin vers le succès
-              </p>
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-                <Link href="/newsletter">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                    Rejoindre la Newsletter
-                  </Button>
-                </Link>
-                <Link href="/community">
-                  <Button size="lg" className="w-full sm:w-auto bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                    Rejoindre la Communauté
-                  </Button>
-                </Link>
-              </div>
             </div>
           </div>
         </section>
@@ -605,4 +374,3 @@ export default function Home() {
     </>
   )
 }
-

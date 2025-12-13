@@ -254,6 +254,105 @@ const staticProjects: Record<string, ProjectData> = {
       <h2>Tests & Qualité</h2>
       <p>Tests unitaires avec JUnit pour valider les algorithmes cryptographiques et garantir la sécurité des opérations.</p>
     `
+  },
+  "thercal-energies": {
+    id: "5",
+    title: "Thercal Energies — site vitrine & demandes de devis",
+    slug: "thercal-energies",
+    description: "Site vitrine industriel pour un expert en calorifugeage, avec mise en avant des services, garanties et capture de leads rapide.",
+    category: "WEB",
+    technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "SEO", "Formulaire devis", "Performance"],
+    githubUrl: null,
+    liveUrl: "https://thercalenergies.com/",
+    period: "2025",
+    location: "France (Mantes-la-Jolie)",
+    highlights: [
+      "Parcours de devis mis en avant dès le hero pour capter les leads en < 24h",
+      "Sections services claires (calorifugeage, isolation, audit) avec CTA contextualisés",
+      "Mises en avant des garanties (décennale, matériaux certifiés, équipes qualifiées)",
+      "Charte sobre orientée industrie avec pictogrammes et preuves sociales partenaires",
+      "Formulaire de contact complet (pièces jointes, coordonnées, horaires d'intervention)"
+    ],
+    content: `
+      <h2>Contexte</h2>
+      <p>Refonte du site vitrine de THERCAL ENERGIES, expert en calorifugeage et isolation thermique industrielle, afin de clarifier l'offre, valoriser les garanties (décennale, matériaux certifiés) et générer des demandes de devis qualifiées.</p>
+
+      <h2>Objectifs</h2>
+      <ul>
+        <li>Mettre en avant les services clés (isolation de tuyauteries, combles, murs, sols, toitures) dès le hero.</li>
+        <li>Créer un parcours de devis simple avec promesse de réponse en moins de 24h.</li>
+        <li>Rassurer avec les garanties (décennale, matériaux écologiques, techniciens qualifiés) et la couverture nationale.</li>
+        <li>Structurer les preuves sociales : expertise, réactivité, partenaires (Tower-Echaf Isolation).</li>
+      </ul>
+
+      <h2>UX & Conversion</h2>
+      <ul>
+        <li>CTA « Devis gratuit » présent dans le hero et répété dans les sections services.</li>
+        <li>Sections services modulaires : calorifugeage vapeur/eau glacée, isolation combles/murs/sols/toiture.</li>
+        <li>Bloc « Pourquoi choisir THERCAL ENERGIES ? » avec piliers (expertise, équipe qualifiée, garantie décennale, matériaux éco).</li>
+        <li>Formulaire complet avec pièces jointes (PDF, Word, images), coordonnées, et rappel des horaires d'ouverture.</li>
+      </ul>
+
+      <h2>Stack & Livraison</h2>
+      <ul>
+        <li>Next.js + Tailwind CSS pour une exécution rapide et une maintenance simple.</li>
+        <li>Framer Motion pour des micro-animations discrètes sur les CTA et sections services.</li>
+        <li>Optimisations SEO on-page (titres, meta, sémantique, performances) pour le marché B2B/industriel.</li>
+        <li>Formulaire relié à l'API /contact pour notifications et suivi.</li>
+      </ul>
+
+      <h2>Résultats</h2>
+      <p>Parcours de devis mis en avant, lisibilité accrue des services industriels et mise en confiance par les garanties, afin d'accélérer les demandes entrantes sur l'ensemble du territoire.</p>
+    `
+  },
+  "kheops-consulting": {
+    id: "6",
+    title: "KHEOPS Consulting — landing B2B de contrôle de projets",
+    slug: "kheops-consulting",
+    description: "Landing page B2B pour un cabinet de conseil en contrôle de projets complexes, centrée sur la méthodologie et la génération de rendez-vous.",
+    category: "WEB",
+    technologies: ["Next.js", "Tailwind CSS", "Motion", "SEO B2B", "Formulaire lead", "Design system"],
+    githubUrl: null,
+    liveUrl: "https://www.kheops-consulting.com/",
+    period: "2025",
+    location: "France / Sénégal",
+    highlights: [
+      "Méthodologie en 3 phases (Structuration, Optimisation, Suivi & Contrôle) présentée dès le hero",
+      "CTA « Discuter de votre projet » et formulaires de leads B2B (coordonnées, message, documents)",
+      "Preuves sociales : références clients (EDF, Alstom, GE...), chiffres clés et expertise sectorielle",
+      "Mise en avant des outils métiers (Primavera P6, MS Project, Power BI, Tableau, Jira, Tilos)",
+      "Section process détaillée (Consultation initiale -> Bilan & transfert) pour rassurer sur la méthode"
+    ],
+    content: `
+      <h2>Enjeu</h2>
+      <p>Concevoir une landing page claire pour un cabinet spécialisé dans le contrôle de projets complexes, afin de présenter la méthodologie et d'augmenter les prises de contact qualifiées.</p>
+
+      <h2>Approche</h2>
+      <ul>
+        <li>Hero direct avec promesse business (« Votre vision, notre expertise ») et CTA principal.</li>
+        <li>Déclinaison de la méthodologie en trois phases : Structuration, Optimisation, Suivi & Contrôle.</li>
+        <li>Processus détaillé en 5 étapes (Consultation initiale → Bilan & transfert) pour cadrer la collaboration.</li>
+        <li>Preuves sociales : références clients (EDF, Alstom, GE, Saipem...) et chiffres clés (satisfaction, projets gérés, experts).</li>
+        <li>Mise en avant des outils : Primavera P6, Microsoft Project, Power BI, Tableau, Jira, Tilos.</li>
+      </ul>
+
+      <h2>UX & Conversion</h2>
+      <ul>
+        <li>CTA constants (« Discuter de votre projet », « Demander un devis ») et formulaires optimisés (coordonnées, message, pièces jointes).</li>
+        <li>Sections différenciées par couleurs et pictogrammes pour les services (planification, contrôle des coûts, risques, ordonnancement).</li>
+        <li>Bloc « Une équipe d'experts à votre écoute » pour valoriser l'accompagnement personnalisé et le transfert de compétences.</li>
+      </ul>
+
+      <h2>Stack & Livraison</h2>
+      <ul>
+        <li>Next.js + Tailwind CSS pour une exécution rapide et un design system B2B cohérent.</li>
+        <li>Animations légères (Motion) pour rythmer la lecture des sections méthodologie et process.</li>
+        <li>Optimisations SEO (titres, sémantique, performances) orientées requêtes conseil/contrôle de projets.</li>
+      </ul>
+
+      <h2>Résultat</h2>
+      <p>Une landing page structurée, orientée valeur et preuves, qui facilite la prise de rendez-vous avec les décideurs et rassure sur la capacité de KHEOPS à piloter des projets critiques.</p>
+    `
   }
 }
 
