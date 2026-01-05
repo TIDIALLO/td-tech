@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="g" x1="16" y1="16" x2="112" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="108" height="108" rx="26" fill="url(#g)"/>
+  <path d="M44 50c0-8 6-14 14-14h18c8 0 14 6 14 14v4h-12v-2c0-4-3-7-7-7H60c-4 0-7 3-7 7v6c0 4 3 7 7 7h10c8 0 14 6 14 14v2c0 8-6 14-14 14H52c-8 0-14-6-14-14v-4h12v2c0 4 3 7 7 7h18c4 0 7-3 7-7v-4c0-4-3-7-7-7H58c-8 0-14-6-14-14v-2z" fill="#ffffff" opacity="0.95"/>
+  <text x="64" y="78" text-anchor="middle" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="28" font-weight="800" fill="#ffffff">
+    S6
+  </text>
+</svg>
+

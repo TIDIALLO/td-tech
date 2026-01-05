@@ -11,7 +11,7 @@ export function Footer() {
             <span className="text-white font-bold text-lg">S6</span>
             </div>
             <span className="text-lg font-bold flex items-center gap-0.5">
-              <span className="text-white">Synap</span>
+              <span className="text-foreground">Synap</span>
               <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">6ia</span>
             </span>
           </div>
@@ -48,7 +48,6 @@ export function Footer() {
           {/* Copyright */}
           <div className="text-sm text-muted-foreground text-center md:text-right">
             <p>© {new Date().getFullYear()} <span className="font-semibold text-foreground">Synap6ia</span>. Tous droits réservés.</p>
-            <p className="mt-1 text-xs opacity-70">Sous-titrage : Sette Inc. 2021</p>
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ export function Navbar() {
             <span className="text-white font-bold text-lg">S6</span>
           </div>
           <span className="text-xl font-bold flex items-center gap-0.5">
-            <span className="text-white">Synap</span>
+            <span className="text-foreground">Synap</span>
             <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">6ia</span>
           </span>
         </Link>
@@ -53,11 +53,13 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <Link href="/auth/signin" className="hidden md:block">
-            <Button variant="outline" size="sm">
-              Connexion
-            </Button>
-          </Link>
+          {process.env.NEXT_PUBLIC_AUTH_ENABLED === "true" && (
+            <Link href="/auth/signin" className="hidden md:block">
+              <Button variant="outline" size="sm">
+                Connexion
+              </Button>
+            </Link>
+          )}
 
           {/* Mobile menu button */}
           <button
@@ -92,11 +94,13 @@ export function Navbar() {
                 {item.name}
               </Link>
             ))}
-            <Link href="/auth/signin" onClick={() => setMobileMenuOpen(false)}>
-              <Button variant="outline" className="w-full">
-                Connexion
-              </Button>
-            </Link>
+            {process.env.NEXT_PUBLIC_AUTH_ENABLED === "true" && (
+              <Link href="/auth/signin" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="outline" className="w-full">
+                  Connexion
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       )}

@@ -121,11 +121,11 @@ export default function ContactPage() {
                   Projets web, automatisations, IA, formations
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">
-                Contact & devis
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+                Contact
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-                Expliquez votre besoin, on revient vers vous avec un plan clair (étapes, délais, budget) et une première recommandation en moins de 24h.
+              <p className="text-lg md:text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed">
+                Expliquez votre besoin, je reviens vers vous avec un plan clair (étapes, délais, budget) et une première recommandation en moins de 24h.
               </p>
             </motion.div>
           </div>
@@ -143,8 +143,8 @@ export default function ContactPage() {
               >
                 <Card className="h-full border border-white/10 bg-slate-950/70 dark:bg-slate-900/80 backdrop-blur-md shadow-2xl">
                   <CardHeader className="space-y-2 pb-3">
-                    <CardTitle className="text-2xl">Brief express</CardTitle>
-                    <CardDescription className="text-base">
+                    <CardTitle className="text-2xl text-white">Brief express</CardTitle>
+                    <CardDescription className="text-base text-slate-200 leading-relaxed">
                       Donnez les éléments clés : contexte, objectifs, délais. Je vous réponds sous 24h avec un plan d&apos;attaque.
                     </CardDescription>
                   </CardHeader>
@@ -152,7 +152,7 @@ export default function ContactPage() {
                     <form onSubmit={handleSubmit} className="space-y-5">
                       <div className="grid gap-5 md:grid-cols-2">
                         <div className="space-y-2">
-                          <Label htmlFor="name" className="text-sm font-medium">
+                          <Label htmlFor="name" className="text-sm font-semibold text-slate-100">
                             Nom complet
                           </Label>
                           <Input
@@ -164,7 +164,7 @@ export default function ContactPage() {
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="email" className="text-sm font-medium">
+                          <Label htmlFor="email" className="text-sm font-semibold text-slate-100">
                             Email
                           </Label>
                           <Input
@@ -179,8 +179,8 @@ export default function ContactPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="subject" className="text-sm font-medium">
-                          Sujet <span className="text-muted-foreground font-normal">(optionnel)</span>
+                        <Label htmlFor="subject" className="text-sm font-semibold text-slate-100">
+                          Sujet <span className="text-slate-300 font-normal">(optionnel)</span>
                         </Label>
                         <Input
                           id="subject"
@@ -191,8 +191,8 @@ export default function ContactPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message" className="text-sm font-medium">
-                          Message <span className="text-muted-foreground text-xs font-normal">(minimum 5 caractères)</span>
+                        <Label htmlFor="message" className="text-sm font-semibold text-slate-100">
+                          Message <span className="text-slate-300 text-xs font-normal">(minimum 5 caractères)</span>
                         </Label>
                         <Textarea
                           id="message"
@@ -230,7 +230,7 @@ export default function ContactPage() {
                       )}
 
                       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-slate-300">
                           Temps de réponse moyen : &lt; 24h. Possibilité d&apos;échange visio ou audit rapide.
                         </p>
                         <Button 
@@ -266,8 +266,8 @@ export default function ContactPage() {
                   <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.25),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.22),transparent_35%)]" />
                   <CardHeader className="relative pb-3">
                     <CardTitle className="text-2xl">Échange direct</CardTitle>
-                    <CardDescription className="text-slate-100/80 text-base">
-                      Besoin d&apos;un créneau rapide ? Contact direct par email ou téléphone, ou partagez des pièces jointes pour un devis précis.
+                    <CardDescription className="text-slate-100 text-base leading-relaxed">
+                      Besoin d&apos;un créneau rapide ? Contact direct par email ou téléphone, ou partagez des pièces jointes pour que je comprenne rapidement votre contexte.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="relative space-y-6">
@@ -313,7 +313,8 @@ export default function ContactPage() {
 
                     <div className="flex flex-wrap gap-2">
                       <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Réponse &lt; 24h</span>
-                      <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Lun–Ven : 9h–18h</span>
+                      <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Lun–Ven : 8h–18h</span>
+                      <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Sam : 9h–13h</span>
                       <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">Visio ou présentiel</span>
                     </div>
 
