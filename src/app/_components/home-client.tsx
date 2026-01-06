@@ -144,6 +144,11 @@ export default function HomeClient() {
                     Applications web, automatisations n8n, agents IA et formations — pensés pour des équipes
                     qui veulent aller vite, sans dette technique.
                   </motion.p>
+
+                  <p className="mx-auto max-w-3xl text-pretty text-sm md:text-base text-muted-foreground leading-relaxed">
+                    Nous aidons les PME, startups et équipes internes à automatiser, livrer vite et scaler sans dette
+                    technique.
+                  </p>
                 </motion.div>
 
                 {/* Un seul CTA principal */}
