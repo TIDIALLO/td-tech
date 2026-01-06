@@ -36,6 +36,7 @@ export default function ServicesPage() {
       title: "Automatisation n8n",
       description: "Workflows fiables (CRM, e-mails, reporting, data) pour gagner du temps chaque semaine.",
       icon: Workflow,
+      href: "/services/automatisation",
       features: ["Intégrations API", "Logs & monitoring", "Sécurité & droits", "Maintenance"],
     },
     {
@@ -135,8 +136,8 @@ export default function ServicesPage() {
             >
               {services.map((service) => {
                 const Icon = service.icon
-                const ctaHref = service.title === "Formations" ? "/formations" : "/contact"
-                const ctaLabel = service.title === "Formations" ? "Voir les formations" : "Démarrer un projet"
+                const ctaHref = service.href || (service.title === "Formations" ? "/formations" : "/contact")
+                const ctaLabel = service.href ? "En savoir plus" : (service.title === "Formations" ? "Voir les formations" : "Démarrer un projet")
                 return (
                   <motion.div key={service.id} variants={itemVariants}>
                     <Card className="group h-full bg-card border-border/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 hover:border-primary/40">
