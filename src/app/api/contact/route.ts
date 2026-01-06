@@ -4,22 +4,129 @@ import { resend } from "@/lib/resend"
 import { transporter } from "@/lib/nodemailer"
 import { z } from "zod"
 
+// ============================================
+// SÉCURITÉ : Validation stricte avec Zod
+// ============================================
 const contactSchema = z.object({
-  name: z.string().min(2, "Le nom doit contenir au moins 2 caractères").trim(),
-  email: z.string().email("Email invalide").trim().toLowerCase(),
-  subject: z.string().optional().transform(val => val?.trim() || undefined),
-  message: z.string().min(5, "Le message doit contenir au moins 5 caractères").trim(),
+  name: z.string()
+    .min(2, "Le nom doit contenir au moins 2 caractères")
+    .max(100, "Le nom ne peut pas dépasser 100 caractères")
+    .trim()
+    .regex(/^[a-zA-ZÀ-ÿ\s'-]+$/, "Le nom contient des caractères invalides"),
+
+  email: z.string()
+    .email("Email invalide")
+    .trim()
+    .toLowerCase()
+    .max(255, "L'email ne peut pas dépasser 255 caractères"),
+
+  subject: z.string()
+    .max(200, "Le sujet ne peut pas dépasser 200 caractères")
+    .optional()
+    .transform(val => val?.trim() || undefined),
+
+  message: z.string()
+    .min(5, "Le message doit contenir au moins 5 caractères")
+    .max(5000, "Le message ne peut pas dépasser 5000 caractères")
+    .trim(),
 })
+
+// ============================================
+// SÉCURITÉ : Fonction de sanitization HTML
+// Protection contre XSS (Cross-Site Scripting)
+// ============================================
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  }
+  return text.replace(/[&<>"']/g, (char) => map[char])
+}
+
+// ============================================
+// SÉCURITÉ : Rate limiting simple (en mémoire)
+// Protection contre le spam et les attaques DDoS
+// ============================================
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
+const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
+const RATE_LIMIT_MAX = 3 // 3 requêtes par minute max
+
+function checkRateLimit(identifier: string): boolean {
+  const now = Date.now()
+  const record = rateLimitMap.get(identifier)
+
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(identifier, { count: 1, resetTime: now + RATE_LIMIT_WINDOW })
+    return true
+  }
+
+  if (record.count >= RATE_LIMIT_MAX) {
+    return false
+  }
+
+  record.count++
+  return true
+}
 
 export async function POST(request: Request) {
   try {
+    // ============================================
+    // SÉCURITÉ : Vérifier l'origine de la requête
+    // ============================================
+    const origin = request.headers.get('origin')
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'https://td-tech-lime.vercel.app',
+      'https://td-tech.vercel.app',
+    ]
+
+    if (origin && !allowedOrigins.includes(origin)) {
+      console.warn(`⚠️ Requête refusée - origine non autorisée: ${origin}`)
+      return NextResponse.json(
+        { error: "Origine non autorisée" },
+        { status: 403 }
+      )
+    }
+
+    // ============================================
+    // SÉCURITÉ : Rate limiting par IP
+    // ============================================
+    const clientIp = request.headers.get('x-forwarded-for') ||
+                     request.headers.get('x-real-ip') ||
+                     'unknown'
+
+    if (!checkRateLimit(clientIp)) {
+      console.warn(`⚠️ Rate limit dépassé pour IP: ${clientIp}`)
+      return NextResponse.json(
+        {
+          error: "Trop de requêtes",
+          message: "Veuillez patienter avant de renvoyer un message."
+        },
+        { status: 429 }
+      )
+    }
+
+    // ============================================
+    // Validation des données avec Zod
+    // Protection automatique contre injection SQL
+    // ============================================
     const body = await request.json()
     const validatedData = contactSchema.parse(body)
 
+    // ============================================
+    // Sanitization supplémentaire des données
+    // ============================================
+    const sanitizedName = escapeHtml(validatedData.name)
+    const sanitizedSubject = validatedData.subject ? escapeHtml(validatedData.subject) : undefined
+    const sanitizedMessage = escapeHtml(validatedData.message)
+
     // Préparer le contenu de l'email
-    const subject = validatedData.subject || "Nouveau message de contact"
-    
-    // Email HTML formaté
+    const subject = sanitizedSubject || "Nouveau message de contact"
+
+    // Email HTML formaté (avec données échappées)
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -43,13 +150,14 @@ export async function POST(request: Request) {
             </div>
             <div class="content">
               <div class="info">
-                <p><span class="label">Nom:</span> ${validatedData.name}</p>
+                <p><span class="label">Nom:</span> ${sanitizedName}</p>
                 <p><span class="label">Email:</span> <a href="mailto:${validatedData.email}">${validatedData.email}</a></p>
-                ${validatedData.subject ? `<p><span class="label">Sujet:</span> ${validatedData.subject}</p>` : ''}
+                ${sanitizedSubject ? `<p><span class="label">Sujet:</span> ${sanitizedSubject}</p>` : ''}
+                <p><span class="label">IP:</span> ${clientIp}</p>
               </div>
               <div class="message">
                 <p><span class="label">Message:</span></p>
-                <p>${validatedData.message.replace(/\n/g, '<br>')}</p>
+                <p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>
               </div>
               <div class="footer">
                 <p>Ce message a été envoyé depuis le formulaire de contact de votre site web.</p>
@@ -64,18 +172,21 @@ export async function POST(request: Request) {
     const textContent = `
 Nouveau Message de Contact
 
-Nom: ${validatedData.name}
+Nom: ${sanitizedName}
 Email: ${validatedData.email}
-${validatedData.subject ? `Sujet: ${validatedData.subject}` : ''}
+${sanitizedSubject ? `Sujet: ${sanitizedSubject}` : ''}
+IP: ${clientIp}
 
 Message:
-${validatedData.message}
+${sanitizedMessage}
 
 ---
 Ce message a été envoyé depuis le formulaire de contact de votre site web.
     `.trim()
 
+    // ============================================
     // PRIORITÉ 1 : Envoyer l'email (Gmail SMTP ou Resend)
+    // ============================================
     let emailSent = false
     let emailId = null
     let emailError = null
@@ -101,7 +212,7 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
       } else {
         // Utiliser Resend (avec ou sans domaine vérifié)
         const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
-        
+
         const emailResult = await resend.emails.send({
           from: fromEmail,
           to: ['diallotidiane014@gmail.com'],
@@ -127,14 +238,56 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
     } catch (err) {
       emailError = err
       console.error("❌ Erreur envoi email:", err)
-      
+
       // Log détaillé de l'erreur pour debugging
       if (err && typeof err === 'object' && 'message' in err) {
         console.error("Détails de l'erreur:", JSON.stringify(err, null, 2))
       }
     }
 
-    // PRIORITÉ 2 : Sauvegarder en base de données (optionnel, ne bloque pas si échec)
+    // ============================================
+    // PRIORITÉ 1.5 : Envoyer au webhook n8n (non-bloquant)
+    // ============================================
+    let n8nSent = false
+    const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL
+
+    if (n8nWebhookUrl) {
+      try {
+        const n8nPayload = {
+          name: validatedData.name,
+          email: validatedData.email,
+          subject: validatedData.subject || "Nouveau message de contact",
+          message: validatedData.message,
+          timestamp: new Date().toISOString(),
+          source: "td-tech-website",
+          ip: clientIp,
+          emailSent: emailSent,
+          emailId: emailId
+        }
+
+        const n8nResponse = await fetch(n8nWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(n8nPayload),
+          signal: AbortSignal.timeout(5000) // Timeout 5 secondes
+        })
+
+        if (n8nResponse.ok) {
+          n8nSent = true
+          console.log("✅ Données envoyées au workflow n8n")
+        } else {
+          console.warn("⚠️ Le webhook n8n a retourné une erreur:", n8nResponse.status)
+        }
+      } catch (n8nError) {
+        console.warn("⚠️ Impossible d'envoyer au webhook n8n (non-bloquant):", n8nError)
+        // Continue même si n8n échoue
+      }
+    }
+
+    // ============================================
+    // PRIORITÉ 2 : Sauvegarder en base de données
+    // Protection contre injection SQL via Prisma (requêtes paramétrées)
+    // ============================================
     let dbSaved = false
     try {
       await prisma.contactMessage.create({
@@ -152,24 +305,27 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
       // On continue même si la DB n'est pas disponible
     }
 
+    // ============================================
     // Retourner le résultat
-    if (emailSent) {
+    // ============================================
+    if (emailSent || n8nSent) {
       return NextResponse.json(
-        { 
+        {
           message: "Message envoyé avec succès",
           emailId: emailId,
           dbSaved: dbSaved,
+          n8nProcessed: n8nSent,
           // Info pour l'utilisateur si DB non disponible
-          ...(dbSaved === false && { 
+          ...(dbSaved === false && {
             info: "Message envoyé par email. La sauvegarde en base de données n'est pas disponible actuellement."
           })
         },
         { status: 200 }
       )
     } else {
-      // Si l'email n'a pas pu être envoyé, analyser l'erreur
+      // Si ni l'email ni n8n n'ont fonctionné
       let errorMessage = "Erreur inconnue lors de l'envoi de l'email"
-      
+
       if (emailError) {
         // Gérer les erreurs Resend spécifiques
         if (typeof emailError === 'object' && emailError !== null) {
@@ -183,9 +339,9 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
           errorMessage = emailError.message
         }
       }
-      
+
       return NextResponse.json(
-        { 
+        {
           error: "L'email n'a pas pu être envoyé",
           message: errorMessage,
           dbSaved: dbSaved,
@@ -198,19 +354,19 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
 
   } catch (err) {
     console.error("Erreur lors de l'envoi:", err)
-    
+
     if (err instanceof z.ZodError) {
       // Formater les erreurs pour un affichage plus clair
       const errorMessages = err.errors.map(errorItem => {
         const field = errorItem.path.join('.')
         return `${field}: ${errorItem.message}`
       })
-      
+
       return NextResponse.json(
-        { 
-          error: "Données invalides", 
+        {
+          error: "Données invalides",
           message: errorMessages.join(', '),
-          details: err.errors 
+          details: err.errors
         },
         { status: 400 }
       )
@@ -219,7 +375,7 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
     // Erreur inattendue
     console.error("Erreur inattendue lors de l'envoi:", err)
     return NextResponse.json(
-      { 
+      {
         error: "Erreur lors du traitement de votre message",
         message: err instanceof Error ? err.message : "Erreur inconnue"
       },

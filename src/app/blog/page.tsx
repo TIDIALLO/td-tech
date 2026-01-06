@@ -55,8 +55,8 @@ export default async function BlogPage() {
                     <Link href="/contact">
                       <Button>Être notifié</Button>
                     </Link>
-                    <Link href="/portfolio">
-                      <Button variant="outline">Voir les projets</Button>
+                    <Link href="/services">
+                      <Button variant="outline">Voir les services</Button>
                     </Link>
                   </CardContent>
                 </Card>

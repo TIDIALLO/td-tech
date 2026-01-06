@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail } from "lucide-react"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -7,8 +8,13 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Logo Synap6ia avec texte */}
           <div className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300 group-hover:scale-105">
-            <span className="text-white font-bold text-lg">S6</span>
+            <div className="relative w-10 h-10 rounded-lg overflow-hidden shadow-lg ring-1 ring-border bg-background group-hover:shadow-xl transition-shadow duration-300 group-hover:scale-105">
+              <Image
+                src="/icon.svg"
+                alt="Synap6ia"
+                width={40}
+                height={40}
+              />
             </div>
             <span className="text-lg font-bold flex items-center gap-0.5">
               <span className="text-foreground">Synap</span>

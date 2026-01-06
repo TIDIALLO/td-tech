@@ -334,12 +334,12 @@ export default function HomeClient() {
               <div className="flex items-center gap-3 text-muted-foreground">
                 <LineChart className="h-5 w-5 text-primary" />
                 <span className="text-sm">
-                  Tu veux afficher tes vrais résultats ? On connecte ça à tes projets (DB / CMS) dès que tu veux.
+                  Tu veux afficher tes vrais résultats ? On connecte ça à tes données (DB / CMS) dès que tu veux.
                 </span>
               </div>
               <Button asChild>
-                <Link href="/portfolio">
-                  Voir le portfolio <ArrowRight className="h-4 w-4" />
+                <Link href="/services">
+                  Voir les services <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -348,7 +348,7 @@ export default function HomeClient() {
 
         {/* TECH STACK */}
         <section className="relative overflow-hidden py-20 bg-gradient-to-b from-background via-muted/40 to-background">
-          <div className="absolute inset-0 pointer-events-none opacity-40 [background-image:radial-gradient(circle,rgba(37,99,235,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
+          <div className="absolute inset-0 pointer-events-none opacity-40 [background-image:radial-gradient(circle,rgba(16,185,129,0.16)_1px,transparent_1px)] [background-size:24px_24px]" />
           <div className="container relative px-4 space-y-10">
             <div className="mx-auto max-w-3xl text-center space-y-3">
               <p className="inline-flex items-center gap-2 rounded-full border bg-background/80 px-3 py-1 text-xs font-semibold text-primary shadow-sm backdrop-blur">
@@ -403,6 +403,65 @@ export default function HomeClient() {
               animation-duration: 30s;
             }
           `}</style>
+        </section>
+
+        {/* NOTRE APPROCHE */}
+        <section id="approche" className="relative overflow-hidden py-20 bg-muted/30">
+          <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:radial-gradient(circle,rgba(16,185,129,0.18)_1px,transparent_1px)] [background-size:26px_26px]" />
+          <div className="container relative px-4">
+            <div className="mx-auto max-w-4xl text-center space-y-4 mb-12">
+              <p className="inline-flex items-center gap-2 rounded-full border bg-background/80 px-3 py-1 text-xs font-semibold text-primary shadow-sm backdrop-blur">
+                Notre approche
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Une méthodologie claire, <span className="text-primary">du cadrage à la livraison</span>
+              </h2>
+              <p className="text-muted-foreground text-base">
+                Une démarche simple : on clarifie le besoin, on construit proprement, on mesure l’impact, puis on itère.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  step: "01",
+                  title: "Discovery",
+                  desc: "On comprend ton contexte, tes objectifs et tes contraintes pour prioriser ce qui crée de la valeur.",
+                },
+                {
+                  step: "02",
+                  title: "Strategy",
+                  desc: "On transforme ça en plan concret : livrables, jalons, délais, KPI et risques.",
+                },
+                {
+                  step: "03",
+                  title: "Build",
+                  desc: "On développe avec une qualité production : perf, SEO, sécurité, tests et déploiement.",
+                },
+                {
+                  step: "04",
+                  title: "Integration",
+                  desc: "On intègre dans tes outils (CRM, email, data), puis on améliore avec des retours mesurés.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.step}
+                  className="group relative overflow-hidden rounded-xl border border-border/60 bg-background/80 backdrop-blur shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                >
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary/12 via-emerald-300/10 to-sky-400/10" />
+                  <div className="relative flex flex-col items-center gap-4 p-6 text-center">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/15 text-primary font-bold shadow-sm group-hover:scale-105 transition-transform duration-300">
+                      {item.step}
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-bold">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Section Booking */}

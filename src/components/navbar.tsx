@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 const navigation = [
   { name: "Accueil", href: "/" },
@@ -24,8 +25,14 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-3 ml-4 md:ml-8 hover:opacity-80 transition-opacity">
-          <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
-            <span className="text-white font-bold text-lg">S6</span>
+          <div className="relative w-10 h-10 rounded-lg overflow-hidden shadow-lg ring-1 ring-border bg-background">
+            <Image
+              src="/icon.svg"
+              alt="Synap6ia"
+              width={40}
+              height={40}
+              priority
+            />
           </div>
           <span className="text-xl font-bold flex items-center gap-0.5">
             <span className="text-foreground">Synap</span>
