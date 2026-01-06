@@ -55,30 +55,6 @@ export default function HomeClient() {
     },
   ] as const
 
-  const caseStudies = [
-    {
-      title: "Automatisation back-office",
-      industry: "Services",
-      metric: "-40% temps de traitement",
-      desc: "Centralisation des demandes, tri automatique, notifications et reporting hebdo.",
-      tags: ["n8n", "Gmail", "Sheets", "Slack"],
-    },
-    {
-      title: "App web de pilotage",
-      industry: "Ops / Data",
-      metric: "+28% visibilité KPI",
-      desc: "Dashboard temps réel, rôles, exports, historique et alertes personnalisées.",
-      tags: ["Next.js", "PostgreSQL", "Prisma", "Tailwind"],
-    },
-    {
-      title: "Agent IA support interne",
-      industry: "Entreprise",
-      metric: "-30% tickets récurrents",
-      desc: "Recherche dans la base documentaire, réponses guidées, escalade intelligente.",
-      tags: ["RAG", "Docs", "Guardrails", "Observability"],
-    },
-  ] as const
-
   const techStack = [
     { name: "n8n", logo: "https://cdn.simpleicons.org/n8n/ff6b6b" },
     { name: "Python", logo: "https://cdn.simpleicons.org/python/3776ab" },
@@ -264,89 +240,6 @@ export default function HomeClient() {
                   </motion.div>
                 )
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* CAS CLIENTS */}
-        <section id="case-studies" className="relative overflow-hidden py-24 bg-muted/30">
-          <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:radial-gradient(circle,rgba(16,185,129,0.18)_1px,transparent_1px)] [background-size:28px_28px] animate-dots-drift" />
-          <div className="container relative px-4">
-            <div className="mx-auto mb-14 max-w-3xl text-center">
-              <motion.h2
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.45 }}
-                className="text-4xl font-bold md:text-5xl"
-              >
-                Cas clients & résultats
-              </motion.h2>
-              <motion.p
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.45, delay: 0.05 }}
-                className="mt-4 text-lg text-muted-foreground"
-              >
-                Exemple de livrables typiques : on vise un impact mesurable (temps, coût, conversion, qualité).
-              </motion.p>
-            </div>
-
-            <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
-              {caseStudies.map((c, idx) => (
-                <motion.div
-                  key={c.title}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{ duration: 0.45, delay: idx * 0.06 }}
-                >
-                  <Card className="card-shine border-border/60 bg-background/85 shadow-lg backdrop-blur">
-                    <CardHeader className="space-y-2">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <div className="text-xs text-muted-foreground">{c.industry}</div>
-                          <CardTitle className="text-xl">{c.title}</CardTitle>
-                        </div>
-                        <div className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-                          {c.metric}
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <p className="text-sm text-foreground/85">{c.desc}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {c.tags.map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full border bg-background/70 px-3 py-1 text-xs text-muted-foreground"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mx-auto mt-10 flex max-w-6xl flex-col items-center justify-between gap-4 rounded-2xl border bg-background/70 p-6 backdrop-blur md:flex-row">
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <LineChart className="h-5 w-5 text-primary" />
-                <span className="text-sm">
-                  Tu veux afficher tes vrais résultats ? On connecte ça à tes données (DB / CMS) dès que tu veux.
-                </span>
-              </div>
-              <Button asChild>
-                <Link href="/services">
-                  Voir les services <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
             </div>
           </div>
         </section>
