@@ -82,7 +82,7 @@ export default function HomeClient() {
         {/* HERO */}
         <section className="relative min-h-[90vh] overflow-hidden">
           <AuroraBackground showRadialGradient className="absolute inset-0">
-            <div className="container relative z-10 px-4 py-24 md:py-28">
+            <div className="container relative z-20 px-4 py-16 sm:py-20 md:py-24 lg:py-28">
               <div className="mx-auto max-w-5xl text-center">
                 <motion.div
                   variants={fadeUp}
@@ -97,7 +97,7 @@ export default function HomeClient() {
                   </div>
 
                   <motion.h1
-                    className="text-balance text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
+                    className="text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight"
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                   >
@@ -113,7 +113,7 @@ export default function HomeClient() {
                   </motion.h1>
 
                   <motion.p
-                    className="mx-auto max-w-3xl text-pretty text-lg text-foreground/85 md:text-xl"
+                    className="mx-auto max-w-3xl text-pretty text-base sm:text-lg md:text-xl text-foreground/85"
                     animate={{ opacity: [0.8, 1, 0.9, 1] }}
                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   >
