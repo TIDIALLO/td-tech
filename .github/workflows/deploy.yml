@@ -68,7 +68,7 @@ jobs:
             echo "🚀 Starting deployment to VPS..."
             
             # Variables
-            DEPLOY_PATH="${{ secrets.VPS_DEPLOY_PATH || '/var/www/td-tech' }}"
+            DEPLOY_PATH="${{ secrets.VPS_DEPLOY_PATH || '/var/www/synap6ia' }}"
             BRANCH="${{ github.ref_name }}"
             
             # Naviguer vers le répertoire du projet
@@ -115,7 +115,7 @@ jobs:
               docker-compose up -d --build || echo "⚠️ Docker restart failed"
             elif command -v pm2 &> /dev/null; then
               echo "🔄 Restarting PM2 process..."
-              pm2 restart td-tech || pm2 start npm --name td-tech -- start || echo "⚠️ PM2 restart failed"
+              pm2 restart synap6ia || pm2 start npm --name synap6ia -- start || echo "⚠️ PM2 restart failed"
             else
               echo "⚠️ No Docker or PM2 found, manual restart required"
             fi

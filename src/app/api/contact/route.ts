@@ -79,8 +79,9 @@ export async function POST(request: Request) {
     const origin = request.headers.get('origin')
     const allowedOrigins = [
       'http://localhost:3000',
-      'https://td-tech-lime.vercel.app',
-      'https://td-tech.vercel.app',
+      'https://synap6ia.com',
+      'https://www.synap6ia.com',
+      'https://synap6ia.vercel.app',
     ]
 
     if (origin && !allowedOrigins.includes(origin)) {
@@ -259,7 +260,7 @@ Ce message a été envoyé depuis le formulaire de contact de votre site web.
           subject: validatedData.subject || "Nouveau message de contact",
           message: validatedData.message,
           timestamp: new Date().toISOString(),
-          source: "td-tech-website",
+          source: "synap6ia-website",
           ip: clientIp,
           emailSent: emailSent,
           emailId: emailId

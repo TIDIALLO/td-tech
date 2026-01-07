@@ -3,6 +3,14 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "nextjs",
-  "regions": ["cdg1"]
+  "regions": ["cdg1"],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.synap6ia.com" }],
+      "destination": "https://synap6ia.com/:path*",
+      "permanent": true
+    }
+  ]
 }
 
