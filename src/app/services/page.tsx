@@ -44,6 +44,7 @@ export default function ServicesPage() {
       title: "Agents IA",
       description: "Assistants IA utiles (support, sales, ops) intégrés à vos outils, avec garde-fous.",
       icon: Bot,
+      href: "/services/agents-ia",
       features: ["RAG & bases métiers", "Déploiement sécurisé", "Mesure d'impact", "Observabilité"],
     },
     {
