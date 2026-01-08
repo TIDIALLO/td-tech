@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ArrowLeft, Calendar } from "lucide-react"
 import { formatDate } from "@/lib/utils"
 import ReactMarkdown from "react-markdown"
+import Image from "next/image"
 
 export async function generateStaticParams() {
   try {
@@ -59,10 +60,28 @@ export default async function BlogPostPage({
                 Retour au blog
               </Button>
             </Link>
-            <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
-              <Calendar className="h-4 w-4" />
-              <span>{post.publishedAt ? formatDate(post.publishedAt) : ""}</span>
+
+            {post.image && (
+              <div className="mb-6 relative h-96 w-full overflow-hidden rounded-lg">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
+
+            <div className="mb-4 flex items-center gap-4">
+              <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+                {post.category}
+              </span>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Calendar className="h-4 w-4" />
+                <span>{post.publishedAt ? formatDate(post.publishedAt) : ""}</span>
+              </div>
             </div>
+
             <h1 className="mb-4 text-4xl font-bold">{post.title}</h1>
             <p className="text-lg text-muted-foreground">{post.excerpt}</p>
             <div className="mt-4 flex flex-wrap gap-2">

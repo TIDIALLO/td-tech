@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { formatDate } from "@/lib/utils"
 import { Calendar } from "lucide-react"
+import Image from "next/image"
 
 export const metadata = {
   title: "Blog - Tidiane Diallo",
@@ -66,9 +67,24 @@ export default async function BlogPage() {
                 {posts.map((post) => (
                   <Card key={post.id} className="flex flex-col">
                     <CardHeader>
+                      {post.image && (
+                        <div className="mb-4 relative h-48 w-full overflow-hidden rounded-md">
+                          <Image
+                            src={post.image}
+                            alt={post.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      )}
                       <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
                         <Calendar className="h-4 w-4" />
                         <span>{post.publishedAt ? formatDate(post.publishedAt) : ""}</span>
+                      </div>
+                      <div className="mb-2">
+                        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                          {post.category}
+                        </span>
                       </div>
                       <CardTitle>{post.title}</CardTitle>
                       <CardDescription>{post.excerpt}</CardDescription>
