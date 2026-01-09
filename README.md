@@ -74,6 +74,9 @@ npx prisma generate
 
 # Peupler la base avec des données d'exemple
 npx prisma db seed
+
+# (Optionnel) Peupler le blog avec des articles de démarrage
+npx tsx prisma/seed-blog.ts
 ```
 
 ### 5. Lancer en développement
@@ -273,6 +276,57 @@ npm run build        # Build pour production
 npm run start        # Lancer en production
 npm run lint         # Vérifier le code
 ```
+
+## ✍️ Gestion du Blog
+
+Le blog est maintenant accessible via la navigation principale et permet de partager du contenu hebdomadaire pour générer du trafic.
+
+### Créer un article via l'interface admin
+
+1. Connectez-vous au dashboard admin : [http://localhost:3000/admin](http://localhost:3000/admin)
+2. Naviguez vers la section "Blog"
+3. Cliquez sur "Nouvel article"
+4. Remplissez les informations :
+   - **Titre** : Le titre de votre article
+   - **Slug** : URL-friendly (ex: mon-article-blog)
+   - **Extrait** : Résumé court pour la liste des articles
+   - **Contenu** : Contenu complet en Markdown
+   - **Catégorie** : DEVELOPPEMENT, IA, AUTOMATISATION, OUTILS, ou TUTORIEL
+   - **Tags** : Mots-clés pour le SEO
+   - **Image** : (Optionnel) Image de couverture
+   - **Publié** : Cochez pour rendre l'article visible publiquement
+
+### Articles de démarrage
+
+Le fichier `prisma/seed-blog.ts` contient 5 articles de blog pré-rédigés sur :
+- L'automatisation en entreprise avec n8n
+- Les agents IA autonomes
+- Les nouveautés Next.js 16
+- Créer un chatbot intelligent avec RAG
+- Comparatif n8n vs Zapier vs Make
+
+Pour les ajouter à votre base de données :
+
+```bash
+npx tsx prisma/seed-blog.ts
+```
+
+### Optimisation SEO
+
+Chaque article génère automatiquement :
+- Meta title et description
+- Open Graph tags pour les réseaux sociaux
+- URL canonique
+- Sitemap XML
+- Dates de publication
+
+### Workflow recommandé
+
+1. **Planification** : Définissez vos thématiques (automatisation, IA, développement, etc.)
+2. **Rédaction** : Écrivez vos articles en Markdown avec des exemples de code
+3. **Publication** : Publiez via l'interface admin
+4. **Promotion** : Partagez sur vos réseaux sociaux et newsletters
+5. **Analyse** : Suivez les performances via Google Analytics
 
 ## 🔧 Prisma
 
