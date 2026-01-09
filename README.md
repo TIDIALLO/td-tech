@@ -2,6 +2,9 @@
 
 Site web personnel + plateforme pédagogique + dashboard admin construit avec Next.js 15, TypeScript, Prisma, et PostgreSQL.
 
+🌐 **Site en ligne** : [synap6ia.com](https://synap6ia.com)
+📝 **Blog** : [synap6ia.com/blog](https://synap6ia.com/blog)
+
 ## 🚀 Technologies
 
 - **Framework**: Next.js 15 (App Router)
@@ -206,9 +209,38 @@ Le projet inclut une configuration CI/CD complète avec GitHub Actions :
 
 ---
 
-## 🚀 Déploiement sur VPS
+## 🚀 Déploiement sur VPS (synap6ia.com - Hostinger)
 
-### 1. Préparer le VPS
+### Déploiement automatisé avec le script
+
+Le moyen le plus simple de configurer votre VPS Hostinger :
+
+```bash
+# Sur votre VPS, après connexion SSH
+git clone https://github.com/TIDIALLO/td-tech.git /var/www/synap6ia
+cd /var/www/synap6ia
+bash scripts/vps-setup.sh
+```
+
+Ce script configure automatiquement :
+- Docker et Docker Compose
+- Nginx avec configuration reverse proxy
+- SSL avec Certbot (Let's Encrypt)
+- Clone et build de l'application
+- Configuration de la base de données
+- Tests de santé
+
+📖 **Guide complet** : Voir [`DEPLOYMENT-SYNAP6IA.md`](./DEPLOYMENT-SYNAP6IA.md)
+
+### Vérification du CI/CD
+
+Avant de déployer, vérifiez que tout est prêt :
+
+```bash
+bash scripts/check-cicd.sh
+```
+
+### 1. Configuration Manuelle (si nécessaire)
 
 ```bash
 # Installer Docker et Docker Compose
@@ -270,11 +302,23 @@ Le workflow `.github/workflows/deploy.yml` est configuré. Ajoutez ces secrets d
 
 ## 📝 Scripts disponibles
 
+### Scripts NPM
+
 ```bash
 npm run dev          # Lancer en développement
 npm run build        # Build pour production
 npm run start        # Lancer en production
 npm run lint         # Vérifier le code
+```
+
+### Scripts de Déploiement
+
+```bash
+# Vérifier la configuration CI/CD
+bash scripts/check-cicd.sh
+
+# Configuration automatique du VPS (à exécuter sur le VPS)
+bash scripts/vps-setup.sh
 ```
 
 ## ✍️ Gestion du Blog
