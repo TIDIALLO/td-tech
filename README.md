@@ -2,6 +2,9 @@
 
 Site web personnel + plateforme pédagogique + dashboard admin construit avec Next.js 15, TypeScript, Prisma, et PostgreSQL.
 
+🌐 **Site en ligne** : [synap6ia.com](https://synap6ia.com)
+📝 **Blog** : [synap6ia.com/blog](https://synap6ia.com/blog)
+
 ## 🚀 Technologies
 
 - **Framework**: Next.js 15 (App Router)
@@ -74,6 +77,9 @@ npx prisma generate
 
 # Peupler la base avec des données d'exemple
 npx prisma db seed
+
+# (Optionnel) Peupler le blog avec des articles de démarrage
+npx tsx prisma/seed-blog.ts
 ```
 
 ### 5. Lancer en développement
@@ -203,9 +209,75 @@ Le projet inclut une configuration CI/CD complète avec GitHub Actions :
 
 ---
 
-## 🚀 Déploiement sur VPS
+## 🚀 Déploiement sur VPS (synap6ia.com - Hostinger)
 
-### 1. Préparer le VPS
+Le site est déployé sur un VPS Hostinger avec **PM2** et **Nginx**.
+
+### Configuration Actuelle
+- ✅ **Nginx** : Reverse proxy vers le port 3002
+- ✅ **SSL/HTTPS** : Actif avec Let's Encrypt
+- ✅ **PM2** : Gestionnaire de processus
+- ✅ **CI/CD** : GitHub Actions
+
+### Déploiement Automatique (Recommandé)
+
+Chaque push vers `main` déclenche un déploiement automatique via GitHub Actions.
+
+**Prérequis** : Configurer les secrets GitHub (voir [DEPLOYMENT-PM2.md](./DEPLOYMENT-PM2.md))
+
+```bash
+# Sur votre machine locale
+git add .
+git commit -m "Vos modifications"
+git push origin main
+
+# GitHub Actions déploie automatiquement ! 🚀
+```
+
+### Déploiement Manuel
+
+Sur le VPS, utilisez le script de déploiement rapide :
+
+```bash
+# Sur votre VPS Hostinger
+cd /var/www/synap6ia
+bash scripts/deploy-pm2.sh
+```
+
+Ce script :
+- Pull les dernières modifications
+- Installe les dépendances
+- Build l'application
+- Applique les migrations de base de données
+- Redémarre PM2
+
+📖 **Guide complet** : Voir [`DEPLOYMENT-PM2.md`](./DEPLOYMENT-PM2.md)
+
+### Vérification du CI/CD
+
+Avant de déployer, vérifiez que tout est prêt :
+
+```bash
+bash scripts/check-cicd.sh
+```
+
+### Commandes PM2 Utiles
+
+```bash
+# Voir le statut
+pm2 status
+
+# Voir les logs en temps réel
+pm2 logs synap6ia
+
+# Redémarrer l'application
+pm2 restart synap6ia
+
+# Monitoring des ressources
+pm2 monit
+```
+
+### 1. Configuration Docker (Alternative - Non utilisée actuellement)
 
 ```bash
 # Installer Docker et Docker Compose
@@ -267,12 +339,75 @@ Le workflow `.github/workflows/deploy.yml` est configuré. Ajoutez ces secrets d
 
 ## 📝 Scripts disponibles
 
+### Scripts NPM
+
 ```bash
 npm run dev          # Lancer en développement
 npm run build        # Build pour production
 npm run start        # Lancer en production
 npm run lint         # Vérifier le code
 ```
+
+### Scripts de Déploiement
+
+```bash
+# Vérifier la configuration CI/CD
+bash scripts/check-cicd.sh
+
+# Configuration automatique du VPS (à exécuter sur le VPS)
+bash scripts/vps-setup.sh
+```
+
+## ✍️ Gestion du Blog
+
+Le blog est maintenant accessible via la navigation principale et permet de partager du contenu hebdomadaire pour générer du trafic.
+
+### Créer un article via l'interface admin
+
+1. Connectez-vous au dashboard admin : [http://localhost:3000/admin](http://localhost:3000/admin)
+2. Naviguez vers la section "Blog"
+3. Cliquez sur "Nouvel article"
+4. Remplissez les informations :
+   - **Titre** : Le titre de votre article
+   - **Slug** : URL-friendly (ex: mon-article-blog)
+   - **Extrait** : Résumé court pour la liste des articles
+   - **Contenu** : Contenu complet en Markdown
+   - **Catégorie** : DEVELOPPEMENT, IA, AUTOMATISATION, OUTILS, ou TUTORIEL
+   - **Tags** : Mots-clés pour le SEO
+   - **Image** : (Optionnel) Image de couverture
+   - **Publié** : Cochez pour rendre l'article visible publiquement
+
+### Articles de démarrage
+
+Le fichier `prisma/seed-blog.ts` contient 5 articles de blog pré-rédigés sur :
+- L'automatisation en entreprise avec n8n
+- Les agents IA autonomes
+- Les nouveautés Next.js 16
+- Créer un chatbot intelligent avec RAG
+- Comparatif n8n vs Zapier vs Make
+
+Pour les ajouter à votre base de données :
+
+```bash
+npx tsx prisma/seed-blog.ts
+```
+
+### Optimisation SEO
+
+Chaque article génère automatiquement :
+- Meta title et description
+- Open Graph tags pour les réseaux sociaux
+- URL canonique
+- Sitemap XML
+- Dates de publication
+
+### Workflow recommandé
+
+1. **Planification** : Définissez vos thématiques (automatisation, IA, développement, etc.)
+2. **Rédaction** : Écrivez vos articles en Markdown avec des exemples de code
+3. **Publication** : Publiez via l'interface admin
+4. **Promotion** : Partagez sur vos réseaux sociaux et newsletters
+5. **Analyse** : Suivez les performances via Google Analytics
 
 ## 🔧 Prisma
 

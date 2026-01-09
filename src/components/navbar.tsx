@@ -14,6 +14,7 @@ const navigation = [
   { name: "Notre approche", href: "/#approche" },
   { name: "Services", href: "/services" },
   { name: "Formations", href: "/formations" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ]
 
