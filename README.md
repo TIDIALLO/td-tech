@@ -211,26 +211,47 @@ Le projet inclut une configuration CI/CD complète avec GitHub Actions :
 
 ## 🚀 Déploiement sur VPS (synap6ia.com - Hostinger)
 
-### Déploiement automatisé avec le script
+Le site est déployé sur un VPS Hostinger avec **PM2** et **Nginx**.
 
-Le moyen le plus simple de configurer votre VPS Hostinger :
+### Configuration Actuelle
+- ✅ **Nginx** : Reverse proxy vers le port 3002
+- ✅ **SSL/HTTPS** : Actif avec Let's Encrypt
+- ✅ **PM2** : Gestionnaire de processus
+- ✅ **CI/CD** : GitHub Actions
+
+### Déploiement Automatique (Recommandé)
+
+Chaque push vers `main` déclenche un déploiement automatique via GitHub Actions.
+
+**Prérequis** : Configurer les secrets GitHub (voir [DEPLOYMENT-PM2.md](./DEPLOYMENT-PM2.md))
 
 ```bash
-# Sur votre VPS, après connexion SSH
-git clone https://github.com/TIDIALLO/td-tech.git /var/www/synap6ia
-cd /var/www/synap6ia
-bash scripts/vps-setup.sh
+# Sur votre machine locale
+git add .
+git commit -m "Vos modifications"
+git push origin main
+
+# GitHub Actions déploie automatiquement ! 🚀
 ```
 
-Ce script configure automatiquement :
-- Docker et Docker Compose
-- Nginx avec configuration reverse proxy
-- SSL avec Certbot (Let's Encrypt)
-- Clone et build de l'application
-- Configuration de la base de données
-- Tests de santé
+### Déploiement Manuel
 
-📖 **Guide complet** : Voir [`DEPLOYMENT-SYNAP6IA.md`](./DEPLOYMENT-SYNAP6IA.md)
+Sur le VPS, utilisez le script de déploiement rapide :
+
+```bash
+# Sur votre VPS Hostinger
+cd /var/www/synap6ia
+bash scripts/deploy-pm2.sh
+```
+
+Ce script :
+- Pull les dernières modifications
+- Installe les dépendances
+- Build l'application
+- Applique les migrations de base de données
+- Redémarre PM2
+
+📖 **Guide complet** : Voir [`DEPLOYMENT-PM2.md`](./DEPLOYMENT-PM2.md)
 
 ### Vérification du CI/CD
 
@@ -240,7 +261,23 @@ Avant de déployer, vérifiez que tout est prêt :
 bash scripts/check-cicd.sh
 ```
 
-### 1. Configuration Manuelle (si nécessaire)
+### Commandes PM2 Utiles
+
+```bash
+# Voir le statut
+pm2 status
+
+# Voir les logs en temps réel
+pm2 logs synap6ia
+
+# Redémarrer l'application
+pm2 restart synap6ia
+
+# Monitoring des ressources
+pm2 monit
+```
+
+### 1. Configuration Docker (Alternative - Non utilisée actuellement)
 
 ```bash
 # Installer Docker et Docker Compose

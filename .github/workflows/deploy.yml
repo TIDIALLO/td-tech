@@ -70,58 +70,80 @@ jobs:
             # Variables
             DEPLOY_PATH="${{ secrets.VPS_DEPLOY_PATH || '/var/www/synap6ia' }}"
             BRANCH="${{ github.ref_name }}"
-            
+            APP_NAME="synap6ia"
+            PORT="${{ secrets.PORT || '3002' }}"
+
+            echo "🚀 Deploying to: $DEPLOY_PATH"
+            echo "📍 Branch: $BRANCH"
+            echo "🔢 Port: $PORT"
+
             # Naviguer vers le répertoire du projet
             cd $DEPLOY_PATH || { echo "❌ Directory $DEPLOY_PATH not found!"; exit 1; }
-            
+
             # Sauvegarder les variables d'environnement
             if [ -f .env ]; then
               cp .env .env.backup.$(date +%Y%m%d_%H%M%S)
               echo "✅ .env file backed up"
             fi
-            
+
             # Pull les dernières modifications
             echo "📥 Pulling latest changes from $BRANCH..."
             git fetch origin
             git reset --hard origin/$BRANCH || git reset --hard origin/main
-            
+
             # Installer les dépendances
             echo "📦 Installing dependencies..."
             npm ci --legacy-peer-deps || npm install --legacy-peer-deps
-            
+
             # Générer Prisma Client
             echo "🔧 Generating Prisma Client..."
             npx prisma generate || echo "⚠️ Prisma generate failed, continuing..."
-            
+
             # Build
             echo "🏗️ Building Next.js application..."
-            npm run build || echo "⚠️ Build failed, continuing..."
-            
+            npm run build || { echo "❌ Build failed!"; exit 1; }
+
             # Appliquer les migrations ou push le schéma
             echo "🗄️ Setting up database..."
             if [ -d "prisma/migrations" ] && [ "$(ls -A prisma/migrations)" ]; then
               echo "📦 Migrations found, applying..."
-              npx prisma migrate deploy || echo "⚠️ Migration failed, trying db push..."
-              npx prisma db push --accept-data-loss || echo "⚠️ DB push also failed, continuing..."
+              npx prisma migrate deploy || {
+                echo "⚠️ Migration failed, trying db push..."
+                npx prisma db push --accept-data-loss || echo "⚠️ DB push also failed, continuing..."
+              }
             else
               echo "⚠️ No migrations found, using db push..."
               npx prisma db push --accept-data-loss || echo "⚠️ DB push failed, continuing..."
             fi
-            
-            # Redémarrer avec Docker (si utilisé)
-            if [ -f docker-compose.yml ]; then
-              echo "🐳 Restarting Docker containers..."
-              docker-compose down || true
-              docker-compose up -d --build || echo "⚠️ Docker restart failed"
-            elif command -v pm2 &> /dev/null; then
-              echo "🔄 Restarting PM2 process..."
-              pm2 restart synap6ia || pm2 start npm --name synap6ia -- start || echo "⚠️ PM2 restart failed"
+
+            # Redémarrer avec PM2
+            if command -v pm2 &> /dev/null; then
+              echo "🔄 Managing PM2 process..."
+
+              # Vérifier si l'app existe déjà
+              if pm2 list | grep -q "$APP_NAME"; then
+                echo "♻️  Restarting existing PM2 app: $APP_NAME"
+                pm2 restart $APP_NAME
+              else
+                echo "🆕 Starting new PM2 app: $APP_NAME"
+                PORT=$PORT pm2 start npm --name $APP_NAME -- start
+              fi
+
+              # Sauvegarder la configuration PM2
+              pm2 save
+
+              # Afficher le statut
+              pm2 list
+              echo "✅ PM2 process restarted successfully"
             else
-              echo "⚠️ No Docker or PM2 found, manual restart required"
+              echo "❌ PM2 not found! Please install PM2: npm install -g pm2"
+              exit 1
             fi
-            
+
+            echo ""
             echo "✅ Deployment completed successfully!"
-            echo "🌐 Application should be available at: ${{ secrets.VPS_URL || 'http://your-domain.com' }}"
+            echo "🌐 Application available at: https://synap6ia.com"
+            echo "📊 Check logs with: pm2 logs $APP_NAME"
 
   deploy-vercel:
     name: Deploy to Vercel
