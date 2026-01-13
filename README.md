@@ -61,6 +61,9 @@ EMAIL_FROM="noreply@votredomaine.com"
 # Admin credentials (pour le seed)
 ADMIN_EMAIL="admin@tidianediallo.com"
 ADMIN_PASSWORD="Admin123!"
+
+# N8N / WhatsApp AI Agent (optionnel)
+N8N_API_KEY="votre-cle-api-secrete-pour-n8n"
 ```
 
 ### 4. Base de données
@@ -154,6 +157,16 @@ mon-site-perso/
 - ✅ Upload de fichiers
 - ✅ Gestion des rôles (Admin/Student/User)
 - ✅ Interface moderne avec shadcn/ui
+
+### Agent IA WhatsApp + n8n
+
+- ✅ Système de tracking analytics intégré
+- ✅ Webhooks pour n8n
+- ✅ Agent IA qui répond en langage naturel
+- ✅ Dashboard analytics temps réel
+- ✅ Tracking des conversions
+
+📖 **Guide complet** : Voir `docs/WHATSAPP-AI-AGENT-N8N.md`
 
 ## 🐳 Docker
 

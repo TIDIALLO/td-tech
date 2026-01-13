@@ -10,11 +10,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Mail, MapPin, Phone, Send } from "lucide-react"
 import { useState } from "react"
 import { motion } from "framer-motion"
+import { useAnalytics } from "@/components/analytics/tracker"
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
+  const { trackConversion } = useAnalytics()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -72,7 +74,12 @@ export default function ContactPage() {
       }
 
       setSuccess(true)
-      
+
+      // Tracker la conversion pour l'analytics
+      await trackConversion("contact_form", undefined, {
+        subject: subject || "Sans sujet",
+      })
+
       if (result.info) {
         setError(result.info)
       } else if (result.dbSaved === false) {
@@ -80,7 +87,7 @@ export default function ContactPage() {
       } else {
         setError("")
       }
-      
+
       ;(e.target as HTMLFormElement).reset()
     } catch (err) {
       setError("Une erreur est survenue. Veuillez réessayer.")

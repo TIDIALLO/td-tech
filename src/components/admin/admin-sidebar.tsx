@@ -11,10 +11,12 @@ import {
   FileText,
   MessageSquare,
   Users,
+  BarChart3,
 } from "lucide-react"
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
   { name: "Projets", href: "/admin/projects", icon: FolderKanban },
   { name: "Services", href: "/admin/services", icon: Briefcase },
   { name: "Formations", href: "/admin/courses", icon: GraduationCap },
