@@ -128,7 +128,7 @@ Synap6ia est une application web moderne construite avec une architecture hybrid
 
 - **n8n** - Plateforme d'automatisation auto-hébergée
   - Hébergé sur VPS Hostinger
-  - URL webhook : `https://n8n.srv787787.hstgr.cloud/webhook-test/contact-form`
+  - URL webhook : `https://n8n.srv787787.hstgr.cloud/webhook/contact-form`
   - Workflows :
     - Contact form processing
     - Email automation
@@ -259,7 +259,7 @@ AUTH_URL=https://synap6ia.com
 USE_GMAIL_SMTP=true
 GMAIL_USER=diallotidiane014@gmail.com
 GMAIL_APP_PASSWORD=<16 caractères>
-N8N_WEBHOOK_URL=https://n8n.srv787787.hstgr.cloud/webhook-test/contact-form
+N8N_WEBHOOK_URL=https://n8n.srv787787.hstgr.cloud/webhook/contact-form
 ```
 
 ### Développement (.env.local)
@@ -270,7 +270,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 DATABASE_URL=postgresql://localhost:5432/synap6ia_dev
 AUTH_SECRET=<secret local>
 AUTH_URL=http://localhost:3000
-N8N_WEBHOOK_URL=https://n8n.srv787787.hstgr.cloud/webhook-test/contact-form
+N8N_WEBHOOK_URL=https://n8n.srv787787.hstgr.cloud/webhook/contact-form
 ```
 
 ---

@@ -161,7 +161,7 @@ AUTH_URL=https://synap6ia.com
 USE_GMAIL_SMTP=true
 GMAIL_USER=diallotidiane014@gmail.com
 GMAIL_APP_PASSWORD=abcdefghijklmnop
-N8N_WEBHOOK_URL=https://n8n.srv787787.hstgr.cloud/webhook-test/contact-form
+N8N_WEBHOOK_URL=https://n8n.srv787787.hstgr.cloud/webhook/contact-form
 ```
 
 ⚠️ **Points critiques** :

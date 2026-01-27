@@ -243,7 +243,7 @@ Ajouter les variables suivantes :
 | `USE_GMAIL_SMTP` | `true` | Production |
 | `GMAIL_USER` | `diallotidiane014@gmail.com` | Production |
 | `GMAIL_APP_PASSWORD` | `<16 caractères>` | Production |
-| `N8N_WEBHOOK_URL` | `https://n8n.srv787787.hstgr.cloud/webhook-test/contact-form` | Production, Preview |
+| `N8N_WEBHOOK_URL` | `https://n8n.srv787787.hstgr.cloud/webhook/contact-form` | Production, Preview |
 
 #### 3. Configurer le Domaine
 
@@ -369,7 +369,7 @@ AUTH_URL=https://synap6ia.com
 NEXT_PUBLIC_SITE_URL=https://synap6ia.com
 GMAIL_USER=diallotidiane014@gmail.com
 GMAIL_APP_PASSWORD=<16 caractères>
-N8N_WEBHOOK_URL=https://n8n.srv787787.hstgr.cloud/webhook-test/contact-form
+N8N_WEBHOOK_URL=https://n8n.srv787787.hstgr.cloud/webhook/contact-form
 ```
 
 #### 6. Installation et Build
@@ -573,7 +573,7 @@ pm2 show synap6ia        # Détails du processus
 2. **Vérifier l'URL du webhook**
    ```bash
    # Tester manuellement
-   curl -X POST https://n8n.srv787787.hstgr.cloud/webhook-test/contact-form \
+   curl -X POST https://n8n.srv787787.hstgr.cloud/webhook/contact-form \
      -H "Content-Type: application/json" \
      -d '{"name":"Test","email":"test@test.com","message":"Test"}'
    ```

@@ -168,7 +168,7 @@ Port : 5678
 Status : _______ (actif / inactif)
 
 Webhooks configurés :
-- [ ] /webhook-test/contact-form (synap6ia)
+- [ ] /webhook/contact-form (synap6ia)
 - [ ] ___________________________
 - [ ] ___________________________
 ```
