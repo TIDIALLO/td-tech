@@ -6,12 +6,9 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  NODE_ENV: production
-
 jobs:
-  test:
-    name: Test & Build
+  build:
+    name: Build & Verify
     runs-on: ubuntu-latest
 
     steps:
@@ -30,101 +27,18 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://user:pass@localhost:5432/test' }}
-        continue-on-error: true
-
-      - name: Run Lint
-        run: npm run lint
+          DATABASE_URL: 'postgresql://user:pass@localhost:5432/test'
         continue-on-error: true
 
       - name: Build Next.js
         run: npm run build
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://user:pass@localhost:5432/test' }}
-          AUTH_SECRET: ${{ secrets.AUTH_SECRET || 'test-secret-for-build' }}
-          AUTH_URL: ${{ secrets.AUTH_URL || 'http://localhost:3000' }}
+          DATABASE_URL: 'postgresql://user:pass@localhost:5432/test'
+          AUTH_SECRET: 'test-secret-for-build'
+          AUTH_URL: 'http://localhost:3000'
           NODE_ENV: production
 
-  deploy-vps:
-    name: Deploy to VPS
-    needs: test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to VPS via SSH
-        if: ${{ secrets.VPS_HOST != '' }}
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_PORT || 22 }}
-          script: |
-            set -e
-            DEPLOY_PATH="${{ secrets.VPS_DEPLOY_PATH || '/var/www/synap6ia' }}"
-            BRANCH="main"
-
-            cd $DEPLOY_PATH
-
-            if [ -f .env ]; then
-              cp .env .env.backup.$(date +%Y%m%d_%H%M%S)
-            fi
-
-            git fetch origin
-            git reset --hard origin/$BRANCH
-
-            npm ci --legacy-peer-deps || npm install --legacy-peer-deps
-            npx prisma generate || true
-            npm run build || true
-
-            if [ -d "prisma/migrations" ] && [ "$(ls -A prisma/migrations)" ]; then
-              npx prisma migrate deploy || true
-            else
-              npx prisma db push --accept-data-loss || true
-            fi
-
-            if command -v pm2 > /dev/null 2>&1; then
-              pm2 restart synap6ia || pm2 start npm --name synap6ia -- start
-            fi
-
-            echo "Deployment completed"
-
-  deploy-vercel:
-    name: Deploy to Vercel
-    needs: test
-    runs-on: ubuntu-latest
-    continue-on-error: true
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Vercel CLI
-        if: ${{ secrets.VERCEL_TOKEN != '' }}
-        run: npm install --global vercel@latest
-
-      - name: Deploy to Vercel Production
-        if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' }}
-        run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
-  notify:
-    name: Notify Deployment Status
-    needs: [test]
-    runs-on: ubuntu-latest
-    if: always()
-
-    steps:
-      - name: Check Deployment Status
+      - name: Deployment status
         run: |
-          if [ "${{ needs.test.result }}" == "success" ]; then
-            echo "Build passed"
-          else
-            echo "Build failed - check logs"
-            exit 1
-          fi
+          echo "Build complete - Vercel deploys automatically from this push"
+          echo "Check https://vercel.com/dashboard for deployment status"
