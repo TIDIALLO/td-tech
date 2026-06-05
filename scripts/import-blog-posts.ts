@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, BlogCategory } from "@prisma/client"
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
@@ -6,7 +6,7 @@ import matter from "gray-matter"
 const prisma = new PrismaClient()
 
 // Mapping des tags vers catégories
-const categoryMapping: Record<string, string> = {
+const categoryMapping: Record<string, BlogCategory> = {
   "Claude Code": "OUTILS",
   "IA": "IA",
   "Développement": "DEVELOPPEMENT",
