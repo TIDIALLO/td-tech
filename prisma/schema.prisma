@@ -233,3 +233,125 @@ model ContactMessage {
   @@map("contact_messages")
 }
 
+// ============================================
+// ANALYTICS - Système de tracking pour l'agent IA WhatsApp
+// ============================================
+
+enum EventType {
+  PAGE_VIEW
+  CLICK
+  SCROLL
+  FORM_SUBMIT
+  CONVERSION
+  CUSTOM
+}
+
+model Visitor {
+  id           String   @id @default(cuid())
+  fingerprint  String   @unique // Identifiant unique du visiteur (hash)
+  firstVisit   DateTime @default(now())
+  lastVisit    DateTime @default(now())
+  visitCount   Int      @default(1)
+  country      String?
+  city         String?
+  device       String?  // mobile, desktop, tablet
+  browser      String?
+  os           String?
+  referrer     String?  // Source du trafic
+  utmSource    String?
+  utmMedium    String?
+  utmCampaign  String?
+
+  pageViews PageView[]
+  events    AnalyticsEvent[]
+
+  @@map("visitors")
+}
+
+model PageView {
+  id          String   @id @default(cuid())
+  visitorId   String
+  path        String   // /portfolio, /services, etc.
+  title       String?  // Titre de la page
+  referrer    String?  // Page précédente
+  duration    Int?     // Temps passé en secondes
+  timestamp   DateTime @default(now())
+
+  visitor Visitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+
+  @@index([path])
+  @@index([timestamp])
+  @@map("page_views")
+}
+
+model AnalyticsEvent {
+  id          String    @id @default(cuid())
+  visitorId   String
+  type        EventType
+  category    String?   // bouton, formulaire, lien, etc.
+  action      String?   // click, submit, scroll, etc.
+  label       String?   // Description de l'événement
+  value       Float?    // Valeur numérique optionnelle
+  path        String?   // Page où l'événement s'est produit
+  metadata    Json?     // Données supplémentaires
+  timestamp   DateTime  @default(now())
+
+  visitor Visitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+
+  @@index([type])
+  @@index([timestamp])
+  @@map("analytics_events")
+}
+
+model Conversion {
+  id          String   @id @default(cuid())
+  visitorId   String?
+  type        String   // contact_form, newsletter, purchase, etc.
+  value       Float?   // Valeur de la conversion
+  source      String?  // Origine du trafic
+  metadata    Json?    // Données supplémentaires
+  timestamp   DateTime @default(now())
+
+  @@index([type])
+  @@index([timestamp])
+  @@map("conversions")
+}
+
+// ============================================
+// N8N & WHATSAPP INTEGRATION
+// ============================================
+
+model N8nWebhookLog {
+  id          String   @id @default(cuid())
+  webhookType String   // whatsapp_message, analytics_query, etc.
+  payload     Json     // Données reçues
+  response    Json?    // Réponse envoyée
+  status      String   @default("received") // received, processed, failed
+  phoneNumber String?  // Numéro WhatsApp (pour les messages)
+  message     String?  // Message reçu
+  aiResponse  String?  // Réponse de l'IA
+  timestamp   DateTime @default(now())
+
+  @@index([webhookType])
+  @@index([timestamp])
+  @@map("n8n_webhook_logs")
+}
+
+model DailyAnalyticsSummary {
+  id              String   @id @default(cuid())
+  date            DateTime @unique @db.Date
+  totalVisitors   Int      @default(0)
+  uniqueVisitors  Int      @default(0)
+  totalPageViews  Int      @default(0)
+  totalEvents     Int      @default(0)
+  totalConversions Int     @default(0)
+  topPages        Json?    // Array des pages les plus visitées
+  topReferrers    Json?    // Sources de trafic
+  deviceStats     Json?    // Répartition mobile/desktop
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([date])
+  @@map("daily_analytics_summary")
+}
+

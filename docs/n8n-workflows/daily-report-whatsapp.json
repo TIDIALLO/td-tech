@@ -1,0 +1,198 @@
+{
+  "name": "Rapport Quotidien Analytics - WhatsApp",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24,
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "schedule-daily",
+      "name": "Chaque jour à 9h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.TDTECH_API_URL }}/api/n8n/webhook",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"type\": \"get_stats\",\n  \"data\": {\n    \"period\": \"yesterday\"\n  }\n}",
+        "options": {}
+      },
+      "id": "get-yesterday-stats",
+      "name": "Stats d'hier",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tdtech-api-key",
+          "name": "TDTech API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.TDTECH_API_URL }}/api/n8n/webhook",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"type\": \"get_top_pages\",\n  \"data\": {\n    \"period\": \"yesterday\",\n    \"limit\": 5\n  }\n}",
+        "options": {}
+      },
+      "id": "get-top-pages",
+      "name": "Top Pages",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 450],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tdtech-api-key",
+          "name": "TDTech API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": []
+        },
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "merge-data",
+      "name": "Fusionner",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [750, 375]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "build-message",
+              "name": "reportMessage",
+              "value": "=📊 *Rapport TDTech - {{ $now.format('dd/MM/yyyy') }}*\n\n*Stats d'hier:*\n👥 Visiteurs: {{ $('Stats d\\'hier').item.json.visitors }}\n📄 Pages vues: {{ $('Stats d\\'hier').item.json.pageViews }}\n🎯 Conversions: {{ $('Stats d\\'hier').item.json.conversions }}\n\n*Top 5 pages:*\n{{ $('Top Pages').item.json.message }}\n\nBonne journée ! 🚀",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "build-report",
+      "name": "Construire Rapport",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1000, 375]
+    },
+    {
+      "parameters": {
+        "from": "={{ $env.TWILIO_WHATSAPP_NUMBER }}",
+        "to": "={{ $env.ADMIN_WHATSAPP_NUMBER }}",
+        "message": "={{ $json.reportMessage }}"
+      },
+      "id": "send-report",
+      "name": "Envoyer Rapport",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [1250, 375],
+      "credentials": {
+        "twilioApi": {
+          "id": "twilio-credentials",
+          "name": "Twilio Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Chaque jour à 9h": {
+      "main": [
+        [
+          {
+            "node": "Stats d'hier",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Top Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Stats d'hier": {
+      "main": [
+        [
+          {
+            "node": "Fusionner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Top Pages": {
+      "main": [
+        [
+          {
+            "node": "Fusionner",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Fusionner": {
+      "main": [
+        [
+          {
+            "node": "Construire Rapport",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construire Rapport": {
+      "main": [
+        [
+          {
+            "node": "Envoyer Rapport",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "Rapport"
+    },
+    {
+      "name": "Analytics"
+    },
+    {
+      "name": "Automatisation"
+    }
+  ]
+}

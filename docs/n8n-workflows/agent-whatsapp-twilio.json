@@ -1,0 +1,123 @@
+{
+  "name": "Agent IA WhatsApp - TDTech avec Twilio",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "twilio-whatsapp",
+        "options": {
+          "responseMode": "responseNode"
+        }
+      },
+      "id": "twilio-webhook",
+      "name": "Twilio WhatsApp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "twilio-whatsapp-tdtech"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.TDTECH_API_URL }}/api/n8n/whatsapp",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"message\": \"{{ $json.body.Body }}\",\n  \"from\": \"{{ $json.body.From }}\",\n  \"profileName\": \"{{ $json.body.ProfileName }}\"\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "http-tdtech-ai",
+      "name": "Agent IA TDTech",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tdtech-api-key",
+          "name": "TDTech API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "={{ $env.TWILIO_WHATSAPP_NUMBER }}",
+        "to": "={{ $('Twilio WhatsApp Webhook').item.json.body.From }}",
+        "message": "={{ $json.reply }}"
+      },
+      "id": "twilio-send",
+      "name": "Envoyer WhatsApp",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [750, 300],
+      "credentials": {
+        "twilioApi": {
+          "id": "twilio-credentials",
+          "name": "Twilio Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response></Response>"
+      },
+      "id": "respond-twilio",
+      "name": "Réponse Twilio",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1000, 300]
+    }
+  ],
+  "connections": {
+    "Twilio WhatsApp Webhook": {
+      "main": [
+        [
+          {
+            "node": "Agent IA TDTech",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent IA TDTech": {
+      "main": [
+        [
+          {
+            "node": "Envoyer WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envoyer WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Réponse Twilio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "WhatsApp"
+    },
+    {
+      "name": "Twilio"
+    },
+    {
+      "name": "Analytics"
+    }
+  ]
+}
