@@ -185,7 +185,7 @@ npm run dev
 # 4. Se connecter en admin
 # http://localhost:3000/auth/signin
 # Email: admin@tidianediallo.com
-# Password: Admin123!
+# Password: [MOT_DE_PASSE_ADMIN_REVOQUE]
 ```
 
 ---

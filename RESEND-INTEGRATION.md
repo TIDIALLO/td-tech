@@ -21,7 +21,7 @@
 - **Reply-To** : Email du visiteur (pour répondre directement)
 
 #### API Key :
-- **Clé** : `re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG`
+- **Clé** : `[RESEND_API_KEY_REVOQUE]`
 - **Stockée** : Dans `.env` comme `RESEND_API_KEY`
 
 ---
@@ -33,7 +33,7 @@
 Ajoute dans ton fichier `.env` :
 
 ```env
-RESEND_API_KEY="re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG"
+RESEND_API_KEY="[RESEND_API_KEY_REVOQUE]"
 ```
 
 ### Vérification Resend

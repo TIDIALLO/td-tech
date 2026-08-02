@@ -65,10 +65,10 @@ openssl rand -base64 32
 
 | Variable | Valeur |
 |----------|--------|
-| `RESEND_API_KEY` | `re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG` |
+| `RESEND_API_KEY` | `[RESEND_API_KEY_REVOQUE]` |
 | `RESEND_FROM_EMAIL` | `onboarding@resend.dev` |
 | `ADMIN_EMAIL` | `admin@tidianediallo.com` |
-| `ADMIN_PASSWORD` | `Admin123!` |
+| `ADMIN_PASSWORD` | `[MOT_DE_PASSE_ADMIN_REVOQUE]` |
 
 **Pour chaque variable** : Coche ✅ **Production**
 

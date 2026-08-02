@@ -42,15 +42,15 @@ git push origin main
 2. **Ajoute chaque variable** (voir `variables-vercel-ready.txt`) :
 
 **Variables OBLIGATOIRES** :
-- `DATABASE_URL` = `postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
-- `AUTH_SECRET` = `yLsy9d/nkotK+ds/Jzaq+McZlB/lTU/c3jOsASZjDec=`
+- `DATABASE_URL` = `postgresql://[REVOQUE-VOIR-.env-LOCAL]`
+- `AUTH_SECRET` = `[AUTH_SECRET_REVOQUE]`
 - `AUTH_URL` = `https://td-tech.vercel.app` (sera mis à jour après)
 
 **Variables OPTIONNELLES** :
-- `RESEND_API_KEY` = `re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG`
+- `RESEND_API_KEY` = `[RESEND_API_KEY_REVOQUE]`
 - `RESEND_FROM_EMAIL` = `onboarding@resend.dev`
 - `ADMIN_EMAIL` = `admin@tidianediallo.com`
-- `ADMIN_PASSWORD` = `Admin123!`
+- `ADMIN_PASSWORD` = `[MOT_DE_PASSE_ADMIN_REVOQUE]`
 
 **Pour chaque variable** : Coche ✅ **Production**
 

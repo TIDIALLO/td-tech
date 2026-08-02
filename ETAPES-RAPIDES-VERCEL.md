@@ -32,9 +32,9 @@
 **Copie-colle ces 3 variables OBLIGATOIRES** :
 
 ```
-DATABASE_URL = postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+DATABASE_URL = postgresql://[REVOQUE-VOIR-.env-LOCAL]
 
-AUTH_SECRET = yLsy9d/nkotK+ds/Jzaq+McZlB/lTU/c3jOsASZjDec=
+AUTH_SECRET = [AUTH_SECRET_REVOQUE]
 
 AUTH_URL = https://td-tech.vercel.app
 ```

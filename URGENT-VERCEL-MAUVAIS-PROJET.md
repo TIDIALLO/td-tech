@@ -31,8 +31,8 @@ Tu vois "Used Phones" en portugais au lieu de ton site TDTech. **Vercel déploie
 
 3. **Variables** (AVANT de déployer) :
    - **Environment Variables** → Ajoute :
-     - `DATABASE_URL` = `postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
-     - `AUTH_SECRET` = `yLsy9d/nkotK+ds/Jzaq+McZlB/lTU/c3jOsASZjDec=`
+     - `DATABASE_URL` = `postgresql://[REVOQUE-VOIR-.env-LOCAL]`
+     - `AUTH_SECRET` = `[AUTH_SECRET_REVOQUE]`
      - `AUTH_URL` = `https://td-tech.vercel.app`
    - Coche **Production** pour toutes
 

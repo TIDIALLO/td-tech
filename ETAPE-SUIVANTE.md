@@ -82,7 +82,7 @@ Une fois PostgreSQL installé et la base créée :
 1. **Accède à l'application** : http://localhost:3000
 2. **Connecte-toi en admin** : http://localhost:3000/auth/signin
    - Email : `admin@tidianediallo.com`
-   - Password : `Admin123!`
+   - Password : `[MOT_DE_PASSE_ADMIN_REVOQUE]`
 3. **Explore le dashboard** : http://localhost:3000/admin
 4. **Ajoute tes projets** : Utilise l'interface admin
 

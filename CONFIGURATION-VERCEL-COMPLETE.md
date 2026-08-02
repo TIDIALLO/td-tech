@@ -8,7 +8,7 @@ Voici toutes les variables d'environnement à ajouter dans Vercel :
 
 #### 1. DATABASE_URL
 ```
-postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+postgresql://[REVOQUE-VOIR-.env-LOCAL]
 ```
 
 #### 2. AUTH_SECRET
@@ -26,7 +26,7 @@ https://td-tech.vercel.app
 
 #### 4. RESEND_API_KEY
 ```
-re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG
+[RESEND_API_KEY_REVOQUE]
 ```
 
 #### 5. RESEND_FROM_EMAIL
@@ -41,7 +41,7 @@ admin@tidianediallo.com
 
 #### 7. ADMIN_PASSWORD
 ```
-Admin123!
+[MOT_DE_PASSE_ADMIN_REVOQUE]
 ```
 
 ---

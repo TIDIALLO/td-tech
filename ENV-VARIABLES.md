@@ -13,7 +13,7 @@ AUTH_SECRET="votre-secret-key-ici"
 AUTH_URL="http://localhost:3000"
 
 # Resend - API Key pour l'envoi d'emails
-RESEND_API_KEY="re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG"
+RESEND_API_KEY="[RESEND_API_KEY_REVOQUE]"
 
 # Resend - Adresse email d'expéditeur (optionnel)
 # Si non défini, utilise 'onboarding@resend.dev' (mode test, emails non livrés)
@@ -46,13 +46,13 @@ EMAIL_FROM="noreply@votredomaine.com"
 
 # Admin credentials (pour le seed)
 ADMIN_EMAIL="admin@tidianediallo.com"
-ADMIN_PASSWORD="Admin123!"
+ADMIN_PASSWORD="[MOT_DE_PASSE_ADMIN_REVOQUE]"
 ```
 
 ## Variables Importantes
 
 ### RESEND_API_KEY (Requis pour les emails)
-- **Valeur** : `re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG`
+- **Valeur** : `[RESEND_API_KEY_REVOQUE]`
 - **Usage** : Envoi d'emails via Resend
 - **Où l'obtenir** : https://resend.com/api-keys
 

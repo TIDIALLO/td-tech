@@ -90,6 +90,32 @@ const staticCourses: CourseType[] = [
     videos: [],
     files: [],
   },
+  {
+    id: "8",
+    title: "Formation Angular (Débutant à Avancé)",
+    slug: "formation-angular",
+    description:
+      "Progression complète sur Angular : composants, services et injection de dépendances, routing, RxJS et state management, jusqu'aux patterns avancés et à la performance.",
+    category: "WEB",
+    level: "Débutant à Avancé",
+    duration: "28 heures",
+    modules: [{ id: "1", title: "Introduction à Angular" }],
+    videos: [],
+    files: [],
+  },
+  {
+    id: "9",
+    title: "Formation Python / Django",
+    slug: "formation-python-django",
+    description:
+      "Développez des applications web backend robustes avec Python et Django : ORM, authentification, API REST et déploiement.",
+    category: "WEB",
+    level: "Débutant à Intermédiaire",
+    duration: "20 heures",
+    modules: [{ id: "1", title: "Introduction à Django" }],
+    videos: [],
+    files: [],
+  },
 ]
 
 async function getCourses() {

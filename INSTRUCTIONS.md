@@ -48,7 +48,7 @@ Ouvrez [http://localhost:3000](http://localhost:3000)
 
 - URL: [http://localhost:3000/auth/signin](http://localhost:3000/auth/signin)
 - Email: `admin@tidianediallo.com`
-- Mot de passe: `Admin123!`
+- Mot de passe: `[MOT_DE_PASSE_ADMIN_REVOQUE]`
 
 Puis accédez au dashboard: [http://localhost:3000/admin](http://localhost:3000/admin)
 

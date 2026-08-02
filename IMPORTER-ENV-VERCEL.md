@@ -106,13 +106,13 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 Voici un exemple avec des valeurs réelles (remplace par les tiennes) :
 
 ```env
-DATABASE_URL="postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://[REVOQUE-VOIR-.env-LOCAL]"
 AUTH_SECRET="aB3xK9mP2qR7vN4wL8tY6uI1oE5sD0fGhJkLmNoPqRsTuVwXyZ"
 AUTH_URL="https://td-tech.vercel.app"
-RESEND_API_KEY="re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG"
+RESEND_API_KEY="[RESEND_API_KEY_REVOQUE]"
 RESEND_FROM_EMAIL="onboarding@resend.dev"
 ADMIN_EMAIL="admin@tidianediallo.com"
-ADMIN_PASSWORD="Admin123!"
+ADMIN_PASSWORD="[MOT_DE_PASSE_ADMIN_REVOQUE]"
 ```
 
 ---

@@ -3,7 +3,7 @@
 ## 🔗 Connection String Neon (Tu l'as ! ✅)
 
 ```
-postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+postgresql://[REVOQUE-VOIR-.env-LOCAL]
 ```
 
 **✅ C'est parfait !** Cette connection string est correcte.
@@ -38,7 +38,7 @@ postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-ea
 - **Name** : `DATABASE_URL`
 - **Value** : 
   ```
-  postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+  postgresql://[REVOQUE-VOIR-.env-LOCAL]
   ```
 - **Environments** : Coche ✅ **Production** (et Preview si tu veux)
 
@@ -74,7 +74,7 @@ aB3xK9mP2qR7vN4wL8tY6uI1oE5sD0fG
 #### Variable 4 : RESEND_API_KEY (OPTIONNEL - pour les emails)
 
 - **Name** : `RESEND_API_KEY`
-- **Value** : `re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG`
+- **Value** : `[RESEND_API_KEY_REVOQUE]`
 - **Environments** : Coche ✅ **Production**
 
 ---
@@ -98,7 +98,7 @@ aB3xK9mP2qR7vN4wL8tY6uI1oE5sD0fG
 #### Variable 7 : ADMIN_PASSWORD (OPTIONNEL)
 
 - **Name** : `ADMIN_PASSWORD`
-- **Value** : `Admin123!`
+- **Value** : `[MOT_DE_PASSE_ADMIN_REVOQUE]`
 - **Environments** : Coche ✅ **Production**
 
 ---

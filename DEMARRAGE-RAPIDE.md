@@ -43,7 +43,7 @@ npm run dev
 2. Clique sur "Connexion" (en haut à droite)
 3. Utilise ces identifiants :
    - **Email**: admin@tidianediallo.com
-   - **Mot de passe**: Admin123!
+   - **Mot de passe**: [MOT_DE_PASSE_ADMIN_REVOQUE]
 4. Tu es maintenant sur le dashboard admin !
 
 ---

@@ -38,7 +38,7 @@ openssl rand -base64 32
 
    **Variable 1 : DATABASE_URL**
    - **Key** : `DATABASE_URL`
-   - **Value** : `postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
+   - **Value** : `postgresql://[REVOQUE-VOIR-.env-LOCAL]`
    - **Environments** : ✅ Production
    - **Save**
 
@@ -56,7 +56,7 @@ openssl rand -base64 32
 
    **Variable 4 : RESEND_API_KEY** (Optionnel)
    - **Key** : `RESEND_API_KEY`
-   - **Value** : `re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG`
+   - **Value** : `[RESEND_API_KEY_REVOQUE]`
    - **Environments** : ✅ Production
    - **Save**
 
@@ -74,7 +74,7 @@ openssl rand -base64 32
 
    **Variable 7 : ADMIN_PASSWORD** (Optionnel)
    - **Key** : `ADMIN_PASSWORD`
-   - **Value** : `Admin123!`
+   - **Value** : `[MOT_DE_PASSE_ADMIN_REVOQUE]`
    - **Environments** : ✅ Production
    - **Save**
 

@@ -15,6 +15,7 @@ import {
   Workflow,
 } from "lucide-react"
 import { BookingCalendar } from "@/components/booking-calendar"
+import { Testimonials } from "@/components/testimonials"
 import { AuroraBackground } from "@/components/ui/aurora-background"
 import { motion } from "framer-motion"
 
@@ -382,6 +383,8 @@ export default function HomeClient() {
             </div>
           </div>
         </section>
+
+        <Testimonials />
       </main>
       <Footer />
     </>

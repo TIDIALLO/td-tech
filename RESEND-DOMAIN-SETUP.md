@@ -59,7 +59,7 @@ Value: [valeur fournie par Resend]
 Une fois vérifié, mets à jour `.env` :
 
 ```env
-RESEND_API_KEY="re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG"
+RESEND_API_KEY="[RESEND_API_KEY_REVOQUE]"
 RESEND_FROM_EMAIL="contact@tidianediallo.com"
 # ou
 RESEND_FROM_EMAIL="Tidiane Diallo <contact@tidianediallo.com>"

@@ -156,7 +156,7 @@ export default function FormationsClient({ courses }: Props) {
         <div className="container relative z-10">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="text-center">
-              <div className="mb-2 text-3xl font-bold text-primary">7+</div>
+              <div className="mb-2 text-3xl font-bold text-primary">9+</div>
               <div className="text-sm text-muted-foreground">Formations disponibles</div>
             </div>
             <div className="text-center">

@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AuroraBackground } from "@/components/ui/aurora-background"
+import { Testimonials } from "@/components/testimonials"
 import { Mail, MapPin, Phone, Send } from "lucide-react"
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -332,6 +333,10 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
+
+        <div className="dark">
+          <Testimonials />
+        </div>
         </div>
       </main>
       <Footer />

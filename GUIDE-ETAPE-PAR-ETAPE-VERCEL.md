@@ -79,7 +79,7 @@ Déployer ton site TDTech sur Vercel avec le bon repository et toutes les config
 - **Key** : `DATABASE_URL`
 - **Value** : Copie-colle cette ligne complète :
   ```
-  postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+  postgresql://[REVOQUE-VOIR-.env-LOCAL]
   ```
 - **Environments** : Coche ✅ **Production**
 - **Save**
@@ -87,7 +87,7 @@ Déployer ton site TDTech sur Vercel avec le bon repository et toutes les config
 ### Variable 2 : AUTH_SECRET
 
 - **Key** : `AUTH_SECRET`
-- **Value** : `yLsy9d/nkotK+ds/Jzaq+McZlB/lTU/c3jOsASZjDec=`
+- **Value** : `[AUTH_SECRET_REVOQUE]`
 - **Environments** : Coche ✅ **Production**
 - **Save**
 
@@ -101,7 +101,7 @@ Déployer ton site TDTech sur Vercel avec le bon repository et toutes les config
 ### Variable 4 : RESEND_API_KEY (Optionnel)
 
 - **Key** : `RESEND_API_KEY`
-- **Value** : `re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG`
+- **Value** : `[RESEND_API_KEY_REVOQUE]`
 - **Environments** : Coche ✅ **Production**
 - **Save**
 
@@ -122,7 +122,7 @@ Déployer ton site TDTech sur Vercel avec le bon repository et toutes les config
 ### Variable 7 : ADMIN_PASSWORD (Optionnel)
 
 - **Key** : `ADMIN_PASSWORD`
-- **Value** : `Admin123!`
+- **Value** : `[MOT_DE_PASSE_ADMIN_REVOQUE]`
 - **Environments** : Coche ✅ **Production**
 - **Save**
 

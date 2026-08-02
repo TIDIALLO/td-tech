@@ -136,7 +136,7 @@ openssl rand -base64 32
 ```env
 # Email (si tu veux le formulaire de contact)
 RESEND_API_KEY
-Valeur : re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG
+Valeur : [RESEND_API_KEY_REVOQUE]
 
 RESEND_FROM_EMAIL
 Valeur : onboarding@resend.dev
@@ -146,7 +146,7 @@ ADMIN_EMAIL
 Valeur : admin@tidianediallo.com
 
 ADMIN_PASSWORD
-Valeur : Admin123!
+Valeur : [MOT_DE_PASSE_ADMIN_REVOQUE]
 ```
 
 ### 4.3 Sélectionner les environnements

@@ -3,14 +3,17 @@
 
 const { execSync } = require('child_process');
 
+// Ce script n'embarque plus aucun secret : il lit les valeurs depuis les
+// variables d'environnement déjà présentes dans le shell (ex: `source .env`
+// avant de lancer `node configure-vercel-env.js`, ou export manuel).
 const envVars = {
-  DATABASE_URL: 'postgresql://neondb_owner:npg_IM9dq5hCxOyo@ep-holy-bar-adkfxk8a-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
-  AUTH_SECRET: process.env.AUTH_SECRET || '[GÉNÈRE-UNE-CLÉ]',
-  AUTH_URL: 'https://td-tech.vercel.app',
-  RESEND_API_KEY: 're_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG',
-  RESEND_FROM_EMAIL: 'onboarding@resend.dev',
-  ADMIN_EMAIL: 'admin@tidianediallo.com',
-  ADMIN_PASSWORD: 'Admin123!'
+  DATABASE_URL: process.env.DATABASE_URL || '[NON DÉFINI - voir .env]',
+  AUTH_SECRET: process.env.AUTH_SECRET || '[NON DÉFINI - voir .env]',
+  AUTH_URL: process.env.AUTH_URL || 'https://td-tech.vercel.app',
+  RESEND_API_KEY: process.env.RESEND_API_KEY || '[NON DÉFINI - voir .env]',
+  RESEND_FROM_EMAIL: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
+  ADMIN_EMAIL: process.env.ADMIN_EMAIL || '[NON DÉFINI - voir .env]',
+  ADMIN_PASSWORD: process.env.ADMIN_PASSWORD || '[NON DÉFINI - voir .env]',
 };
 
 console.log('📝 Variables d\'environnement à configurer dans Vercel:\n');

@@ -1,7 +1,12 @@
+"use client"
+
 import { Github, Linkedin, Mail } from "lucide-react"
 import Image from "next/image"
+import { useCookieConsent } from "@/components/analytics/cookie-consent-provider"
 
 export function Footer() {
+  const { setConsent } = useCookieConsent()
+
   return (
     <footer className="border-t bg-background/95 backdrop-blur-sm">
       <div className="container py-6">
@@ -54,6 +59,13 @@ export function Footer() {
           {/* Copyright */}
           <div className="text-sm text-muted-foreground text-center md:text-right">
             <p>© {new Date().getFullYear()} <span className="font-semibold text-foreground">Synap6ia</span>. Tous droits réservés.</p>
+            <button
+              type="button"
+              onClick={() => setConsent(null)}
+              className="mt-1 text-xs text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
+            >
+              Gérer les cookies
+            </button>
           </div>
         </div>
       </div>

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" https://www.kheops-consulting.com/ --max-time 10)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(echo \"started with pid $!\")",
+      "Bash(gh --version)",
+      "Bash(gh run *)"
+    ]
+  }
+}

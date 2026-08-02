@@ -80,7 +80,7 @@ npm run dev
 2. Va sur `/auth/signin`
 3. Connecte-toi :
    - **Email** : admin@tidianediallo.com
-   - **Password** : Admin123!
+   - **Password** : [MOT_DE_PASSE_ADMIN_REVOQUE]
 4. Explore le dashboard admin
 
 ---

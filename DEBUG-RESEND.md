@@ -71,7 +71,7 @@ Pour utiliser `diallotidiane014@gmail.com` ou un domaine personnalisé :
 Assure-toi que `RESEND_API_KEY` est dans ton `.env` :
 
 ```env
-RESEND_API_KEY="re_Y6gWENxV_EoSQ3ErTiGAbhe5htT7TT2YG"
+RESEND_API_KEY="[RESEND_API_KEY_REVOQUE]"
 ```
 
 ### 2. Vérifier les Logs

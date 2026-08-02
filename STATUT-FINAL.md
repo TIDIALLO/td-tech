@@ -211,7 +211,7 @@ npm run dev
 ### Étape 4 : Se connecter
 - URL : http://localhost:3001/auth/signin
 - Email : admin@tidianediallo.com
-- Password : Admin123!
+- Password : [MOT_DE_PASSE_ADMIN_REVOQUE]
 
 ### Étape 5 : Explorer et personnaliser
 - Ajouter des projets

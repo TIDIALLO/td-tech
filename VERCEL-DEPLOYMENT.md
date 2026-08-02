@@ -65,7 +65,7 @@ EMAIL_FROM="noreply@votredomaine.com"
 
 # Admin (pour le seed)
 ADMIN_EMAIL="admin@tidianediallo.com"
-ADMIN_PASSWORD="Admin123!"
+ADMIN_PASSWORD="[MOT_DE_PASSE_ADMIN_REVOQUE]"
 ```
 
 #### Générer AUTH_SECRET :
