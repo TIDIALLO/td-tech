@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { JokkoWidget } from "@/components/jokko-widget";
+import { QualificationAssistant } from "@/components/qualification-assistant";
+import { CookieConsentProvider } from "@/components/analytics/cookie-consent-provider";
+import { CookieConsentBanner } from "@/components/analytics/cookie-consent-banner";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -71,8 +74,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <JokkoWidget />
+          <CookieConsentProvider>
+            {children}
+            <QualificationAssistant />
+            <GoogleAnalytics />
+            <CookieConsentBanner />
+          </CookieConsentProvider>
         </ThemeProvider>
       </body>
     </html>
