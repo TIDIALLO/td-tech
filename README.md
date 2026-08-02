@@ -60,7 +60,7 @@ EMAIL_FROM="noreply@votredomaine.com"
 
 # Admin credentials (pour le seed)
 ADMIN_EMAIL="admin@tidianediallo.com"
-ADMIN_PASSWORD="Admin123!"
+ADMIN_PASSWORD="[MOT_DE_PASSE_ADMIN_REVOQUE]"
 ```
 
 ### 4. Base de données
@@ -89,7 +89,7 @@ Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 Après avoir exécuté le seed :
 
 - **Email**: admin@tidianediallo.com (ou la valeur de `ADMIN_EMAIL`)
-- **Mot de passe**: Admin123! (ou la valeur de `ADMIN_PASSWORD`)
+- **Mot de passe**: [MOT_DE_PASSE_ADMIN_REVOQUE] (ou la valeur de `ADMIN_PASSWORD`)
 
 Accédez au dashboard admin : [http://localhost:3000/admin](http://localhost:3000/admin)
 
@@ -185,19 +185,20 @@ Le projet inclut une configuration CI/CD complète avec GitHub Actions :
 
 ### Workflows Disponibles :
 
-- **CI - Build and Test** : Build et validation sur chaque push
-- **Deploy to Production** : Déploiement automatique sur VPS
-- **PR Checks** : Validation automatique des pull requests
-- **Tests** : Tests automatisés avec PostgreSQL
+- **CI - Tests & Lint** : lint, typecheck et build de validation
+- **Deploy to Production (Vercel)** : déploiement automatique en production
+- **PR Checks** : validation automatique des pull requests
+- **Tests** : tests automatisés avec PostgreSQL
 
 ### Configuration :
 
-1. **Secrets GitHub** : Configurer dans `Settings → Secrets and variables → Actions`
-   - `VPS_HOST`, `VPS_USERNAME`, `VPS_SSH_KEY`
-   - `DATABASE_URL`, `AUTH_SECRET`
-   - Voir `CI-CD-SETUP.md` pour la liste complète
+1. **Secrets GitHub** : configurer dans `Settings → Secrets and variables → Actions`
+  - `VERCEL_TOKEN`
+  - `VERCEL_ORG_ID`
+  - `VERCEL_PROJECT_ID`
+  - Voir `CI-CD-SETUP.md` pour le détail
 
-2. **Déploiement automatique** : Chaque push vers `master` déclenche le déploiement
+2. **Déploiement automatique** : chaque push vers `main` déclenche un déploiement production Vercel
 
 📖 **Guide complet** : Voir `CI-CD-SETUP.md`
 
